@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GralWebs Solutions - FAQ</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Fonts & icônes -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+  <style>
+    /* ===================== FAQ ===================== */
+    .faq-section {
+      padding: 60px 20px;
+      background: #111; /* garde style OLED */
+      color: #fff;
+      text-align: center;
+    }
+
+    .faq-section .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #b30000; /* rouge dégradé si souhaité */
+      margin-bottom: 50px;
+      background: linear-gradient(90deg, #b30000, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .faq-item {
+      max-width: 900px;
+      margin: 0 auto 15px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #222;
+      text-align: left;
+      box-shadow: 0 5px 15px rgba(255,0,0,0.2);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 10px 25px rgba(255,0,0,0.4);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 18px 24px;
+      background: #333;
+      color: #ffc107; /* jaune pour les titres */
+      font-size: 1.4rem;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .faq-question:hover {
+      background: #444;
+      transform: translateX(3px);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      padding: 0 24px;
+      background: #111;
+    }
+
+    .faq-answer p {
+      font-size: 1.2rem;
+      padding: 12px 0;
+      line-height: 1.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .faq-question {
+        font-size: 1.2rem;
+        padding: 16px 20px;
+      }
+      .faq-answer p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .faq-question {
+        font-size: 1.1rem;
+        padding: 14px 18px;
+      }
+      .faq-answer p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header id="navbar">
+  <div class="container">
+    <h1 class="logo">GralWebs</h1>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#home">Accueil</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">À propos</a></li>
+        <li><a href="index.html#destinations">Destinations</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="contrat.html">Contrat</a></li>
+      </ul>
+    </nav>
+
+    <div class="burger">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" class="faq-section section-offset">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Foire aux Questions (FAQ)</h2>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+      <button class="faq-question">1. Quels types de sites web propose GralWebs ?</button>
+      <div class="faq-answer">
+        <p>GralWebs crée des sites vitrines, sites business, et sites professionnels avec blog, multi-langue et fonctionnalités avancées selon vos besoins.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+      <button class="faq-question">2. Combien coûte la création d’un site web ?</button>
+      <div class="faq-answer">
+        <p>Nos tarifs commencent à 699.000 Ar pour un site vitrine, 990.000 Ar pour un site business, et 2.390.000 Ar et plus pour un site professionnel premium.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+      <button class="faq-question">3. La maintenance est-elle incluse ?</button>
+      <div class="faq-answer">
+        <p>La maintenance est optionnelle et facturée à partir de 250.000 Ar par mois, selon le type de site et les demandes spécifiques du client.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+      <button class="faq-question">4. Puis-je demander des modifications après la livraison du site ?</button>
+      <div class="faq-answer">
+        <p>Oui, les modifications post-livraison sont possibles mais sont facturées séparément, selon le temps et la complexité des changements, afin de garantir la continuité du service.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+      <button class="faq-question">5. Offrez-vous un hébergement et nom de domaine ?</button>
+      <div class="faq-answer">
+        <p>Nous pouvons vous aider à choisir un hébergement et un nom de domaine adaptés, y compris des solutions abordables ou premium selon vos besoins.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
+      <button class="faq-question">6. Quels sont vos délais de livraison ?</button>
+      <div class="faq-answer">
+        <p>Les délais varient selon la complexité du projet : 2 à 3 semaines pour un site vitrine, 3 à 7 semaines pour un site business, et 4 à 9 semaines pour un site premium.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+      <button class="faq-question">7. Garantissez-vous la sécurité et le SEO du site ?</button>
+      <div class="faq-answer">
+        <p>Oui, tous nos sites sont sécurisés (HTTPS) et optimisés pour le SEO de base. Pour un SEO avancé, un forfait supplémentaire peut être proposé.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER PREMIUM ===================== -->
+<footer class="footer-premium">
+  <div class="footer-container">
+
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Logo GralWebs" class="footer-logo">
+      <h3>GralWebs Solutions</h3>
+    </div>
+
+    <p class="footer-description">
+      Création de sites web modernes, interactifs et haut de gamme.
+      Nous façonnons des présences digitales puissantes.
+    </p>
+
+    <p class="copyright">
+      &copy; 2026 GralWebs Solutions | Tous droits réservés
+    </p>
+
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+<script src="script.js" defer></script>
+<script>
+  // Accordion FAQ
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    question.addEventListener('click', () => {
+      // fermer tous les autres
+      faqItems.forEach(i => {
+        if (i !== item) i.querySelector('.faq-answer').style.maxHeight = null;
+      });
+
+      // ouvrir ou fermer celui-ci
+      if (answer.style.maxHeight) {
+        answer.style.maxHeight = null;
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+
+  // AOS Init
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+
+  // Burger menu
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => nav.classList.toggle('active'));
+</script>
+
+</body>
+</html>
