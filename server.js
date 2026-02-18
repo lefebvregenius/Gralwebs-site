@@ -70,6 +70,10 @@ app.post("/api/contact", async (req, res) => {
 });
 
 /* ===================== LANCEMENT ===================== */
+// Fallback vers index.html
+app.get("*", (req, res) => {
+  res.sendFile(require("path").join(__dirname, "public", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur http://localhost:${PORT}`);
