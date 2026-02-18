@@ -776,41 +776,49 @@
 </div>
 
 <!-- reCAPTCHA v3 -->
-<script src="https://www.google.com/recaptcha/api.js?render=TA_CLE_SITE"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LfB4m4sAAAAAAfuCeRGZkXZxwIw1L6UsNTC490T"></script>
+
 <script>
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+  
   const status = document.getElementById('formStatus');
   status.textContent = "Envoi en cours…";
 
   try {
-    const token = await grecaptcha.execute('TA_CLE_SITE', { action: 'contact' });
+    // Récupération du token reCAPTCHA
+    const token = await grecaptcha.execute('6LfB4m4sAAAAAAfuCeRGZkXZxwIw1L6UsNTC490T', { action: 'contact' });
 
+    // Préparation des données
     const formData = {
       name: document.getElementById('name').value,
       email: document.getElementById('email').value,
-      message: document.getElementById('messageField').value,
-      token
+      message: document.getElementById('message').value,
+      token: token
     };
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    // Envoi au backend
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
 
-    const data = await res.json();
-    status.textContent = data.message;
-    document.getElementById('contactForm').reset();
+    const result = await response.json();
 
-  } catch(err) {
-    status.textContent = "Erreur lors de l'envoi. Veuillez réessayer.";
+    if (response.ok) {
+      status.textContent = "Message envoyé ✅";
+      document.getElementById('contactForm').reset();
+    } else {
+      status.textContent = "Erreur : " + result.message;
+    }
+  } catch (err) {
     console.error(err);
+    status.textContent = "Erreur serveur ❌";
   }
 });
 </script>
 
-  </div>
 <!-- ===================== FOOTER PREMIUM ===================== -->
 <footer class="footer-premium">
   <div class="footer-container">
@@ -831,23 +839,25 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
   </div>
 </footer>
+<!-- SCRIPT BACKEND -->
+<script>
+  const backendUrl = window.location.hostname.includes("localhost")
+    ? "http://localhost:3000"
+    : "https://gralwebs-site-production.up.railway.app";
 
-  <!-- SCRIPT BACKEND -->
-  <script>
-    // Tester le backend
-    document.getElementById('testBtn').addEventListener('click', () => {
-      fetch("http://localhost:3000/api/test")
-        .then(res => res.json())
-        .then(data => {
-          console.log("Réponse du backend :", data.message);
-          document.getElementById('message').textContent = data.message;
-        })
-        .catch(err => {
-          console.error("Erreur backend :", err);
-          document.getElementById('message').textContent = "Erreur de connexion au backend";
-        });
-    });
-  </script>
+  document.getElementById('testBtn').addEventListener('click', () => {
+    fetch(`${backendUrl}/api/test`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("Réponse du backend :", data.message);
+        document.getElementById('message').textContent = data.message;
+      })
+      .catch(err => {
+        console.error("Erreur backend :", err);
+        document.getElementById('message').textContent = "Erreur de connexion au backend";
+      });
+  });
+</script>
 
 
 
