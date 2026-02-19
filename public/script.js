@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==============================
   // BACKEND CONNECTION (invisible)
   // ==============================
-  const backendUrl = "http://localhost:3000/api/test";
+ const backendUrl = "/api/test";
   fetch(backendUrl)
     .then(res => res.json())
     .then(data => {
@@ -328,7 +328,7 @@ document.querySelectorAll(".pack-modal-content").forEach(modal => {
 const tarifData = {
 
 "Pack Essentiel": {
-title: "Pack Essentiel — À partir de 499 000 Ar",
+title: "Pack Essentiel — À partir de 699 000 Ar",
 text: `
 <p class="fade-text">Prix d’entrée stratégique pour une présence professionnelle maîtrisée.</p>
 
@@ -364,7 +364,7 @@ text: `
 },
 
 "Pack Prémium": {
-title: "Pack Premium Evolution — À partir de 1 990 000 Ar",
+title: "Pack Premium Evolution — À partir de 2 300 000 Ar",
 text: `
 <p class="fade-text">L’investissement stratégique pour une domination digitale complète.</p>
 

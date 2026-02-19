@@ -4,29 +4,37 @@ const fs = require("fs");
 
 const app = express();
 
-// Railway fournit automatiquement le port
-const PORT = process.env.PORT || 8080;
+// ✅ Railway fournit AUTOMATIQUEMENT le port
+const PORT = process.env.PORT;
 
-// Middleware pour parser le JSON des formulaires
-app.use(express.json());
-
-// Servir les fichiers statiques (index.html + assets)
-const publicPath = path.join(__dirname, "public");
-if (!fs.existsSync(publicPath)) {
-  console.error("❌ Dossier public introuvable ! Assurez-vous que 'public/index.html' existe.");
+// Sécurité : si Railway ne fournit pas de port → erreur
+if (!PORT) {
+  console.error("❌ PORT non défini. Railway doit fournir process.env.PORT.");
   process.exit(1);
 }
+
+// Middleware JSON
+app.use(express.json());
+
+// Servir les fichiers statiques
+const publicPath = path.join(__dirname, "public");
+
+if (!fs.existsSync(publicPath)) {
+  console.error("❌ Dossier 'public' introuvable !");
+  process.exit(1);
+}
+
 app.use(express.static(publicPath));
-console.log(`📂 Fichiers statiques servis depuis ${publicPath}`);
+console.log(`📂 Static depuis : ${publicPath}`);
 
-// ================= ROUTES API =================
+// ================= API =================
 
-// Route test backend
+// Test backend
 app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connecté ✅" });
 });
 
-// Route POST pour le formulaire de contact
+// Contact
 app.post("/api/contact", (req, res) => {
   const { name, email, message, token } = req.body;
 
@@ -34,23 +42,20 @@ app.post("/api/contact", (req, res) => {
     return res.status(400).json({ message: "Tous les champs sont requis !" });
   }
 
-  console.log("📩 Nouveau message reçu :", { name, email, message, token });
+  console.log("📩 Nouveau message :", { name, email, message });
 
-  res.status(200).json({ message: "Message envoyé avec succès ✅" });
+  res.json({ message: "Message envoyé avec succès ✅" });
 });
 
-// ================= FALLBACK SPA =================
-// Toujours en dernier : redirige toutes les routes non-API vers index.html
+// ================= FALLBACK =================
+
+// ⚠️ IMPORTANT : toujours APRÈS les routes API
 app.get("*", (req, res) => {
-  const indexPath = path.join(publicPath, "index.html");
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
-  } else {
-    res.status(404).send("❌ Index.html introuvable !");
-  }
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
-// ================= LANCEMENT SERVEUR =================
+// ================= START =================
+
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Serveur lancé sur le port ${PORT}`);
+  console.log(`🚀 Railway écoute sur le port ${PORT}`);
 });
