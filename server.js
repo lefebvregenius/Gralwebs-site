@@ -6,20 +6,18 @@ const app = express();
 // Railway fournit automatiquement le port
 const PORT = process.env.PORT || 8080;
 
-// Servir les fichiers statiques
+// Middleware pour parser le JSON des formulaires
+app.use(express.json());
+
+// Servir les fichiers statiques (index.html + assets)
 app.use(express.static(path.join(__dirname, "public")));
+
+// ROUTES API -------------------------
 
 // Route test backend
 app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connecté ✅" });
 });
-
-// IMPORTANT : toujours renvoyer index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-// Pour parser le JSON du formulaire
-app.use(express.json());
 
 // Route POST pour le formulaire de contact
 app.post("/api/contact", (req, res) => {
@@ -38,7 +36,14 @@ app.post("/api/contact", (req, res) => {
   res.status(200).json({ message: "Message envoyé avec succès ✅" });
 });
 
-// Écoute sur 0.0.0.0 pour Railway
+// -------------------------
+// ROUTE FALLBACK pour SPA
+// Toujours en dernier : redirige toutes les routes non-API vers index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// Lancement serveur
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
 });
