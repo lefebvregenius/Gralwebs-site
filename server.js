@@ -1,49 +1,70 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
-
-// Railway fournit automatiquement le port
 const PORT = process.env.PORT || 8080;
 
-// Middleware pour parser le JSON des formulaires
+// -----------------------------
+// Middleware JSON pour les formulaires
+// -----------------------------
 app.use(express.json());
 
-// Servir les fichiers statiques (index.html + assets)
-app.use(express.static(path.join(__dirname, "public")));
+// -----------------------------
+// Trouver dynamiquement le dossier contenant index.html
+// -----------------------------
+let publicFolder = null;
 
-// ROUTES API -------------------------
+// On regarde dans le dossier courant et sous-dossiers courants
+const possibleFolders = ["public", "dist", "build", "www"];
+for (const folder of possibleFolders) {
+  const fullPath = path.join(__dirname, folder, "index.html");
+  if (fs.existsSync(fullPath)) {
+    publicFolder = path.join(__dirname, folder);
+    break;
+  }
+}
 
-// Route test backend
+if (!publicFolder) {
+  console.warn(
+    "⚠️ Aucun dossier contenant index.html trouvé ! Vérifie ton projet."
+  );
+} else {
+  console.log("✅ Dossier public trouvé :", publicFolder);
+  app.use(express.static(publicFolder));
+}
+
+// -----------------------------
+// ROUTES API
+// -----------------------------
 app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connecté ✅" });
 });
 
-// Route POST pour le formulaire de contact
 app.post("/api/contact", (req, res) => {
   const { name, email, message, token } = req.body;
-
-  // Vérification basique des champs
   if (!name || !email || !message || !token) {
     return res.status(400).json({ message: "Tous les champs sont requis !" });
   }
 
-  // Ici tu peux ajouter la vérification reCAPTCHA côté serveur si besoin
-  // et envoyer un e-mail ou stocker le message dans une base de données
   console.log("Nouveau message reçu :", { name, email, message, token });
-
-  // Réponse côté front
   res.status(200).json({ message: "Message envoyé avec succès ✅" });
 });
 
-// -------------------------
-// ROUTE FALLBACK pour SPA
-// Toujours en dernier : redirige toutes les routes non-API vers index.html
+// -----------------------------
+// FALLBACK SPA
+// Toutes les routes non-API renvoient index.html
+// -----------------------------
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  if (!publicFolder) {
+    return res.status(404).send("404 Not Found - index.html introuvable");
+  }
+  res.sendFile(path.join(publicFolder, "index.html"));
 });
 
+// -----------------------------
 // Lancement serveur
+// -----------------------------
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
 });
