@@ -2,21 +2,24 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 
-// Servir fichiers statiques
+// Railway fournit automatiquement le bon port
+const PORT = process.env.PORT || 3000;
+
+// Servir les fichiers statiques depuis le dossier public
 app.use(express.static(path.join(__dirname, "public")));
 
-// API test
+// Route API test (optionnel)
 app.get("/api/test", (req, res) => {
   res.json({ message: "Backend connecté ✅" });
 });
 
-// Fallback
+// IMPORTANT : Toujours renvoyer index.html pour toutes les routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// Démarrage serveur
 app.listen(PORT, "0.0.0.0", () => {
-  console.log("🚀 Server running on port " + PORT);
+  console.log(`Serveur démarré sur le port ${PORT}`);
 });
