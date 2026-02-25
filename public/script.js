@@ -1052,3 +1052,115 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Sélectionne uniquement les boutons / cartes Vos Choix
+  const vosChoixCards = document.querySelectorAll(".vos-choix + .card.open-popup");
+  const popups = {
+    "popup-essentiel": document.getElementById("popup-essentiel"),
+    "popup-pro": document.getElementById("popup-pro"),
+    "popup-premium": document.getElementById("popup-premium")
+  };
+
+  vosChoixCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const popupId = card.getAttribute("data-popup");
+      const popup = popups[popupId];
+
+      if (popup) {
+        popup.classList.add("show");
+      }
+    });
+  });
+
+  // Fermer les popups au clic sur le X
+  Object.values(popups).forEach(popup => {
+    const closeBtn = popup.querySelector(".close-popup");
+    closeBtn.addEventListener("click", () => {
+      popup.classList.remove("show");
+    });
+
+    // Fermer si clic à l'extérieur
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  });
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // Sélectionne uniquement les cartes Vos Choix
+  const vosChoixCards = document.querySelectorAll(".vos-choix + .card.open-popup");
+
+  // Crée un mapping popup
+  const popups = {
+    "popup-essentiel": document.getElementById("popup-essentiel"),
+    "popup-pro": document.getElementById("popup-pro"),
+    "popup-premium": document.getElementById("popup-premium")
+  };
+
+  // Ouvrir popup au clic
+  vosChoixCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const popupId = card.getAttribute("data-popup");
+      const popup = popups[popupId];
+      if (popup) popup.classList.add("show");
+    });
+  });
+
+  // Fermer popup
+  Object.values(popups).forEach(popup => {
+    const closeBtn = popup.querySelector(".close-popup");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => popup.classList.remove("show"));
+    }
+    // clic à l'extérieur
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) popup.classList.remove("show");
+    });
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // Sélectionne uniquement les cartes Vos Choix
+  const vosChoixCards = document.querySelectorAll(".vos-choix + .card.open-popup");
+
+  // Map des popups
+  const popups = {
+    "popup-essentiel": document.getElementById("popup-essentiel"),
+    "popup-pro": document.getElementById("popup-pro"),
+    "popup-premium": document.getElementById("popup-premium")
+  };
+
+  // Ouvrir popup au clic
+  vosChoixCards.forEach(card => {
+    card.addEventListener("click", (e) => {
+      e.stopPropagation(); // éviter propagation
+      const popupId = card.getAttribute("data-popup");
+      const popup = popups[popupId];
+      if (popup) {
+        popup.classList.add("show");
+      }
+    });
+  });
+
+  // Fermer popup au clic sur X
+  Object.values(popups).forEach(popup => {
+    const closeBtn = popup.querySelector(".close-popup");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => popup.classList.remove("show"));
+    }
+
+    // Fermer au clic en dehors du contenu
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) popup.classList.remove("show");
+    });
+  });
+
+  // Fermer popup avec Échap
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      Object.values(popups).forEach(p => p.classList.remove("show"));
+    }
+  });
+});

@@ -59,7 +59,28 @@
     <a href="#contact" class="btn">Contactez-nous</a>
   </div>
 </section>
-
+<!-- ===================== MÉTÉO ULTRA PREMIUM ===================== -->
+<section class="premium-weather-section">
+  <div class="weather-card">
+    <div class="weather-background" id="weather-bg"></div>
+    <canvas id="weather-effects"></canvas>
+    <div class="weather-content">
+      <div class="weather-left">
+        <h3 id="location">Chargement...</h3>
+        <p id="description">...</p>
+        <div class="weather-extra">
+          <span id="humidity">💧 Humidité: --%</span>
+          <span id="wind">💨 Vent: -- km/h</span>
+          <span id="sun">🌅 Soleil: --</span>
+        </div>
+      </div>
+      <div class="weather-right">
+        <div class="weather-icon" id="weather-icon">☀️</div>
+        <div class="weather-temp" id="temperature">--°C</div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ===================== À PROPOS PREMIUM ===================== -->
 <section id="about" class="about-section">
 
@@ -1075,13 +1096,18 @@ if (navigator.hardwareConcurrency <= 4) {
   });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  // 🔹 Ferme tous les popups au chargement
-  document.querySelectorAll(".pack-content").forEach(popup => {
+document.addEventListener("DOMContentLoaded", function() {
+  // 🔹 Ferme uniquement les popups de la section "Détails des packs"
+  document.querySelectorAll("#pack-details .pack-content").forEach(popup => {
     popup.classList.remove("active");
   });
 
+  // 🔹 Optimisation des images
+  const images = document.querySelectorAll("img");
+  images.forEach(img => {
+    img.loading = "lazy";
+    img.decoding = "async";
+  });
 });
 </script>
 <script>
@@ -1103,6 +1129,152 @@ window.onload = function() {
   }, 500);
 
 };
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const images = document.querySelectorAll(".popup-services img");
+
+  // Si navigateur moderne
+  if ('IntersectionObserver' in window) {
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible-animate");
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    images.forEach(img => observer.observe(img));
+
+  } else {
+    // Fallback Android 4.0
+    function revealOnScroll() {
+      const windowHeight = window.innerHeight;
+
+      images.forEach(img => {
+        const rect = img.getBoundingClientRect();
+        if (rect.top < windowHeight - 50) {
+          img.classList.add("visible-animate");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+  }
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const cards = document.querySelectorAll(".open-popup");
+
+  cards.forEach(card => {
+
+    card.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const popupId = this.getAttribute("data-popup");
+      const popup = document.getElementById(popupId);
+
+      if (!popup) return;
+
+      // Fermer autres popups
+      document.querySelectorAll(".popup").forEach(p => {
+        if (p !== popup) p.classList.remove("active");
+      });
+
+      popup.classList.add("active");
+    });
+
+  });
+
+  // Fermer en cliquant en dehors
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".popup") && !e.target.closest(".open-popup")) {
+      document.querySelectorAll(".popup").forEach(p => {
+        p.classList.remove("active");
+      });
+    }
+  });
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const vosChoixCards = document.querySelectorAll(
+        ".vos-choix .card.open-popup"
+    );
+
+    vosChoixCards.forEach(card => {
+        card.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            const popupId = this.dataset.popup;
+            const popup = document.getElementById(popupId);
+
+            if (popup) {
+                popup.classList.add("active");
+                popup.style.display = "flex";
+            }
+        });
+    });
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Sélectionne toutes les cartes "Vos choix"
+  const choiceCards = document.querySelectorAll(".open-popup");
+
+  choiceCards.forEach(card => {
+    card.addEventListener("click", function(e) {
+      e.stopPropagation(); // Empêche la propagation pour ne pas fermer tout
+      const popupId = card.getAttribute("data-popup");
+      const popup = document.getElementById(popupId);
+
+      if (!popup) return;
+
+      // Affiche le popup
+      popup.style.display = "block";
+      popup.style.position = "fixed";
+      popup.style.top = "50%";
+      popup.style.left = "50%";
+      popup.style.transform = "translate(-50%, -50%)";
+      popup.style.zIndex = "9999"; // Force au-dessus de tout
+      popup.style.background = "#fff";
+      popup.style.padding = "2rem";
+      popup.style.boxShadow = "0 0 20px rgba(0,0,0,0.5)";
+      popup.style.maxHeight = "90vh";
+      popup.style.overflowY = "auto";
+
+      // Fermer le popup avec le bouton X
+      const closeBtn = popup.querySelector(".close-popup");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          popup.style.display = "none";
+        });
+      }
+
+      // Fermer le popup si on clique en dehors
+      document.addEventListener("click", function clickOutside(event) {
+        if (!popup.contains(event.target) && event.target !== card) {
+          popup.style.display = "none";
+          document.removeEventListener("click", clickOutside);
+        }
+      });
+
+    });
+  });
+
+});
 </script>
 
 
