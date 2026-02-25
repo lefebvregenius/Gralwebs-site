@@ -1164,3 +1164,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+// Empêcher les popups d'interférer avec les liens normaux
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", function(e) {
+    const href = this.getAttribute("href");
+
+    // Si c'est un vrai fichier (FAQ, contrat, etc.)
+    if (href && href.endsWith(".html")) {
+      e.stopPropagation(); // empêche popup
+    }
+  });
+});
+// Gestion propre des popups
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.querySelectorAll(".open-popup").forEach(button => {
+    button.addEventListener("click", function(e) {
+      e.preventDefault();
+      const popupId = this.dataset.popup;
+      document.getElementById(popupId).classList.add("active");
+    });
+  });
+
+  document.querySelectorAll(".close-popup").forEach(button => {
+    button.addEventListener("click", function() {
+      this.closest(".popup").classList.remove("active");
+    });
+  });
+
+});
