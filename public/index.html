@@ -59,31 +59,255 @@
     <a href="#contact" class="btn">Contactez-nous</a>
   </div>
 </section>
-<!-- ===================== MÉTÉO ULTRA PREMIUM ===================== -->
-<section class="premium-weather-section">
-  <div class="weather-card">
-    <div class="weather-bg"></div>
-    <canvas id="weather-effects"></canvas>
+<!-- ================= IOS STYLE REALISTIC WEATHER ================= -->
 
-    <div class="weather-content">
-      <div class="weather-left">
-        <h3 id="weather-city">Chargement météo…</h3>
-        <p id="weather-desc"></p>
-        <div class="weather-extra">
-          <span id="weather-temp"></span>
-          <span id="weather-humidity"></span>
-        </div>
-        <div class="weather-extra">
-          <span id="weather-wind"></span>
-          <span id="weather-sun"></span>
-        </div>
+<section class="weather-ios">
+  <div class="weather-card">
+
+    <canvas id="weather-canvas"></canvas>
+
+    <div class="sun"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="lightning"></div>
+
+    <div class="content">
+
+      <div class="top">
+        <h2 id="city">Chargement...</h2>
+        <div id="clock"></div>
       </div>
-      <div class="weather-right">
-        <div class="weather-icon" id="weather-icon"></div>
+
+      <div class="middle">
+        <div id="icon"></div>
+        <div class="temp"><span id="temp">--</span>°</div>
       </div>
+
+      <p id="desc"></p>
+
+      <div class="info">
+        <div><small>Humidité</small><p id="humidity"></p></div>
+        <div><small>Vent</small><p id="wind"></p></div>
+        <div><small>Pression</small><p id="pressure"></p></div>
+      </div>
+
+      <div class="hourly">
+        <h3>Prochaines heures</h3>
+        <div id="hourly"></div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<style>
+.weather-ios{width:100%;padding:40px 0;font-family:Segoe UI,sans-serif}
+.weather-card{
+  position:relative;
+  width:100%;
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(255,255,255,0.2);
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  color:white;
+}
+.content{position:relative;z-index:5;padding:40px}
+.top{display:flex;justify-content:space-between}
+.middle{display:flex;justify-content:space-between;align-items:center;margin:30px 0}
+.temp{font-size:80px;font-weight:300}
+.info{display:flex;gap:20px}
+.info div{flex:1;background:rgba(255,255,255,0.1);padding:15px;border-radius:15px;text-align:center}
+.hourly{margin-top:30px}
+#hourly{display:flex;gap:15px;overflow-x:auto;padding-top:10px}
+.hour-card{min-width:90px;background:rgba(255,255,255,0.1);padding:10px;border-radius:15px;text-align:center}
+
+/* SUN */
+.sun{
+  position:absolute;
+  top:40px;
+  right:60px;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle,#ffd93b,#ff9900);
+  border-radius:50%;
+  filter:blur(2px);
+  animation:sunPulse 6s infinite alternate;
+  opacity:0;
+}
+@keyframes sunPulse{from{transform:scale(1)}to{transform:scale(1.1)}}
+
+/* CLOUDS */
+.cloud{
+  position:absolute;
+  width:300px;
+  height:150px;
+  background:radial-gradient(circle,rgba(255,255,255,0.8),transparent 70%);
+  border-radius:50%;
+  filter:blur(20px);
+  opacity:0;
+}
+.cloud1{top:60px;left:-100px;animation:cloudMove 60s linear infinite}
+.cloud2{top:120px;left:-200px;animation:cloudMove 80s linear infinite}
+@keyframes cloudMove{from{transform:translateX(0)}to{transform:translateX(120%)}}
+
+/* LIGHTNING */
+.lightning{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:white;
+  opacity:0;
+}
+@keyframes flash{0%,95%,100%{opacity:0}96%{opacity:0.8}97%{opacity:0}}
+
+/* CANVAS */
+#weather-canvas{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  pointer-events:none;
+  z-index:1;
+}
+.sunny{background:linear-gradient(135deg,#4facfe,#00f2fe)}
+.cloudy{background:linear-gradient(135deg,#89f7fe,#66a6ff)}
+.rainy{background:linear-gradient(135deg,#4e73df,#1cc88a)}
+.storm{background:linear-gradient(135deg,#141e30,#243b55)}
+.night{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)}
+</style>
+
+<script>
+const API_KEY="2b064a1719bbb355a6eff1162ec5a189";
+
+/* CLOCK */
+function updateClock(){
+  const now=new Date();
+  document.getElementById("clock").innerText=
+  now.toLocaleDateString()+" • "+now.toLocaleTimeString();
+}
+setInterval(updateClock,1000);updateClock();
+
+/* CANVAS PARTICLES */
+const canvas=document.getElementById("weather-canvas");
+const ctx=canvas.getContext("2d");
+let particles=[];let rain=false;
+
+function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
+window.addEventListener("resize",resize);resize();
+
+function createRain(){
+  particles=[];
+  for(let i=0;i<200;i++){
+    particles.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      len:Math.random()*20+10,
+      speed:Math.random()*6+4
+    });
+  }
+}
+
+function draw(){
+  if(!rain)return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle="rgba(255,255,255,0.6)";
+  ctx.lineWidth=1.2;
+  ctx.beginPath();
+  for(let p of particles){
+    ctx.moveTo(p.x,p.y);
+    ctx.lineTo(p.x-3,p.y+p.len);
+    p.y+=p.speed;
+    if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width;}
+  }
+  ctx.stroke();
+  requestAnimationFrame(draw);
+}
+
+/* FETCH */
+async function fetchWeather(lat,lon){
+  try{
+    const res=await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`);
+    const current=await res.json();
+    const forecastRes=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`);
+    const forecast=await forecastRes.json();
+
+    document.getElementById("city").innerText=current.name;
+    document.getElementById("temp").innerText=Math.round(current.main.temp);
+    document.getElementById("desc").innerText=current.weather[0].description;
+    document.getElementById("humidity").innerText=current.main.humidity+"%";
+    document.getElementById("wind").innerText=current.wind.speed+" km/h";
+    document.getElementById("pressure").innerText=current.main.pressure+" hPa";
+    document.getElementById("icon").innerHTML=
+      `<img src="https://openweathermap.org/img/wn/${current.weather[0].icon}@4x.png">`;
+
+    applyTheme(current.weather[0].main);
+    generateHourly(forecast);
+
+  }catch(e){
+    document.getElementById("city").innerText="Erreur météo";
+  }
+}
+
+function applyTheme(condition){
+  const card=document.querySelector(".weather-card");
+  const sun=document.querySelector(".sun");
+  const clouds=document.querySelectorAll(".cloud");
+  const lightning=document.querySelector(".lightning");
+
+  card.className="weather-card";
+  sun.style.opacity=0;
+  clouds.forEach(c=>c.style.opacity=0);
+  lightning.style.animation="none";
+  rain=false;
+
+  if(condition.includes("Clear")){
+    card.classList.add("sunny");
+    sun.style.opacity=1;
+  }
+  else if(condition.includes("Cloud")){
+    card.classList.add("cloudy");
+    clouds.forEach(c=>c.style.opacity=0.6);
+  }
+  else if(condition.includes("Rain")){
+    card.classList.add("rainy");
+    rain=true;createRain();draw();
+    clouds.forEach(c=>c.style.opacity=0.7);
+  }
+  else if(condition.includes("Thunder")){
+    card.classList.add("storm");
+    rain=true;createRain();draw();
+    lightning.style.animation="flash 5s infinite";
+    clouds.forEach(c=>c.style.opacity=0.8);
+  }
+  else card.classList.add("night");
+}
+
+function generateHourly(data){
+  const container=document.getElementById("hourly");
+  container.innerHTML="";
+  for(let i=0;i<5;i++){
+    const item=data.list[i];
+    const hour=new Date(item.dt*1000).getHours()+":00";
+    container.innerHTML+=`
+      <div class="hour-card">
+        <p>${hour}</p>
+        <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+        <p>${Math.round(item.main.temp)}°</p>
+      </div>
+    `;
+  }
+}
+
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(
+    pos=>fetchWeather(pos.coords.latitude,pos.coords.longitude),
+    ()=>fetchWeather(-18.8792,47.5079)
+  );
+}else fetchWeather(-18.8792,47.5079);
+</script>
 <!-- ===================== À PROPOS PREMIUM ===================== -->
 <section id="about" class="about-section">
 
