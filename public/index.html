@@ -62,21 +62,24 @@
 <!-- ===================== MÉTÉO ULTRA PREMIUM ===================== -->
 <section class="premium-weather-section">
   <div class="weather-card">
-    <div class="weather-background" id="weather-bg"></div>
+    <div class="weather-bg"></div>
     <canvas id="weather-effects"></canvas>
+
     <div class="weather-content">
       <div class="weather-left">
-        <h3 id="location">Chargement...</h3>
-        <p id="description">...</p>
+        <h3 id="weather-city">Chargement météo…</h3>
+        <p id="weather-desc"></p>
         <div class="weather-extra">
-          <span id="humidity">💧 Humidité: --%</span>
-          <span id="wind">💨 Vent: -- km/h</span>
-          <span id="sun">🌅 Soleil: --</span>
+          <span id="weather-temp"></span>
+          <span id="weather-humidity"></span>
+        </div>
+        <div class="weather-extra">
+          <span id="weather-wind"></span>
+          <span id="weather-sun"></span>
         </div>
       </div>
       <div class="weather-right">
-        <div class="weather-icon" id="weather-icon">☀️</div>
-        <div class="weather-temp" id="temperature">--°C</div>
+        <div class="weather-icon" id="weather-icon"></div>
       </div>
     </div>
   </div>
