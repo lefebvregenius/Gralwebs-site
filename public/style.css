@@ -2389,3 +2389,13 @@ body {
   cursor: pointer;
   color: #333;
 }
+.popup {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
