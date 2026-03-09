@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>L'histoire de GralWebs</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+GLOBAL
+========================= */
+body{
+  background:#050505;
+  color:white;
+  font-family:"Poppins",sans-serif;
+  margin:0;
+  padding:0;
+}
+
+/* =========================
+NAVBAR
+========================= */
+#navbar{
+  background:#070707;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand-name{
+  font-family:"Orbitron";
+  font-size:20px;
+  letter-spacing:2px;
+  color:#00eaff;
+}
+
+.nav-logo{
+  width:40px;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  opacity:0.8;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#00eaff;
+}
+
+/* =========================
+HERO + G LIQUID GLASS
+========================= */
+.history-hero{
+  height:600px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:linear-gradient(180deg,#050505,#0a0a0a);
+  position:relative;
+  overflow:hidden;
+}
+
+.history-hero h1{
+  font-family:"Orbitron";
+  font-size:150px;
+  font-weight:900;
+  letter-spacing:10px;
+  color:transparent;
+  background: linear-gradient(45deg, #ff004c, #00ff9f, #00eaff, #7b61ff);
+  -webkit-background-clip: text;
+  text-shadow:
+    0 0 30px rgba(255,0,80,0.5),
+    0 0 60px rgba(0,234,255,0.4),
+    0 0 90px rgba(123,97,255,0.3);
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+  pointer-events:none;
+}
+
+/* =========================
+HOLOGRAM VIDEO
+========================= */
+.hologram-container{
+  position:relative;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  margin:auto;
+  margin-top:50px;
+  overflow:hidden;
+  z-index:5;
+  box-shadow:
+    0 0 20px rgba(255,0,80,0.7),
+    0 0 40px rgba(255,0,80,0.5),
+    0 0 60px rgba(255,0,80,0.3);
+}
+
+.hologram-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(1.2) contrast(1.2) saturate(1.3);
+}
+
+/* effet hologram lumineux */
+.hologram-container::before{
+  content:"";
+  position:absolute;
+  top:-10px; left:-10px; right:-10px; bottom:-10px;
+  border-radius:50%;
+  background:linear-gradient(120deg, rgba(255,0,80,0.15), rgba(123,61,255,0.1), rgba(0,234,255,0.15));
+  filter:blur(40px);
+  z-index:-1;
+}
+
+.hologram-scan{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:linear-gradient(transparent, rgba(255,0,80,0.2), transparent);
+  animation:scan 4s linear infinite;
+}
+
+@keyframes scan{
+  0%{transform:translateY(-100%);}
+  100%{transform:translateY(100%);}
+}
+
+/* =========================
+CONTENT
+========================= */
+.history-content{
+  max-width:950px;
+  margin:auto;
+  padding:80px 20px;
+  line-height:1.8;
+  z-index:1;
+  position:relative;
+}
+
+.history-content h2{
+  font-family:"Orbitron";
+  font-size:40px;
+  margin-bottom:30px;
+  background:linear-gradient(90deg,#ff004c,#00ff9f,#00eaff,#7b61ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(255,0,80,0.3);
+}
+
+.history-content p{
+  font-size:18px;
+  margin-bottom:25px;
+  color:#d1d1d1;
+}
+
+.highlight{
+  font-weight:600;
+  color:white;
+}
+
+.big{
+  font-size:22px;
+  font-weight:600;
+  color:#00eaff;
+}
+
+.signature{
+  margin-top:40px;
+  font-style:italic;
+  color:#aaa;
+}
+
+/* =========================
+FOOTER
+========================= */
+footer{
+  margin-top:50px;
+  padding:20px;
+  text-align:center;
+  font-size:14px;
+  color:#888;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+footer img{
+  width:30px;
+  vertical-align:middle;
+  margin-right:10px;
+}
+</style>
+
+</head>
+<body>
+    <!-- LOADER FULLSCREEN -->
+<div id="loader">
+  <span class="loader-g">G</span>
+  <div class="loader-steps">
+    <div class="step">Chargement modules...</div>
+    <div class="step">Initialisation assets...</div>
+    <div class="step">Configuration interface...</div>
+  </div>
+</div>
+
+<style>
+/* =====================
+LOADER FULLSCREEN
+===================== */
+#loader {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#050505;
+  z-index:99999; /* maximum, au-dessus de tout */
+  pointer-events: all; /* empêche interaction avec popups derrière */
+}
+
+.loader-g {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 200px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.05);
+  text-transform: uppercase;
+  position: relative;
+  background: linear-gradient(135deg, rgba(0,234,255,0.6), rgba(255,0,80,0.6), rgba(123,61,255,0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 30px rgba(0,234,255,0.4),
+    0 0 60px rgba(255,0,80,0.3),
+    0 0 90px rgba(123,61,255,0.2);
+  animation: pulseG 2s infinite alternate;
+}
+
+.loader-g::after{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  border-radius:50%;
+  background: linear-gradient(45deg, rgba(0,255,255,0.1), rgba(255,0,100,0.1));
+  filter: blur(40px);
+  z-index:-1;
+}
+
+@keyframes pulseG{
+  0%{ text-shadow:0 0 20px rgba(0,234,255,0.4), 0 0 40px rgba(255,0,80,0.3);}
+  100%{ text-shadow:0 0 50px rgba(0,234,255,0.6),0 0 100px rgba(255,0,80,0.5);}
+}
+
+/* =====================
+LOADER STEPS
+===================== */
+.loader-steps{
+  margin-top:30px;
+  text-align:center;
+  font-family:'Poppins',sans-serif;
+  font-size:16px;
+  color:#fff;
+  opacity:0.8;
+}
+
+.loader-steps .step{
+  margin:5px 0;
+  animation: fadeStep 1.5s ease-in-out infinite;
+}
+
+.loader-steps .step:nth-child(2){ animation-delay:0.5s;}
+.loader-steps .step:nth-child(3){ animation-delay:1s;}
+
+@keyframes fadeStep{
+  0%,100%{opacity:0;}
+  50%{opacity:0.8;}
+}
+
+/* =====================
+MASQUER LOADER QUAND TERMINÉ
+===================== */
+#loader.hide{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.7s ease;
+}
+</style>
+
+<script>
+// Masquer loader après chargement complet
+window.addEventListener('load',()=>{
+  const loader = document.getElementById('loader');
+  setTimeout(()=>loader.classList.add('hide'),3000); // ici 3s
+});
+</script>
+
+<!-- NAVBAR -->
+<header id="navbar">
+<div class="nav-container">
+<div class="brand">
+<img src="images/logo.png" class="nav-logo" loading="lazy">
+<span class="brand-name">GralWebs</span>
+</div>
+<ul class="nav-links">
+<li><a href="index.html">Accueil</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="about.html">À propos</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="contrat.html">Contrat</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="about-gralwebs.html">Histoire</a></li>
+</ul>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="history-hero">
+
+<h1>G</h1> <!-- G Liquid Glass Fluorescent -->
+
+<div class="hologram-container">
+  <video class="hologram-video" autoplay muted loop playsinline>
+    <source src="videos/vidéo-profile.mp4" type="video/mp4" loading="lazy">
+  </video>
+  <div class="hologram-scan"></div>
+</div>
+
+</section>
+
+<!-- CONTENT -->
+<section class="history-content">
+<h2>Notre vision</h2>
+<p class="big">
+GralWebs est une micro-agence digitale indépendante basée à Madagascar.
+</p>
+<p>
+Contrairement aux agences traditionnelles possédant un siège fixe,
+<span class="highlight">GralWebs fonctionne comme un réseau agile de talents</span>,
+réunissant développeurs, designers, conseillers digitaux et spécialistes
+de différents secteurs afin de créer des sites web réellement
+professionnels et modernes.
+</p>
+<p>
+Notre mission est simple mais ambitieuse :
+<span class="highlight">concevoir des sites web premium qui marquent les esprits</span>.
+Même nos projets les plus simples sont pensés avec une exigence élevée
+en matière de design, de performance et d'expérience utilisateur.
+</p>
+<p>
+Chez GralWebs, chaque projet est abordé comme une collaboration.
+Nous réunissons des experts dans plusieurs domaines afin de donner vie
+à un site web qui ne se contente pas d'exister,
+mais qui <strong>se distingue réellement en ligne</strong>.
+</p>
+
+<h2>Notre différence</h2>
+<p>
+Nous accordons une importance particulière à deux éléments essentiels :
+la <strong>sécurité</strong> et la <strong>performance</strong>.
+</p>
+<p>
+Pour cela, nous avons développé un système interne appelé
+<strong>ASSW Monitoring</strong>.
+Ce logiciel propriétaire permet de surveiller en continu la performance
+et la stabilité de votre site web.
+</p>
+<p>
+ASSW intègre également des technologies d’<strong>intelligence artificielle</strong>
+capables de détecter les erreurs potentielles, d’optimiser les performances
+et d’assurer que votre plateforme reste rapide, fiable et sécurisée.
+</p>
+<p>
+Notre objectif est que vous puissiez vous concentrer sur votre activité
+pendant que nous veillons en permanence à la qualité et à la stabilité
+de votre présence en ligne.
+</p>
+<p>
+Chez GralWebs, nous croyons qu’un site web n’est pas simplement
+une page sur Internet.
+C’est une <strong>vitrine stratégique</strong>, une <strong>identité digitale</strong>,
+et souvent le premier contact entre une entreprise et ses clients.
+</p>
+<p class="signature">
+Votre tranquillité et votre satisfaction sont au cœur de notre travail.
+</p>
+</section>
+
+<!-- ===================== FOOTER PREMIUM ===================== -->
+<footer class="footer-premium">
+  <div class="footer-container">
+
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Logo GralWebs" class="footer-logo"loading="lazy">
+      <h3>GralWebs Solutions</h3>
+    </div>
+
+    <p class="footer-description">
+      Création de sites web modernes, interactifs et haut de gamme.
+      Nous façonnons des présences digitales puissantes.
+    </p>
+
+    <p class="copyright">
+      &copy; 2026 GralWebs Solutions | Tous droits réservés
+    </p>
+
+  </div>
+</footer>
+
+</body>
+</html>

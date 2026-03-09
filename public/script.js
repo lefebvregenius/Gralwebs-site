@@ -1193,3 +1193,145 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 });
+// ===============================
+// POPUPS PREMIUM - Activation après chargement complet
+// ===============================
+window.addEventListener("load", () => {
+
+  // 1️⃣ Sélectionner toutes les popups
+  const popups = document.querySelectorAll(".popup, .pack-popup, .pack-modal");
+  popups.forEach(popup => {
+    popup.classList.remove("active", "show");
+    popup.style.opacity = "0";
+    popup.style.visibility = "hidden";
+    popup.style.display = "none"; // pour modals style flex
+  });
+
+  // 2️⃣ Ajouter les triggers clics pour toutes les popups
+  document.querySelectorAll(".open-popup, .pack-btn, [data-modal-target]").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+
+      // Si c'est un lien normal FAQ ou autre, ne rien faire
+      if(btn.tagName === "A" && !btn.dataset.popup && !btn.dataset.modalTarget) return;
+
+      // Déterminer la popup
+      const popupId = btn.dataset.popup || btn.dataset.modalTarget;
+      const popup = document.getElementById(popupId);
+      if(!popup) return;
+
+      // Affichage
+      popup.classList.add("active", "show");
+      popup.style.opacity = "1";
+      popup.style.visibility = "visible";
+      popup.style.display = "flex"; // ou block selon le style
+
+      // Bloquer scroll page si nécessaire
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  // 3️⃣ Fermer popup au clic sur X
+  document.querySelectorAll(".close-popup, .close-pack, .pack-modal .close").forEach(closeBtn => {
+    closeBtn.addEventListener("click", () => {
+      const popup = closeBtn.closest(".popup, .pack-popup, .pack-modal");
+      if(!popup) return;
+
+      popup.classList.remove("active", "show");
+      popup.style.opacity = "0";
+      popup.style.visibility = "hidden";
+      popup.style.display = "none";
+
+      document.body.style.overflow = "auto";
+    });
+  });
+
+  // 4️⃣ Fermer popup si clic en dehors du contenu
+  popups.forEach(popup => {
+    popup.addEventListener("click", e => {
+      if(e.target === popup){
+        popup.classList.remove("active", "show");
+        popup.style.opacity = "0";
+        popup.style.visibility = "hidden";
+        popup.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+    });
+  });
+
+  // 5️⃣ Fermer popup avec Échap
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape"){
+      popups.forEach(popup => {
+        popup.classList.remove("active", "show");
+        popup.style.opacity = "0";
+        popup.style.visibility = "hidden";
+        popup.style.display = "none";
+      });
+      document.body.style.overflow = "auto";
+    }
+  });
+
+});
+// ================= POPUPS PREMIUM GLASS VOS CHOIX =================
+window.addEventListener("load", () => {
+  // Récupérer tous les boutons pack
+  const packButtons = document.querySelectorAll(".pack-btn");
+  const popups = document.querySelectorAll(".pack-content");
+
+  // Ouvrir popup au clic sur un bouton
+  packButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const pack = btn.getAttribute("data-pack");
+      const targetPopup = document.getElementById(pack);
+
+      // Fermer tous les popups avant d'ouvrir
+      popups.forEach(p => p.classList.remove("active"));
+
+      if(targetPopup){
+        targetPopup.classList.add("active");
+      }
+    });
+  });
+
+  // Fermer popup au clic sur la croix
+  const closeButtons = document.querySelectorAll(".close-pack");
+  closeButtons.forEach(closeBtn => {
+    closeBtn.addEventListener("click", () => {
+      closeBtn.closest(".pack-content").classList.remove("active");
+    });
+  });
+
+  // Fermer popup au clic en dehors
+  document.addEventListener("click", (e) => {
+    popups.forEach(popup => {
+      if(popup.classList.contains("active") && !popup.contains(e.target) && !e.target.classList.contains("pack-btn")){
+        popup.classList.remove("active");
+      }
+    });
+  });
+
+  // Fermer avec Échap
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape"){
+      popups.forEach(popup => popup.classList.remove("active"));
+    }
+  });
+});
+/* ===== LOADER ===== */
+
+window.addEventListener("load", () => {
+
+  const loader = document.getElementById("loader");
+
+  setTimeout(()=>{
+    loader.style.opacity="0";
+    loader.style.transition="opacity 0.6s ease";
+
+    setTimeout(()=>{
+      loader.style.display="none";
+    },600)
+
+  },1500)
+
+});
