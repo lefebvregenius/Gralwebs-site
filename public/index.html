@@ -1466,14 +1466,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script>
-window.onload = function() {
+window.addEventListener("load", function(){
 
-  setTimeout(() => {
-    const popups = document.querySelectorAll(".popup, .modal, .overlay");
-    popups.forEach(el => el.remove());
-  }, 500);
+  const modals = document.querySelectorAll('.pack-modal');
 
-};
+  modals.forEach(modal=>{
+    modal.style.display="none";
+  });
+
+});
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -1649,6 +1650,46 @@ modals.forEach(modal => {
   modal.addEventListener('click', e => {
     if(e.target === modal) modal.style.display = 'none';
   });
+});
+</script>
+<script>
+/* ===============================
+CORRECTION LOADER + POPUPS
+=============================== */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const loader = document.getElementById("loader");
+
+  const popups = document.querySelectorAll(
+    ".popup, .pack-modal, .modal, .overlay"
+  );
+
+  /* Désactive les popups au démarrage */
+  popups.forEach(p => {
+    p.style.pointerEvents = "none";
+    p.style.opacity = "0";
+  });
+
+  /* Quand la page est chargée */
+  window.addEventListener("load", function(){
+
+    setTimeout(function(){
+
+      if(loader){
+        loader.classList.add("hide");
+      }
+
+      /* Réactive les popups */
+      popups.forEach(p => {
+        p.style.pointerEvents = "";
+        p.style.opacity = "";
+      });
+
+    },3000);
+
+  });
+
 });
 </script>
 
