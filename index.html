@@ -1080,7 +1080,7 @@ if(navigator.geolocation){
       </div>
       <div class="card" data-aos="flip-left" data-aos-delay="200">
         <h3>Pack Prémium</h3>
-        <p>à partir de 2 300 000 Ar et plus</p>
+        <p>à partir de 2 699 000 Ar et plus</p>
         <ul>
           <li>Jusqu’à 15 pages</li>
           <li>Blog / Multi-langue</li>
@@ -1502,10 +1502,6 @@ if (navigator.hardwareConcurrency <= 4) {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // 🔹 Ferme uniquement les popups de la section "Détails des packs"
-  document.querySelectorAll("#pack-details .pack-content").forEach(popup => {
-    popup.classList.remove("active");
-  });
 
   // 🔹 Optimisation des images
   const images = document.querySelectorAll("img");
@@ -1523,17 +1519,6 @@ document.addEventListener("DOMContentLoaded", function () {
     img.loading = "lazy";
     img.decoding = "async";
   });
-});
-</script>
-<script>
-window.addEventListener("load", function(){
-
-  const modals = document.querySelectorAll('.pack-modal');
-
-  modals.forEach(modal=>{
-    modal.style.display="none";
-  });
-
 });
 </script>
 <script>
@@ -1580,10 +1565,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const cards = document.querySelectorAll(".open-popup");
 
-  cards.forEach(card => {
-
-    card.addEventListener("click", function (e) {
-      e.preventDefault();
+  card.addEventListener("click", function (e) {
+  e.stopPropagation();
+  e.preventDefault();
 
       const popupId = this.getAttribute("data-popup");
       const popup = document.getElementById(popupId);
@@ -1608,29 +1592,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
-
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const vosChoixCards = document.querySelectorAll(
-        ".vos-choix .card.open-popup"
-    );
-
-    vosChoixCards.forEach(card => {
-        card.addEventListener("click", function (e) {
-            e.stopPropagation();
-
-            const popupId = this.dataset.popup;
-            const popup = document.getElementById(popupId);
-
-            if (popup) {
-                popup.classList.add("active");
-                popup.style.display = "flex";
-            }
-        });
-    });
 
 });
 </script>
@@ -1752,8 +1713,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
-
-
 
 </body>
 </html>

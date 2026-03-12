@@ -1335,3 +1335,114 @@ window.addEventListener("load", () => {
   },1500)
 
 });
+document.addEventListener("DOMContentLoaded", function(){
+
+/* =============================
+   CREATION LUNE
+============================= */
+
+const moonContainer = document.createElement("div");
+moonContainer.id = "moon-container";
+
+const moon = document.createElement("div");
+moon.className = "moon";
+
+const shadow = document.createElement("div");
+shadow.className = "moon-shadow";
+
+moon.appendChild(shadow);
+moonContainer.appendChild(moon);
+
+document.body.appendChild(moonContainer);
+
+
+/* =============================
+   PHASE LUNAIRE REELLE
+============================= */
+
+function getMoonPhase(){
+
+const now = new Date();
+
+/* nouvelle lune de référence */
+const newMoon = new Date("2024-01-11");
+
+const diff = now - newMoon;
+
+const days = diff / (1000 * 60 * 60 * 24);
+
+/* cycle lunaire */
+const phase = days % 29.53;
+
+return phase;
+
+}
+
+function updateMoon(){
+
+const phase = getMoonPhase();
+
+let offset;
+
+/* calcul ombre */
+
+if(phase < 14.76){
+
+offset = (phase / 14.76) * 110;
+
+}else{
+
+offset = ((29.53 - phase) / 14.76) * 110;
+
+}
+
+shadow.style.transform = `translateX(${offset}px)`;
+
+}
+
+updateMoon();
+
+
+/* =============================
+   ETOILES
+============================= */
+
+function createStars(){
+
+for(let i=0;i<100;i++){
+
+const star = document.createElement("div");
+
+star.className = "star";
+
+star.style.left = Math.random()*100 + "vw";
+star.style.top = Math.random()*100 + "vh";
+
+document.body.appendChild(star);
+
+}
+
+}
+
+createStars();
+
+
+/* =============================
+   MODE NUIT AUTOMATIQUE
+============================= */
+
+function nightMode(){
+
+const hour = new Date().getHours();
+
+if(hour >= 19 || hour <= 5){
+
+document.body.classList.add("night");
+
+}
+
+}
+
+nightMode();
+
+});
