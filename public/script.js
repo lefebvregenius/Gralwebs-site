@@ -1669,25 +1669,3 @@ star.style.animationDelay = Math.random()*5 + "s";
 stars.appendChild(star);
 
 }
-
-}
-
-/* FORCER THÈME POUR TEST */
-
-if(card){
-
-card.classList.remove(
-"sunny",
-"cloudy",
-"rainy",
-"storm",
-"night"
-);
-
-/* change ici pour tester */
-
-card.classList.add("sunny");
-
-}
-
-});

@@ -3158,7 +3158,7 @@ position:absolute;
 top:80px;
 right:120px;
 width:110px;
-background:url("images/sun.jpg") no-repeat center/contain;
+background:url("/images/sun.jpg") no-repeat center/contain;
 height:110px;
 animation:sunFloat 8s ease-in-out infinite;
 filter:drop-shadow(0 0 20px rgba(255,200,0,.8));
@@ -3178,7 +3178,7 @@ top:90px;
 right:120px;
 width:90px;
 height:90px;
-background:url("images/moon.jpg") no-repeat center/contain;
+background:url("/images/moon.jpg") no-repeat center/contain;
 opacity:0;
 transition:opacity 2s ease;
 animation:moonFloat 10s ease-in-out infinite;
@@ -3196,7 +3196,7 @@ animation:moonFloat 10s ease-in-out infinite;
 position:absolute;
 width:220px;
 height:120px;
-background:url("images/cloud.jpg") no-repeat center/contain;
+background:url("/images/cloud.jpg") no-repeat center/contain;
 opacity:.9;
 animation:cloudMove linear infinite;
 }
@@ -3270,7 +3270,4 @@ opacity:0;
 }
 .sun,.moon,.cloud{
 will-change:transform;
-}
-.sun,.moon,.cloud,.stars{
-will-change: transform, opacity;
 }
