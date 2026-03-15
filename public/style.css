@@ -2494,29 +2494,7 @@ body {
   object-fit: cover;
   border-radius: 15px;
 }
-/* ================= LOADER NEON G ================= */
 
-#loader{
-  position:fixed;
-  inset:0;
-  background:#050505;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999999;
-}
-
-.neon-g{
-  font-size:120px;
-  font-weight:800;
-  color:#fff;
-  text-shadow:
-  0 0 10px #ff004c,
-  0 0 20px #ff004c,
-  0 0 40px #ff004c,
-  0 0 80px #ff004c;
-  animation:pulseG 1.5s infinite alternate;
-}
 
 @keyframes pulseG{
   from{
@@ -2554,7 +2532,7 @@ pointer-events:none;
 width:110px;
 height:110px;
 border-radius:50%;
-background:radial-gradient(circle at 30% 30%, #ffffff, #d9d9d9 60%, #bfbfbf);
+background:radial-gradient(circle at 30% 30%, #ffffff, #d9d9d9 60%, #532323);
 box-shadow:0 0 40px rgba(255,255,255,0.5);
 overflow:hidden;
 position:relative;
@@ -2594,4 +2572,705 @@ animation:twinkle 4s infinite alternate;
 0%{opacity:0.2;}
 100%{opacity:1;}
 
+}
+/* =============================
+   VARIABLES GLOBALES
+============================= */
+:root {
+  --sky-color-day: #87ceeb;
+  --sky-color-night: #0b1d51;
+  --sun-color: #FFD93B;
+  --moon-color: #F0EDEE;
+  --cloud-color: #ffffff;
+  --temp-color-cold: #00f;
+  --temp-color-warm: #f90;
+}
+
+/* =============================
+   SKY - fond jour/nuit
+============================= */
+.sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--sky-color-day);
+  transition: background 3s ease-in-out;
+  z-index: -1;
+}
+
+/* =============================
+   SOLEIL / LUNE
+============================= */
+.sun, .moon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transition: all 3s ease-in-out;
+}
+
+.sun {
+  background: var(--sun-color);
+  box-shadow: 0 0 50px 20px rgba(235, 142, 49, 0.57);
+}
+
+.moon {
+  background: var(--moon-color);
+  box-shadow: 0 0 40px 15px rgba(22, 21, 21, 0.76);
+  opacity: 0;
+}
+
+/* =============================
+   NUAGES
+============================= */
+.cloud {
+  position: absolute;
+  background: var(--cloud-color);
+  border-radius: 50%;
+  width: 120px;
+  height: 60px;
+  opacity: 0.8;
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+  animation: cloudMove 60s linear infinite;
+  transition: box-shadow 2s ease-in-out;
+}
+
+@keyframes cloudMove {
+  0% { transform: translateX(-150px); }
+  100% { transform: translateX(100vw); }
+}
+
+/* =============================
+   TEMPERATURE
+============================= */
+.temperature {
+  font-size: 48px;
+  color: var(--temp-color-warm);
+  transition: color 2s ease-in-out, transform 1s ease-in-out;
+}
+
+/* =============================
+   CLASSES DYNAMIQUES
+============================= */
+.night {
+  background: var(--sky-color-night);
+}
+
+.show-moon {
+  opacity: 1;
+}
+
+.cold {
+  color: var(--temp-color-cold);
+}
+
+.warm {
+  color: var(--temp-color-warm);
+}
+
+.cloud-shadow {
+  box-shadow: 20px 20px 40px rgba(0,0,0,0.3);
+}
+/* =============================
+   STYLE POPUP TITRE PREMIUM
+============================= */
+.popup h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #00ff7f, #ff4d4d, #a020f0); /* Vert -> Rouge -> Violet */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px rgba(255,255,255,0.5);
+  margin-bottom: 15px;
+}
+
+/* =============================
+   STYLE PARAGRAPHES PLUME ANCIENNE
+============================= */
+.popup p, .popup ul, .popup li {
+  font-family: 'Cedarville Cursive', 'Times New Roman', serif; /* Style manuscrit / plume ancienne */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #f5f5f5;
+}
+
+/* =============================
+   STYLE POPUP CONTAINER
+============================= */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(30,30,30,0.9);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* =============================
+   CLOSE BUTTON
+============================= */
+.popup .close-popup {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s;
+}
+
+.popup .close-popup:hover {
+  transform: scale(1.2);
+}
+
+/* =============================
+   IMAGES DANS POPUP
+============================= */
+.popup img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+/* =============================
+   EFFET FLAIR SUR CARDS / POPUPS
+============================= */
+.popup {
+  position: relative;
+  overflow: hidden; /* Pour que le flare ne déborde pas */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Animation du flare avec pseudo-élément */
+.popup::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 255, 127, 0.4),
+    rgba(255, 77, 77, 0.4),
+    rgba(160, 32, 240, 0.4)
+  );
+  transform: rotate(45deg) translate(-100%, -100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s ease;
+  z-index: 0;
+  filter: blur(50px);
+}
+
+/* Hover : anime le flare et soulève la card */
+.popup:hover::before {
+  transform: rotate(45deg) translate(50%, 50%);
+  opacity: 1;
+}
+
+.popup:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Si tu veux couleurs spécifiques par type de popup */
+.popup-vert::before {
+  background: linear-gradient(45deg, rgba(0,255,127,0.4), rgba(0,200,0,0.2));
+}
+
+.popup-rouge::before {
+  background: linear-gradient(45deg, rgba(255,77,77,0.4), rgba(200,0,0,0.2));
+}
+
+.popup-violet::before {
+  background: linear-gradient(45deg, rgba(160,32,240,0.4), rgba(120,0,200,0.2));
+}
+/* =============================== */
+/* POPUPS - Images s'affichent instantanément */
+/* =============================== */
+
+/* Popups cachées par défaut */
+.popup {
+  display: none;       /* invisible au chargement */
+  opacity: 1;          /* pas de fondu */
+  transition: none;    /* supprime toute transition */
+}
+
+/* Quand la popup est activée via JS (ex: .active) */
+.popup.active {
+  display: block;      /* apparaît instantanément */
+}
+
+/* Images à l’intérieur des popups */
+.popup img {
+  display: block;      /* s’affiche correctement */
+  opacity: 1 !important;   /* visible immédiatement */
+  transition: none !important;  /* aucune transition/fade-in */
+}
+/* ======================================= */
+/* BLOQUER TOUTES LES POPUPS AU CHARGEMENT */
+/* ======================================= */
+
+/* Toutes les popups sont complètement cachées au chargement */
+.popup, .popup-violet, .popup-premium {
+  display: none !important;   /* invisible */
+  opacity: 0 !important;      /* invisible même si display change */
+  pointer-events: none !important; /* pas cliquable */
+  transition: none !important; /* supprime toute transition/fade-in */
+  animation: none !important;  /* supprime animations lentes */
+}
+
+/* Quand on active la popup via JS (ex: ajouter .active) */
+.popup.active {
+  display: block !important;  /* apparaît immédiatement */
+  opacity: 1 !important;      /* visible instantanément */
+  pointer-events: auto !important; /* clic autorisé */
+}
+
+/* Images à l’intérieur des popups */
+.popup img {
+  display: block;           /* s’affiche correctement */
+  opacity: 1 !important;    /* visible immédiatement */
+  transition: none !important;  /* aucune transition/fade-in */
+}
+/* ======================================= */
+/* BLOQUER TOUTES LES POPUPS AU CHARGEMENT */
+/* ======================================= */
+
+/* Cacher toutes les popups par défaut */
+.popup, 
+.popup-violet, 
+.popup-premium, 
+.popup-nos-services {
+  display: none !important;       /* invisible au chargement */
+  opacity: 0 !important;          /* force invisibilité */
+  pointer-events: none !important; /* pas cliquable */
+  transition: none !important;    /* supprime toute transition */
+  animation: none !important;     /* supprime animations */
+}
+
+/* Pour ouvrir les popups via JS, ajouter la classe .active */
+.popup.active,
+.popup-violet.active,
+.popup-premium.active,
+.popup-nos-services.active {
+  display: block !important;      /* apparaît au clic */
+  opacity: 1 !important;          /* visible instantanément */
+  pointer-events: auto !important; /* cliquable */
+}
+
+/* Images à l’intérieur des popups */
+.popup img {
+  display: block;           
+  opacity: 1 !important;    
+  transition: none !important;
+}
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:opacity .2s ease;
+}
+
+.popup,
+.pack-modal,
+.modal,
+.overlay{
+display:none;
+}
+/* ===============================
+ACCÉLÉRATION ANIMATIONS MÉTÉO
+=============================== */
+
+.weather-animation,
+.sun,
+.moon,
+.cloud,
+.star{
+will-change: transform, opacity;
+transform: translateZ(0);
+backface-visibility: hidden;
+}
+
+/* évite les recalculs du navigateur */
+
+.weather-animation *{
+contain: layout style paint;
+}
+
+/* animations plus fluides */
+
+.sun,
+.moon,
+.cloud,
+.star{
+animation-timing-function: linear;
+animation-fill-mode: both;
+}
+/* CONTENEUR METEO */
+
+.weather-container{
+position:relative;
+width:100%;
+height:100%;
+opacity:0;
+visibility:hidden;
+transition:opacity 0.3s ease;
+}
+
+/* activation */
+
+.weather-container.active{
+opacity:1;
+visibility:visible;
+}
+
+/* optimisation animations */
+
+.sun,
+.moon,
+.cloud,
+.star{
+will-change:transform, opacity;
+transform:translateZ(0);
+backface-visibility:hidden;
+}
+/* =========================
+OLED BACKGROUND
+========================= */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:#000000;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+z-index:99999;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
+/* centre */
+
+.loader-center{
+text-align:center;
+}
+
+/* =========================
+TITRE GRALWEBS PREMIUM
+========================= */
+
+.gralwebs-title{
+
+font-size:80px;
+font-weight:700;
+letter-spacing:6px;
+
+background:linear-gradient(
+135deg,
+#563232,
+#632e2e,
+#750808
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+backdrop-filter:blur(10px);
+
+text-shadow:
+
+0 0 20px rgba(255,0,0,0.7),
+0 0 40px rgba(194, 127, 127, 0.6),
+0 0 60px rgba(115, 10, 10, 0.4);
+
+margin-bottom:50px;
+
+animation:glowPulse 2s infinite;
+}
+
+/* effet illumination */
+
+@keyframes glowPulse{
+
+0%{
+text-shadow:
+0 0 15px rgba(173, 114, 19, 0.6),
+0 0 30px rgba(192, 131, 47, 0.5);
+}
+
+50%{
+text-shadow:
+0 0 35px rgba(126, 101, 16, 0.9),
+0 0 60px rgba(114, 9, 9, 0.8);
+}
+
+100%{
+text-shadow:
+0 0 15px rgba(105, 14, 14, 0.6),
+0 0 30px rgba(255,0,0,0.5);
+}
+
+}
+
+/* =========================
+TECHNOLOGIES
+========================= */
+
+.tech-display{
+
+font-size:40px;
+font-weight:600;
+height:50px;
+margin-bottom:40px;
+}
+
+/* couleurs officielles */
+
+.html{
+color:#e34c26;
+}
+
+.css{
+color:#264de4;
+}
+
+.js{
+color:#f0db4f;
+}
+
+.python{
+color:#4B8BBE;
+}
+
+.gral{
+color:#ff0000;
+}
+
+/* =========================
+BARRE DE CHARGEMENT
+========================= */
+
+.loading-bar{
+
+width:320px;
+height:6px;
+
+background:#111;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin:auto;
+}
+
+.loading-progress{
+
+height:100%;
+width:0%;
+
+background:linear-gradient(
+90deg,
+#481919,
+#6a5a0f,
+#1e9438
+);
+
+animation:loading 2s linear forwards;
+}
+
+@keyframes loading{
+
+0%{width:0%;}
+100%{width:100%;}
+
+}
+
+/* =========================
+SOUS TEXTE
+========================= */
+
+.loading-text{
+
+margin-top:25px;
+
+font-size:14px;
+letter-spacing:3px;
+
+color:#888;
+}
+
+/* =============================== */
+/* APPLE STYLE WEATHER SYSTEM */
+/* =============================== */
+
+.weather-container{
+position:relative;
+overflow:hidden;
+height:100%;
+width:100%;
+transition:background 2s ease;
+}
+
+/* ciel jour */
+
+.weather-day{
+background:linear-gradient(to top,#6ec6ff,#e3f2fd);
+}
+
+/* ciel nuit */
+
+.weather-night{
+background:linear-gradient(to top,#000191,#001621);
+}
+
+/* soleil */
+
+.sun{
+position:absolute;
+top:80px;
+right:120px;
+width:110px;
+background:url("images/sun.jpg") no-repeat center/contain;
+height:110px;
+animation:sunFloat 8s ease-in-out infinite;
+filter:drop-shadow(0 0 20px rgba(255,200,0,.8));
+}
+
+@keyframes sunFloat{
+0%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+100%{transform:translateY(0)}
+}
+
+/* lune */
+
+.moon{
+position:absolute;
+top:90px;
+right:120px;
+width:90px;
+height:90px;
+background:url("images/moon.jpg") no-repeat center/contain;
+opacity:0;
+transition:opacity 2s ease;
+animation:moonFloat 10s ease-in-out infinite;
+}
+
+@keyframes moonFloat{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* nuages */
+
+.cloud{
+position:absolute;
+width:220px;
+height:120px;
+background:url("images/cloud.jpg") no-repeat center/contain;
+opacity:.9;
+animation:cloudMove linear infinite;
+}
+
+.cloud1{
+top:120px;
+left:-250px;
+animation-duration:70s;
+}
+
+.cloud2{
+top:220px;
+left:-300px;
+animation-duration:100s;
+}
+
+@keyframes cloudMove{
+
+from{
+transform:translateX(0)
+}
+
+to{
+transform:translateX(140vw)
+}
+
+}
+
+/* étoiles */
+
+.stars{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+opacity:0;
+transition:opacity 2s ease;
+}
+
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+animation:twinkle 4s infinite;
+}
+
+@keyframes twinkle{
+
+0%{opacity:.2}
+50%{opacity:1}
+100%{opacity:.2}
+
+}
+
+/* activation nuit */
+
+.weather-night .stars{
+opacity:1;
+}
+
+.weather-night .moon{
+opacity:1;
+}
+
+.weather-night .sun{
+opacity:0;
+}
+.sun,.moon,.cloud{
+will-change:transform;
+}
+.sun,.moon,.cloud,.stars{
+will-change: transform, opacity;
 }

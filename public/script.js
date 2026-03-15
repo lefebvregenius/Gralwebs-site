@@ -1446,3 +1446,248 @@ document.body.classList.add("night");
 nightMode();
 
 });
+document.addEventListener('DOMContentLoaded', () => {
+
+  const sky = document.querySelector('.sky');
+  const sun = document.querySelector('.sun');
+  const moon = document.querySelector('.moon');
+  const tempElem = document.querySelector('.temperature');
+  const clouds = document.querySelectorAll('.cloud');
+
+  // Simule la météo et le jour/nuit
+  const weather = {
+    isNight: false, // true = nuit
+    temperature: 28, // °C
+    cloudsShadow: true
+  };
+
+  function updateSky() {
+    if(weather.isNight){
+      sky.classList.add('night');
+      sun.style.opacity = 0;
+      moon.classList.add('show-moon');
+    } else {
+      sky.classList.remove('night');
+      sun.style.opacity = 1;
+      moon.classList.remove('show-moon');
+    }
+  }
+
+  function updateTemperature() {
+    if(weather.temperature <= 15){
+      tempElem.classList.add('cold');
+      tempElem.classList.remove('warm');
+    } else {
+      tempElem.classList.add('warm');
+      tempElem.classList.remove('cold');
+    }
+    // animation légère pour simuler le changement
+    tempElem.style.transform = 'scale(1.2)';
+    setTimeout(() => tempElem.style.transform = 'scale(1)', 500);
+  }
+
+  function updateClouds() {
+    clouds.forEach(cloud => {
+      if(weather.cloudsShadow){
+        cloud.classList.add('cloud-shadow');
+      } else {
+        cloud.classList.remove('cloud-shadow');
+      }
+    });
+  }
+
+  function updateWeather() {
+    updateSky();
+    updateTemperature();
+    updateClouds();
+  }
+
+  // Appel initial
+  updateWeather();
+
+  // Exemple : changer la météo toutes les 10 secondes pour démonstration
+  setInterval(() => {
+    weather.isNight = !weather.isNight;
+    weather.temperature = Math.floor(Math.random() * 35); // random temp
+    weather.cloudsShadow = !weather.cloudsShadow;
+    updateWeather();
+  }, 10000);
+
+});
+/* ============================= */
+/* APPLE WEATHER DAY NIGHT LOGIC */
+/* ============================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const weather = document.querySelector(".weather-container")
+
+function updateWeatherMode(){
+
+const hour = new Date().getHours()
+
+if(hour >= 6 && hour < 18){
+
+weather.classList.add("weather-day")
+weather.classList.remove("weather-night")
+
+}else{
+
+weather.classList.add("weather-night")
+weather.classList.remove("weather-day")
+
+}
+
+}
+
+updateWeatherMode()
+
+})
+/* étoiles dynamiques */
+
+const starsContainer = document.querySelector(".stars")
+
+for(let i=0;i<60;i++){
+
+let star=document.createElement("div")
+
+star.classList.add("star")
+
+star.style.top=Math.random()*100+"%"
+star.style.left=Math.random()*100+"%"
+
+star.style.animationDelay=Math.random()*5+"s"
+
+starsContainer.appendChild(star)
+
+}
+/* =============================== */
+/* PREMIUM WEATHER SYSTEM */
+/* =============================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const weather=document.querySelector(".weather-container")
+
+if(!weather) return
+
+/* jour / nuit automatique */
+
+function updateDayNight(){
+
+const hour=new Date().getHours()
+
+if(hour>=6 && hour<18){
+
+weather.classList.add("weather-day")
+weather.classList.remove("weather-night")
+
+}else{
+
+weather.classList.add("weather-night")
+weather.classList.remove("weather-day")
+
+}
+
+}
+
+updateDayNight()
+
+/* génération étoiles */
+
+const stars=document.querySelector(".stars")
+
+if(stars){
+
+for(let i=0;i<70;i++){
+
+let star=document.createElement("div")
+
+star.classList.add("star")
+
+star.style.top=Math.random()*100+"%"
+star.style.left=Math.random()*100+"%"
+star.style.animationDelay=Math.random()*5+"s"
+
+stars.appendChild(star)
+
+}
+
+}
+
+})
+const starsContainer = document.querySelector(".stars");
+
+if(starsContainer){
+for(let i=0;i<60;i++){
+const star=document.createElement("div");
+star.classList.add("star");
+star.style.top=Math.random()*100+"%";
+star.style.left=Math.random()*100+"%";
+star.style.animationDelay=Math.random()*5+"s";
+starsContainer.appendChild(star);
+}
+}
+/* ============================= */
+/* FORCE WEATHER ANIMATIONS */
+/* ============================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const card = document.querySelector(".weather-card");
+const sun = document.querySelector(".sun");
+const moon = document.querySelector(".moon");
+const clouds = document.querySelectorAll(".cloud");
+const lightning = document.querySelector(".lightning");
+const stars = document.querySelector(".stars");
+
+/* FORCER VISIBILITÉ */
+
+if(sun) sun.style.opacity = 1;
+if(moon) moon.style.opacity = 0;
+clouds.forEach(c => c.style.opacity = 0.7);
+
+/* ACTIVER ANIMATIONS */
+
+if(lightning){
+lightning.style.animation = "flash 6s infinite";
+}
+
+/* CRÉER ÉTOILES AUTOMATIQUEMENT */
+
+if(stars && stars.children.length === 0){
+
+for(let i=0;i<80;i++){
+
+const star = document.createElement("div");
+star.classList.add("star");
+
+star.style.top = Math.random()*100 + "%";
+star.style.left = Math.random()*100 + "%";
+star.style.animationDelay = Math.random()*5 + "s";
+
+stars.appendChild(star);
+
+}
+
+}
+
+/* FORCER THÈME POUR TEST */
+
+if(card){
+
+card.classList.remove(
+"sunny",
+"cloudy",
+"rainy",
+"storm",
+"night"
+);
+
+/* change ici pour tester */
+
+card.classList.add("sunny");
+
+}
+
+});

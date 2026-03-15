@@ -314,7 +314,7 @@ MASQUER LOADER QUAND TERMINÉ
 #loader.hide{
   opacity:0;
   pointer-events:none;
-  transition:opacity 0.7s ease;
+  transition:opacity 0.4s ease;
 }
 </style>
 
@@ -322,7 +322,7 @@ MASQUER LOADER QUAND TERMINÉ
 // Masquer loader après chargement complet
 window.addEventListener('load',()=>{
   const loader = document.getElementById('loader');
-  setTimeout(()=>loader.classList.add('hide'),3000); // ici 3s
+  setTimeout(()=>loader.classList.add('hide'),1000); // ici 1s
 });
 </script>
 
@@ -434,6 +434,63 @@ Votre tranquillité et votre satisfaction sont au cœur de notre travail.
     <p class="copyright">
       &copy; 2026 GralWebs Solutions | Tous droits réservés
     </p>
+    <!-- ===== FOOTER CONTACT PREMIUM ===== -->
+<footer class="premium-contact">
+  <div class="contact-container">
+    <h2>Contactez GralWebs</h2>
+    <p class="phone">📞 034 11 453 99</p>
+    <p class="email">lefebvregenius@gmail.com</p>
+    <p class="note">Solutions web modernes & cybersécurité avancée</p>
+  </div>
+</footer>
+
+<style>
+/* ===== FOOTER CONTACT PREMIUM ===== */
+.premium-contact {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(28, 15, 15, 0.9), rgba(49, 10, 10, 0.8));
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+  backdrop-filter: blur(5px);
+}
+
+.premium-contact .contact-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.premium-contact .contact-container .phone {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.premium-contact .contact-container .email {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.premium-contact .contact-container .note {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* Effet subtil au survol */
+.premium-contact .contact-container h2:hover,
+.premium-contact .contact-container .phone:hover {
+  color: #60510a;
+  transition: 0.3s ease-in-out;
+}
+</style>
 
   </div>
 </footer>

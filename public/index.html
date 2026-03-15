@@ -1,190 +1,96 @@
-<!DOCTYPE html>
-<html lang="fr">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Cache et robots -->
 <meta http-equiv="Cache-Control" content="public, max-age=31536000">
 <meta name="robots" content="index, follow">
-<meta name="google-site-verification" content="CODE_GSC">
 
-<title>Gralwebs Solution | Création Web & Cybersécurité</title>
-
-<meta name="description" content="Gralwebs Solution est une plateforme moderne spécialisée dans la création de sites web, solutions SaaS, cybersécurité et technologies web avancées.">
-
+<!-- Titre et description premium -->
+<title>Gralwebs Solution | Création Web Premium & Cybersécurité</title>
+<meta name="description" content="Gralwebs Solution : création de sites web professionnels, cybersécurité avancée et solutions SaaS pour entreprises. Modernité, sécurité et performance garantie.">
 <meta name="keywords" content="Gralwebs, création site web, cybersécurité, SaaS, développement web, Antananarivo, Madagascar">
-
 <meta name="author" content="Gralwebs Solution">
-
 <meta name="theme-color" content="#000000">
 
+<!-- Favicon -->
 <link rel="icon" href="/logo.png" type="image/png">
 
-<!-- Open Graph (réseaux sociaux) -->
-
-<meta property="og:title" content="Gralwebs Solution">
-<meta property="og:description" content="Solutions web modernes, cybersécurité et technologies SaaS avancées.">
-<meta property="og:image" content="https://gralwebs-site.vercel.app/logo.png">
-<meta property="og:url" content="https://gralwebs-site.vercel.app">
-<meta property="og:type" content="website">
+<!-- Open Graph -->
+<meta property="og:image" content="https://gralwebs-site.vercel.app/media/profil.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="Photo profil Gralwebs Solution">
 
 <!-- Twitter Card -->
-
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gralwebs Solution">
-<meta name="twitter:description" content="Création de sites web modernes et solutions technologiques avancées.">
+<meta name="twitter:title" content="Gralwebs Solution | Création Web Premium">
+<meta name="twitter:description" content="Sites web modernes et sécurisés, cybersécurité et solutions SaaS avancées pour entreprises.">
 <meta name="twitter:image" content="https://gralwebs-site.vercel.app/logo.png">
 
-<!-- STRUCTURED DATA SEO -->
-
+<!-- JSON-LD Structured Data SEO -->
 <script type="application/ld+json">
 {
- "@context": "https://schema.org",
- "@type": "Organization",
- "name": "Gralwebs Solution",
- "url": "https://gralwebs-site.vercel.app",
- "logo": "https://gralwebs-site.vercel.app/logo.png",
- "description": "Gralwebs Solution est une plateforme moderne spécialisée dans la création de sites web, cybersécurité et solutions SaaS avancées.",
- "contactPoint": {
-   "@type": "ContactPoint",
-   "telephone": "+261341145399",
-   "contactType": "customer service",
-   "areaServed": "MG",
-   "availableLanguage": ["French","English"]
- },
- "sameAs": [
-   "https://facebook.com/AndrianinaRandriamanantena",
-   "https://tiktok.com/@lefebvregenius"
- ]
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Gralwebs Solution",
+  "url": "https://gralwebs-site.vercel.app",
+  "logo": "https://gralwebs-site.vercel.app/logo.png",
+  "image": "https://gralwebs-site.vercel.app/media/profil.jpg",
+  "description": "Gralwebs Solution est une plateforme moderne spécialisée dans la création de sites web, cybersécurité et solutions SaaS avancées.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+261341145399",
+    "contactType": "customer service",
+    "areaServed": "MG",
+    "availableLanguage": ["French","English"]
+  },
+  "sameAs": [
+    "https://facebook.com/AndrianinaRandriamanantena",
+    "https://tiktok.com/@lefebvregenius"
+  ]
 }
 </script>
 
-<!-- PRELOAD (performance) -->
-
+<!-- Preload des fichiers critiques -->
 <link rel="preload" href="style.css" as="style">
 <link rel="preload" href="script.js" as="script">
-<link rel="preload" href="images/hero.webp" as="image">
+<link rel="preload" href="media/profil.jpg" as="image">
+<link rel="preload" href="media/logo.png" as="image">
 
-<!-- CSS -->
-
-<link rel="stylesheet" href="style.css">
-
+<!-- Fonts & CSS externes premium -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 
+<!-- CSS principal -->
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- LOADER -->
+  <!-- ===== LOADER GRALWEBS PRO ===== -->
+
 <div id="loader">
-  <span class="loader-g">G</span>
-  <div class="loader-steps">
-    <div class="step">Chargement modules...</div>
-    <div class="step">Initialisation assets...</div>
-    <div class="step">Configuration interface...</div>
-  </div>
+
+<div class="loader-center">
+
+<h1 class="gralwebs-title">GRALWEBS</h1>
+
+<div class="tech-display">
+<span id="techWord">HTML</span>
 </div>
 
-<style>
-/* =====================
-LOADER FULLSCREEN
-===================== */
-#loader {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  background:#050505;
-  z-index:9999;
-}
+<div class="loading-bar">
+<div class="loading-progress"></div>
+</div>
 
-.loader-g {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 200px; /* Très grand G */
-  font-weight: 900;
-  color: rgba(255,255,255,0.05); /* base transparente */
-  text-transform: uppercase;
-  position: relative;
-  background: linear-gradient(135deg, rgba(0,234,255,0.6), rgba(255,0,80,0.6), rgba(123,61,255,0.6));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 30px rgba(0,234,255,0.4),
-    0 0 60px rgba(255,0,80,0.3),
-    0 0 90px rgba(123,61,255,0.2);
-  animation: pulseG 2s infinite alternate;
-}
+<p class="loading-text">Tout est possible</p>
 
-/* liquid glass neon effect */
-.loader-g::after{
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0; bottom:0;
-  border-radius:50%;
-  background: linear-gradient(45deg, rgba(0,255,255,0.1), rgba(255,0,100,0.1));
-  filter: blur(40px);
-  z-index:-1;
-}
+</div>
 
-/* animation pulse */
-@keyframes pulseG{
-  0%{ text-shadow:0 0 20px rgba(0,234,255,0.4), 0 0 40px rgba(255,0,80,0.3);}
-  100%{ text-shadow:0 0 50px rgba(0,234,255,0.6),0 0 100px rgba(255,0,80,0.5);}
-}
+</div>
 
-/* =====================
-LOADER STEPS
-===================== */
-.loader-steps{
-  margin-top:30px;
-  text-align:center;
-  font-family:'Poppins',sans-serif;
-  font-size:16px;
-  color:#fff;
-  opacity:0.8;
-}
-
-.loader-steps .step{
-  margin:5px 0;
-  animation: fadeStep 1.5s ease-in-out infinite;
-}
-
-.loader-steps .step:nth-child(2){ animation-delay:0.5s;}
-.loader-steps .step:nth-child(3){ animation-delay:1s;}
-
-@keyframes fadeStep{
-  0%,100%{opacity:0;}
-  50%{opacity:0.8;}
-}
-
-/* =====================
-MASQUER LOADER QUAND TERMINÉ
-===================== */
-#loader.hide{
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 0.5s ease;
-}
-</style>
-
-<script>
-// exemple pour masquer loader après 3s
-window.addEventListener('load',()=>{
-  const loader=document.getElementById('loader');
-  setTimeout(()=>loader.classList.add('hide'),3000);
-});
-</script>
 
 <!-- ===================== NAVBAR ===================== -->
 <header id="navbar">
@@ -232,8 +138,10 @@ window.addEventListener('load',()=>{
     <canvas id="weather-canvas"></canvas>
 
     <div class="sun"></div>
+    <div class="moon"></div>
     <div class="cloud cloud1"></div>
     <div class="cloud cloud2"></div>
+    <div class="stars"></div>
     <div class="lightning"></div>
 
     <div class="content">
@@ -1070,7 +978,7 @@ if(navigator.geolocation){
       </div>
       <div class="card" data-aos="flip-left" data-aos-delay="100">
         <h3>Pack Pro</h3>
-        <p>à partir de 990 000 Ar</p>
+        <p>à partir de 990 000 Ar jusqu'à 2 000 000 Ar</p>
         <ul>
           <li>Jusqu’à 10 pages</li>
           <li>Formulaire personnalisé</li>
@@ -1080,7 +988,7 @@ if(navigator.geolocation){
       </div>
       <div class="card" data-aos="flip-left" data-aos-delay="200">
         <h3>Pack Prémium</h3>
-        <p>à partir de 2 699 000 Ar et plus</p>
+        <p>à partir de 3 699 000 Ar et plus</p>
         <ul>
           <li>Jusqu’à 15 pages</li>
           <li>Blog / Multi-langue</li>
@@ -1192,16 +1100,7 @@ if(navigator.geolocation){
     <a href="https://wa.me/261341145399" target="_blank" class="contact-item whatsapp">
       <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
     </a>
-    <div class="contact-form-container" data-aos="fade-up">
-  <h3>Contactez-nous</h3>
-  <form id="contactForm">
-    <input id="name" type="text" placeholder="Votre nom" required>
-    <input id="email" type="email" placeholder="Votre email" required>
-    <textarea id="messageField" placeholder="Votre message" required></textarea>
-    <button type="submit">Envoyer</button>
-  </form>
-  <p id="formStatus"></p>
-</div>
+   
 
 <!-- reCAPTCHA v3 -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LfB4m4sAAAAAAfuCeRGZkXZxwIw1L6UsNTC490T"></script>
@@ -1288,50 +1187,55 @@ document.getElementById('contactForm').addEventListener('submit', async function
 </script>
 
 
-
 <!-- POPUP ESSENTIEL -->
 <div class="popup popup-vert" id="popup-essentiel">
   <span class="close-popup">&times;</span>
   <h2>Pack Essentiel</h2>
+  
+  
+  <img src="images/simples 4.jpg" alt="Essentiel" loading="lazy">
+  <img src="images/simples 3.jpg" alt="Essentiel" loading="lazy">
+
   <p>
-Idéal pour démarrer avec une image sérieuse et crédible.
+    Idéal pour démarrer avec une image sérieuse et crédible.
+    Ce pack est pensé pour les entrepreneurs, indépendants et petites structures
+    qui souhaitent établir une présence digitale professionnelle rapidement,
+    avec efficacité et maîtrise du budget.
+  </p>
 
-Ce pack est pensé pour les entrepreneurs, indépendants et petites structures
-qui souhaitent établir une présence digitale professionnelle rapidement,
-avec efficacité et maîtrise du budget.
-</p>
-
-<p>
-🎯 Ce que vous obtenez réellement :
-Un site clair, rassurant et moderne qui inspire confiance
-et valorise immédiatement votre activité auprès de vos clients.
-</p>
- <ul>
-        <li>Jusqu’à 5 pages</li>
-        <li>Responsive et design moderne</li>
-        <li>Formulaire de contact + WhatsApp intégré</li>
-      </ul>
-      <p>Parfait pour des entreprises qui veullent des présences sérieuses, mais avec des budgets plus maîtrisé.</p>
-
+  <p>
+    🎯 Ce que vous obtenez réellement :
+    Un site clair, rassurant et moderne qui inspire confiance
+    et valorise immédiatement votre activité auprès de vos clients.
+  </p>
+  <ul>
+    <li>Jusqu’à 5 pages</li>
+    <li>Responsive et design moderne</li>
+    <li>Formulaire de contact + WhatsApp intégré</li>
+  </ul>
+  <p>Parfait pour des entreprises qui veulent des présences sérieuses, mais avec un budget maîtrisé.</p>
 </div>
 
 <!-- POPUP PRO -->
 <div class="popup popup-rouge" id="popup-pro">
   <span class="close-popup">&times;</span>
   <h2>Pack Business Pro</h2>
+
+  
+  <img src="images/vente2.jpg" alt="Pack Business Pro" loading="lazy"> 
+  <img src="images/vente1.jpg" alt="Pack Business Pro" loading="lazy"> 
   <p>
-Pensé pour développer votre activité et renforcer votre crédibilité en ligne.
+    Pensé pour développer votre activité et renforcer votre crédibilité en ligne.
+    Ce pack s’adresse aux entreprises qui veulent se démarquer,
+    attirer plus de prospects et convertir efficacement.
+  </p>
 
-Ce pack s’adresse aux entreprises qui veulent se démarquer,
-attirer plus de prospects et convertir efficacement.
-</p>
-
-<p>
-🎯 Ce que vous obtenez réellement :
-Une plateforme digitale stratégique,
-optimisée pour la visibilité, l’interaction client
-et la croissance progressive de votre marque.
-</p>
+  <p>
+    🎯 Ce que vous obtenez réellement :
+    Une plateforme digitale stratégique,
+    optimisée pour la visibilité, l’interaction client
+    et la croissance progressive de votre marque.
+  </p>
 
   <ul>
     <li>✔ Jusqu’à 10 pages</li>
@@ -1340,41 +1244,41 @@ et la croissance progressive de votre marque.
     <li>✔ SEO optimisé</li>
     <li>✔ Support 30 jours</li>
   </ul>
-  <p>
-    🎯 Idéal pour : entreprises en croissance.
-  </p>
+  <p>🎯 Idéal pour : entreprises en croissance.</p>
 </div>
 
 <!-- POPUP PREMIUM -->
 <div class="popup popup-violet" id="popup-premium">
   <span class="close-popup">&times;</span>
   <h2>Pack Premium Evolution</h2>
- <p>
-La solution complète, conçue pour les entreprises ambitieuses
-qui veulent une présence digitale puissante et évolutive.
 
-Ce pack vous offre liberté totale, performance avancée
-et accompagnement stratégique durable.
-</p>
+  
+<img src="images/premium5.jpg" alt="Pack Premium Evolution" loading="lazy">
+<img src="images/premium4.jpg" alt="Pack Premium Evolution" loading="lazy">
+  
+  <p>
+    La solution complète, conçue pour les entreprises ambitieuses
+    qui veulent une présence digitale puissante et évolutive.
+    Ce pack vous offre liberté totale, performance avancée
+    et accompagnement stratégique durable.
+  </p>
 
-<p>
-🎯 Ce que vous obtenez réellement :
-Un véritable outil de croissance,
-capable de vendre, convertir, évoluer
-et positionner votre marque au niveau supérieur.
-</p>
+  <p>
+    🎯 Ce que vous obtenez réellement :
+    Un véritable outil de croissance,
+    capable de vendre, convertir, évoluer
+    et positionner votre marque au niveau supérieur.
+  </p>
 
   <ul>
-    <li>✔ 15 Pages </li>
+    <li>✔ 15 Pages</li>
     <li>✔ Blog professionnel</li>
     <li>✔ Multi-langue complet</li>
     <li>✔ SEO avancé</li>
     <li>✔ E-commerce possible</li>
     <li>✔ Support prolongé</li>
   </ul>
-  <p>
-    🎯 Idéal pour : marques ambitieuses et projets internationaux.
-  </p>
+  <p>🎯 Idéal pour : marques ambitieuses et projets internationaux.</p>
 </div>
 <!--================ Les partie script et fin ================ -->
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -1593,7 +1497,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-});
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -1616,7 +1519,7 @@ document.addEventListener("DOMContentLoaded", function() {
       popup.style.left = "50%";
       popup.style.transform = "translate(-50%, -50%)";
       popup.style.zIndex = "9999"; // Force au-dessus de tout
-      popup.style.background = "#fff";
+      popup.style.background = "#150606";
       popup.style.padding = "2rem";
       popup.style.boxShadow = "0 0 20px rgba(0,0,0,0.5)";
       popup.style.maxHeight = "90vh";
@@ -1674,47 +1577,163 @@ modals.forEach(modal => {
 });
 </script>
 <script>
+
+
 /* ===============================
-CORRECTION LOADER + POPUPS
+ACCÉLÉRATION MÉTÉO
 =============================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const weather = document.querySelector(".weather-animation");
+
+if(weather){
+
+requestAnimationFrame(() => {
+
+weather.style.opacity = "1";
+weather.style.visibility = "visible";
+
+});
+
+}
+
+});
+
+</script>
+<script>
+
+/* =========================
+INITIALISATION MÉTÉO
+========================= */
 
 document.addEventListener("DOMContentLoaded", function(){
 
-  const loader = document.getElementById("loader");
+const weather = document.querySelector(".weather-container");
 
-  const popups = document.querySelectorAll(
-    ".popup, .pack-modal, .modal, .overlay"
-  );
+if(weather){
 
-  /* Désactive les popups au démarrage */
-  popups.forEach(p => {
-    p.style.pointerEvents = "none";
-    p.style.opacity = "0";
-  });
+requestAnimationFrame(()=>{
 
-  /* Quand la page est chargée */
-  window.addEventListener("load", function(){
-
-    setTimeout(function(){
-
-      if(loader){
-        loader.classList.add("hide");
-      }
-
-      /* Réactive les popups */
-      popups.forEach(p => {
-        p.style.pointerEvents = "";
-        p.style.opacity = "";
-      });
-
-    },3000);
-
-  });
+weather.classList.add("active");
 
 });
+
+}
+
+});
+
 </script>
+<script>
 
 
+const techs = [
+
+{ name:"HTML", class:"html" },
+{ name:"CSS", class:"css" },
+{ name:"JAVASCRIPT", class:"js" },
+{ name:"PYTHON", class:"python" },
+{ name:"GRALWEBS", class:"gral" }
+
+];
+
+let index = 0;
+
+const techWord = document.getElementById("techWord");
+
+function changeTech(){
+
+index++;
+
+if(index >= techs.length){
+index = 0;
+}
+
+techWord.textContent = techs[index].name;
+techWord.className = techs[index].class;
+
+}
+
+setInterval(changeTech,500);
+
+
+/* fermeture loader */
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+const loader = document.getElementById("loader");
+
+loader.style.opacity="0";
+loader.style.transition="opacity .4s";
+
+setTimeout(()=>{
+loader.style.display="none";
+},400);
+
+},2000);
+
+});
+
+</script>
+<!-- ===== FOOTER CONTACT PREMIUM ===== -->
+<footer class="premium-contact">
+  <div class="contact-container">
+    <h2>Contactez GralWebs</h2>
+    <p class="phone">📞 034 11 453 99</p>
+    <p class="email">lefebvregenius@gmail.com</p>
+    <p class="note">Solutions web modernes & cybersécurité avancée</p>
+  </div>
+</footer>
+
+<style>
+/* ===== FOOTER CONTACT PREMIUM ===== */
+.premium-contact {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(17, 6, 6, 0.9), rgba(28, 6, 6, 0.8));
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+  backdrop-filter: blur(5px);
+}
+
+.premium-contact .contact-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.premium-contact .contact-container .phone {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.premium-contact .contact-container .email {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.premium-contact .contact-container .note {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* Effet subtil au survol */
+.premium-contact .contact-container h2:hover,
+.premium-contact .contact-container .phone:hover {
+  color: #654a08;
+  transition: 0.3s ease-in-out;
+}
+</style>
 
 </body>
 </html>
