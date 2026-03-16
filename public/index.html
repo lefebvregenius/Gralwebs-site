@@ -1626,57 +1626,39 @@ weather.classList.add("active");
 
 </script>
 <script>
-
-
 const techs = [
-
-{ name:"HTML", class:"html" },
-{ name:"CSS", class:"css" },
-{ name:"JAVASCRIPT", class:"js" },
-{ name:"PYTHON", class:"python" },
-{ name:"GRALWEBS", class:"gral" }
-
+  { name:"HTML", class:"html" },
+  { name:"CSS", class:"css" },
+  { name:"JAVASCRIPT", class:"js" },
+  { name:"PYTHON", class:"python" },
+  { name:"GRALWEBS", class:"gral" }
 ];
 
 let index = 0;
-
 const techWord = document.getElementById("techWord");
 
-function changeTech(){
+// Changement de mot toutes les 0.2s
+const intervalId = setInterval(() => {
+  index = (index + 1) % techs.length;
+  techWord.textContent = techs[index].name;
+  techWord.className = techs[index].class;
+}, 200);
 
-index++;
+// Fermeture rapide du loader dès que le DOM est prêt
+document.addEventListener("DOMContentLoaded", () => {
+  const loader = document.getElementById("loader");
 
-if(index >= techs.length){
-index = 0;
-}
+  // Transition rapide et disparition
+  loader.style.transition = "opacity 2.3s ease-out";
+  loader.style.opacity = "0";
 
-techWord.textContent = techs[index].name;
-techWord.className = techs[index].class;
-
-}
-
-setInterval(changeTech,500);
-
-
-/* fermeture loader */
-
-window.addEventListener("load",()=>{
-
-setTimeout(()=>{
-
-const loader = document.getElementById("loader");
-
-loader.style.opacity="0";
-loader.style.transition="opacity .4s";
-
-setTimeout(()=>{
-loader.style.display="none";
-},400);
-
-},2000);
-
+  // Supprimer le loader après la transition
+  setTimeout(() => {
+    loader.style.display = "none";
+    // Optionnel : arrêter le changement de mot pour économiser des ressources
+    clearInterval(intervalId);
+  }, 2300);
 });
-
 </script>
 <!-- ===== FOOTER CONTACT PREMIUM ===== -->
 <footer class="premium-contact">

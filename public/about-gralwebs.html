@@ -222,108 +222,141 @@ footer img{
 
 </head>
 <body>
-    <!-- LOADER FULLSCREEN -->
+  <!-- =========================
+LOADER PREMIUM GRALWEBS
+========================= -->
 <div id="loader">
-  <span class="loader-g">G</span>
-  <div class="loader-steps">
-    <div class="step">Chargement modules...</div>
-    <div class="step">Initialisation assets...</div>
-    <div class="step">Configuration interface...</div>
-  </div>
+  <div class="logo-loader">G</div>
 </div>
 
 <style>
-/* =====================
+
+/* =========================
 LOADER FULLSCREEN
-===================== */
-#loader {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  background:#050505;
-  z-index:99999; /* maximum, au-dessus de tout */
-  pointer-events: all; /* empêche interaction avec popups derrière */
+========================= */
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#050505;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
 }
 
-.loader-g {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 200px;
-  font-weight: 900;
-  color: rgba(255,255,255,0.05);
-  text-transform: uppercase;
-  position: relative;
-  background: linear-gradient(135deg, rgba(0,234,255,0.6), rgba(255,0,80,0.6), rgba(123,61,255,0.6));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 30px rgba(0,234,255,0.4),
-    0 0 60px rgba(255,0,80,0.3),
-    0 0 90px rgba(123,61,255,0.2);
-  animation: pulseG 2s infinite alternate;
+/* =========================
+GRAND G OUTLINE
+========================= */
+.logo-loader{
+font-family:'Orbitron',sans-serif;
+font-size:260px;
+font-weight:900;
+color:transparent;
+-webkit-text-stroke:3px rgba(255,0,0,0.15);
+position:relative;
 }
 
-.loader-g::after{
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0; bottom:0;
-  border-radius:50%;
-  background: linear-gradient(45deg, rgba(0,255,255,0.1), rgba(255,0,100,0.1));
-  filter: blur(40px);
-  z-index:-1;
+/* =========================
+LUMIERE QUI TRACE LE G
+========================= */
+.logo-loader::before{
+content:"G";
+position:absolute;
+top:0;
+left:0;
+color:transparent;
+-webkit-text-stroke:3px red;
+
+clip-path: inset(0 100% 0 0);
+
+animation:traceG 0.65s linear forwards;
 }
 
-@keyframes pulseG{
-  0%{ text-shadow:0 0 20px rgba(0,234,255,0.4), 0 0 40px rgba(255,0,80,0.3);}
-  100%{ text-shadow:0 0 50px rgba(0,234,255,0.6),0 0 100px rgba(255,0,80,0.5);}
+/* =========================
+LUMIERE GLOW
+========================= */
+.logo-loader::after{
+content:"G";
+position:absolute;
+top:0;
+left:0;
+color:red;
+opacity:0;
+filter:blur(10px);
+animation:glowG 0.65s linear forwards;
 }
 
-/* =====================
-LOADER STEPS
-===================== */
-.loader-steps{
-  margin-top:30px;
-  text-align:center;
-  font-family:'Poppins',sans-serif;
-  font-size:16px;
-  color:#fff;
-  opacity:0.8;
+/* =========================
+TRACE ANIMATION
+========================= */
+@keyframes traceG{
+
+0%{
+clip-path: inset(0 100% 0 0);
 }
 
-.loader-steps .step{
-  margin:5px 0;
-  animation: fadeStep 1.5s ease-in-out infinite;
+100%{
+clip-path: inset(0 0 0 0);
 }
 
-.loader-steps .step:nth-child(2){ animation-delay:0.5s;}
-.loader-steps .step:nth-child(3){ animation-delay:1s;}
-
-@keyframes fadeStep{
-  0%,100%{opacity:0;}
-  50%{opacity:0.8;}
 }
 
-/* =====================
-MASQUER LOADER QUAND TERMINÉ
-===================== */
+/* =========================
+GLOW FINAL
+========================= */
+@keyframes glowG{
+
+0%{
+opacity:0;
+}
+
+80%{
+opacity:0.8;
+}
+
+100%{
+opacity:0;
+}
+
+}
+
+/* =========================
+DISPARITION RAPIDE
+========================= */
 #loader.hide{
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 0.4s ease;
+opacity:0;
+pointer-events:none;
+transition:opacity 0.8s ease;
 }
+
 </style>
 
 <script>
-// Masquer loader après chargement complet
-window.addEventListener('load',()=>{
-  const loader = document.getElementById('loader');
-  setTimeout(()=>loader.classList.add('hide'),1000); // ici 1s
+
+/* =========================
+LOADER ULTRA RAPIDE
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const loader = document.getElementById("loader");
+
+/* disparition rapide */
+setTimeout(()=>{
+
+loader.classList.add("hide");
+
+setTimeout(()=>{
+loader.style.display="none";
+},800);
+
+},1000);
+
 });
+
 </script>
 
 <!-- NAVBAR -->
