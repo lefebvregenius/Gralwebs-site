@@ -3126,4 +3126,100 @@ letter-spacing:3px;
 
 color:#888;
 }
+/* ===================== CARDS TARIFS ===================== */
+.tarif-card {
+  position: relative;
+  background: rgba(255,255,255,0.05); /* fond très léger */
+  border-radius: 20px;
+  padding: 25px;
+  width: 250px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px); /* léger flou interne à la card */
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+}
 
+/* Glow différent selon la couleur de la card */
+.tarif-card.popup-vert:hover {
+  box-shadow: 0 0 25px 5px rgba(0,255,127,0.7);
+  transform: translateY(-5px);
+  background: rgba(0,255,127,0.1);
+}
+
+.tarif-card.popup-rouge:hover {
+  box-shadow: 0 0 25px 5px rgba(255,77,77,0.7);
+  transform: translateY(-5px);
+  background: rgba(255,77,77,0.1);
+}
+
+.tarif-card.popup-violet:hover {
+  box-shadow: 0 0 25px 5px rgba(160,32,240,0.7);
+  transform: translateY(-5px);
+  background: rgba(160,32,240,0.1);
+}
+
+/* ===================== POPUPS TARIFS ===================== */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(30,30,30,0.7); /* glassmorphism semi-transparent */
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 600px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* Popup active */
+.popup.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Flouter le background derrière quand popup active */
+body.popup-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  z-index: 900;
+}
+/* Glassmorphism pour les popups Vos Choix */
+.popup-vos-choix {
+  background: rgba(30,30,30,0.7); /* semi-transparent */
+  backdrop-filter: blur(15px);     /* effet glass */
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 600px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* Popup active */
+.popup-vos-choix.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Flouter le background quand popup active */
+body.voschoix-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  z-index: 900;
+}

@@ -325,165 +325,7 @@ document.querySelectorAll(".pack-modal-content").forEach(modal => {
   });
 
 });
-const tarifData = {
 
-"Pack Essentiel": {
-title: "Pack Essentiel — À partir de 699 000 Ar",
-text: `
-<p class="fade-text">Prix d’entrée stratégique pour une présence professionnelle maîtrisée.</p>
-
-<p class="fade-text">🔹 Inclus de base : jusqu’à 5 pages, design responsive, formulaire de contact, intégration WhatsApp et Google Maps.</p>
-
-<p class="fade-text">🔹 Majorations possibles :</p>
-
-<p class="fade-text">• Ajout de pages supplémentaires : +40 000 à 70 000 Ar / page</p>
-<p class="fade-text">• Design personnalisé avancé : +80 000 à 150 000 Ar</p>
-<p class="fade-text">• Optimisation SEO approfondie : +120 000 Ar</p>
-<p class="fade-text">• Animations premium & effets interactifs : +90 000 Ar</p>
-
-<p class="fade-text">💼 Selon les ajustements, le projet peut évoluer jusqu’à 750 000 Ar et plus.</p>
-`
-},
-
-"Pack Pro": {
-title: "Pack Business Pro — À partir de 899 000 Ar",
-text: `
-<p class="fade-text">Solution optimisée pour la croissance et la performance digitale.</p>
-
-<p class="fade-text">🔹 Inclus : jusqu’à 10 pages, SEO de base, galerie, formulaires avancés, 30 jours support.</p>
-
-<p class="fade-text">🔹 Majorations possibles :</p>
-
-<p class="fade-text">• Branding graphique sur mesure : +150 000 Ar</p>
-<p class="fade-text">• Fonctionnalités avancées spécifiques : +200 000 Ar</p>
-<p class="fade-text">• Intégration système de réservation : +180 000 Ar</p>
-<p class="fade-text">• Optimisation vitesse & sécurité avancée : +130 000 Ar</p>
-
-<p class="fade-text">📈 Projet évolutif pouvant dépasser 1 200 000 Ar selon la complexité.</p>
-`
-},
-
-"Pack Prémium": {
-title: "Pack Premium Evolution — À partir de 2 300 000 Ar",
-text: `
-<p class="fade-text">L’investissement stratégique pour une domination digitale complète.</p>
-
-<p class="fade-text">🔹 Inclus : multi-langue, SEO avancé, blog, e-commerce possible, support prolongé.</p>
-
-<p class="fade-text">🔹 Majorations possibles :</p>
-
-<p class="fade-text">• E-commerce complet personnalisé : +400 000 Ar</p>
-<p class="fade-text">• Système paiement sécurisé international : +350 000 Ar</p>
-<p class="fade-text">• Développement fonctionnalité sur mesure : devis personnalisé</p>
-<p class="fade-text">• Stratégie SEO avancée + audit complet : +300 000 Ar</p>
-
-<p class="fade-text">🚀 Budget évolutif pouvant dépasser 3 000 000 Ar selon ambition et objectifs.</p>
-`
-}
-
-};
-const tarifPopup = document.getElementById("tarifPopup");
-const tarifOverlay = document.querySelector(".tarif-overlay");
-const tarifTitle = document.getElementById("tarifTitle");
-const tarifContent = document.getElementById("tarifContent");
-const tarifClose = document.querySelector(".tarif-close");
-
-/* OUVERTURE AU CLIC SUR CARTES TARIF */
-document.querySelectorAll("#tarifs .card").forEach(card => {
-
-card.addEventListener("click", () => {
-
-const title = card.querySelector("h3").innerText;
-
-if(tarifData[title]){
-  tarifTitle.innerText = tarifData[title].title;
-  tarifContent.innerHTML = tarifData[title].text;
-}
-
-tarifPopup.classList.add("active");
-tarifOverlay.classList.add("active");
-
-setTimeout(() => {
-  document.querySelectorAll(".fade-text").forEach((el, i) => {
-    setTimeout(() => el.classList.add("visible"), i * 200);
-  });
-}, 300);
-
-});
-});
-
-/* FERMETURE */
-tarifClose.onclick = closeTarif;
-tarifOverlay.onclick = closeTarif;
-
-function closeTarif(){
-  tarifPopup.classList.remove("active");
-  tarifOverlay.classList.remove("active");
-}
-document.body.style.overflow = "hidden";
-document.addEventListener("DOMContentLoaded", function () {
-
-  const packCards = document.querySelectorAll(".pack-card");
-  const packPopups = document.querySelectorAll(".pack-popup");
-  const closeButtons = document.querySelectorAll(".close-pack");
-
-  packCards.forEach(card => {
-    card.addEventListener("click", () => {
-
-      const packId = card.getAttribute("data-pack");
-      const popup = document.getElementById(packId);
-
-      if (popup) {
-        popup.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-
-    });
-  });
-
-  closeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      btn.closest(".pack-popup").classList.remove("active");
-      document.body.style.overflow = "auto";
-    });
-  });
-
-  packPopups.forEach(popup => {
-    popup.addEventListener("click", (e) => {
-      if (e.target === popup) {
-        popup.classList.remove("active");
-        document.body.style.overflow = "auto";
-      }
-    });
-  });
-
-});
-document.addEventListener("DOMContentLoaded", function() {
-  // Ouvre le popup
-  const openButtons = document.querySelectorAll("[data-modal-target]");
-  openButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = document.querySelector(btn.dataset.modalTarget);
-      if(target) target.classList.add("show");
-    });
-  });
-
-  // Ferme le popup
-  const closeButtons = document.querySelectorAll(".pack-modal .close");
-  closeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      btn.closest(".pack-modal").classList.remove("show");
-    });
-  });
-
-  // Ferme si clic en dehors du contenu
-  const modals = document.querySelectorAll(".pack-modal");
-  modals.forEach(modal => {
-    modal.addEventListener("click", e => {
-      if(e.target === modal) modal.classList.remove("show");
-    });
-  });
-});
 /* ===============================
    PREMIUM GPU SLIDER 120FPS OLED
    Compatible tous appareils
@@ -1512,5 +1354,40 @@ document.addEventListener('DOMContentLoaded', () => {
     weather.cloudsShadow = !weather.cloudsShadow;
     updateWeather();
   }, 10000);
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const tarifCards = document.querySelectorAll('.tarif-card');
+  const popups = document.querySelectorAll('.popup');
+  const closeButtons = document.querySelectorAll('.close-popup');
+
+  // Ouvrir popup au clic sur la carte
+  tarifCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const pack = card.getAttribute('data-pack');
+      const popup = document.getElementById(`popup-${pack}`);
+      if(popup) popup.classList.add('active');
+    });
+  });
+
+  // Fermer popup au clic sur la croix
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.parentElement.classList.remove('active');
+    });
+  });
+
+  // Fermer popup si clic en dehors
+  window.addEventListener('click', e => {
+    popups.forEach(popup => {
+      if (popup.classList.contains('active') &&
+          !popup.contains(e.target) &&
+          !e.target.classList.contains('tarif-card')) {
+        popup.classList.remove('active');
+      }
+    });
+  });
 
 });
