@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GralWebs Premium Experience</title>
+
+<!-- CSS EXISTANT -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+
+/* ================= VIDEO BACKGROUND ================= */
+.video-container{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
+
+#bg-video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    filter:
+        brightness(0.95)
+        contrast(1.1)
+        saturate(1.25)
+        hue-rotate(350deg);
+
+    animation:zoom 25s ease-in-out infinite;
+}
+
+@keyframes zoom{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+/* Overlay léger (ne cache pas la vidéo) */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle, rgba(193,18,31,0.06), rgba(0,0,0,0.45));
+    z-index:0;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+    color:white;
+}
+
+.title{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(3rem,7vw,6rem);
+
+    background:linear-gradient(120deg,#fff,#ff4d4d,#c1121f);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:0 0 30px rgba(193,18,31,0.3);
+}
+
+.subtitle{
+    margin-top:2rem;
+    font-size:clamp(1rem,2vw,1.4rem);
+    max-width:800px;
+    line-height:1.8;
+}
+
+.italic{
+    font-style:italic;
+    opacity:0.8;
+}
+
+/* ================= SCROLL ANIMATION ================= */
+.fade-in{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1.2s ease;
+}
+.fade-in.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header id="navbar">
+  <div class="container nav-container">
+    
+    <div class="brand">
+      <img src="images/logo.png" alt="Logo GralWebs" class="nav-logo" loading="lazy">
+      <span class="brand-name">GralWebs</span>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#home">Accueil</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">À propos</a></li>
+        <li><a href="index.html#destinations">Destinations</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="contrat.html">Contrat</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="about-gralwebs.html">Histoire</a></li>
+        <li><a href="final.html">Fin</a></li>
+      </ul>
+    </nav>
+
+    <div class="burger">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= VIDEO ================= -->
+<div class="video-container">
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="videos/rouge.mp4" type="video/mp4" loading="lazy">
+  </video>
+</div>
+
+<div class="overlay"></div>
+
+<!-- ================= SECTION 1 ================= -->
+<section class="section">
+  <div class="fade-in">
+    <h1 class="title">Merci d'avoir visité Gralwebs</h1>
+
+    <p class="subtitle">
+      Nous vous remercions sincèrement pour votre visite.<br><br>
+
+      Votre projet est entre les mains d’experts passionnés,<br>
+      dédiés à créer une présence digitale élégante et performante.<br><br>
+
+      <span class="italic">
+        Chaque détail est pensé pour vous offrir une expérience unique, fiable et premium.
+      </span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= SECTION 2 ================= -->
+<section class="section">
+  <div class="fade-in">
+    <h1 class="title">Une expérience en construction</h1>
+
+    <p class="subtitle">
+      Nous façonnons votre futur digital avec précision,<br>
+      innovation et excellence.<br><br>
+
+      <span class="italic">
+        Votre confiance est notre priorité, votre succès notre mission.
+      </span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= SECTION 3 ================= -->
+<section class="section">
+  <div class="fade-in">
+    <h1 class="title">Gralwebs Solution</h1>
+
+    <p class="subtitle">
+      Merci de faire partie de cette aventure.<br><br>
+
+      Votre site est conçu avec bienveillance,<br>
+      sécurité et exigence professionnelle.<br><br>
+
+      <span class="italic">
+        Nous construisons bien plus qu’un site : nous créons votre image digitale.
+      </span>
+    </p>
+
+    <div style="margin-top:40px; font-family:'Playfair Display',serif;">
+      — RANDRIAMANANTENA Lalanirina José Andrianina<br>
+      Fondateur de Gralwebs Solution
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer-premium">
+  <div class="footer-container">
+
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Logo GralWebs" class="footer-logo" loading="lazy">
+      <h3>GralWebs Solutions</h3>
+    </div>
+
+    <p class="footer-description">
+      Création de sites web modernes, interactifs et haut de gamme.
+      Nous façonnons des présences digitales puissantes.
+    </p>
+
+    <p class="copyright">
+      &copy; 2026 GralWebs Solutions | Tous droits réservés
+    </p>
+
+  </div>
+</footer>
+
+<!-- ================= CONTACT ================= -->
+<footer class="premium-contact">
+  <div class="contact-container">
+    <h2>Contactez GralWebs</h2>
+    <p class="phone">📞 034 11 453 99</p>
+    <p class="email">lefebvregenius@gmail.com</p>
+    <p class="note">Solutions web modernes & cybersécurité avancée</p>
+  </div>
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+
+// scroll animation
+const elements = document.querySelectorAll('.fade-in')
+
+function reveal(){
+  const trigger = window.innerHeight * 0.85
+
+  elements.forEach(el=>{
+    const top = el.getBoundingClientRect().top
+    if(top < trigger){
+      el.classList.add('visible')
+    }
+  })
+}
+
+window.addEventListener('scroll', reveal)
+reveal()
+
+// burger
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-links');
+
+burger.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+
+</script>
+
+</body>
+</html>
