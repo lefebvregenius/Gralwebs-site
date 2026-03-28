@@ -1391,3 +1391,98 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+const burger = document.querySelector(".burger");
+const nav = document.querySelector(".nav-links");
+
+// sécurité anti bug
+if (burger && nav) {
+
+  burger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    burger.classList.toggle("toggle");
+    burger.classList.remove("glow");
+  });
+
+  // 🔥 animation attention au chargement
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      burger.classList.add("glow");
+    }, 1200);
+  });
+
+  // 🔥 fermer menu si clique lien
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+      burger.classList.remove("toggle");
+    });
+  });
+
+}
+// ================= AJOUT ANIMATION PULSE =================
+const burgerPulse = document.querySelector(".burger");
+
+if (burgerPulse) {
+
+  // 🔥 lancer pulse après chargement
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      burgerPulse.classList.add("pulse");
+    }, 1200);
+  });
+
+  // ❌ enlever pulse quand utilisateur clique
+  burgerPulse.addEventListener("click", () => {
+    burgerPulse.classList.remove("pulse");
+  });
+
+}
+// ================= PULSE ROUGE PREMIUM =================
+const burgerRed = document.querySelector(".burger");
+
+if (burgerRed) {
+
+  // lancer effet après chargement
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      burgerRed.classList.add("pulse-red");
+    }, 1000);
+  });
+
+  // enlever effet au clic
+  burgerRed.addEventListener("click", () => {
+    burgerRed.classList.remove("pulse-red");
+  });
+
+  // 🔥 réactiver après inactivité
+  let timeout;
+  document.addEventListener("click", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      burgerRed.classList.add("pulse-red");
+    }, 5000); // revient après 5s
+  });
+
+}
+// ================= HAPTIC FEEDBACK PREMIUM =================
+const burgerHaptic = document.querySelector(".burger");
+
+if (burgerHaptic) {
+
+  burgerHaptic.addEventListener("click", () => {
+
+    // 📳 vibration mobile (Android)
+    if (navigator.vibrate) {
+      navigator.vibrate(10); // ultra douce
+    }
+
+    // 🍏 iPhone / devices modernes
+    if (window.navigator && window.navigator.hapticFeedback) {
+      try {
+        window.navigator.hapticFeedback.impactOccurred("light");
+      } catch(e){}
+    }
+
+  });
+
+}
