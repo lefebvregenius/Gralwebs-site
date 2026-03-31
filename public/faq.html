@@ -156,7 +156,7 @@
     <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
       <button class="faq-question">3. La maintenance est-elle incluse ?</button>
       <div class="faq-answer">
-        <p>La maintenance est optionnelle et facturée à partir de 350.000 Ar par mois, selon le type de site et les demandes spécifiques du client.</p>
+        <p>La maintenance est optionnelle et facturée à partir de 250.000 Ar par mois, selon le type de site et les demandes spécifiques du client.</p>
       </div>
     </div>
 
@@ -216,41 +216,55 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
 <script src="script.js" defer></script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
 
-  // Accordion FAQ
+  // ================= FAQ =================
   const faqItems = document.querySelectorAll('.faq-item');
 
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
+  if(faqItems.length){
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
 
-    question.addEventListener('click', () => {
-      // fermer tous les autres
-      faqItems.forEach(i => {
-        if (i !== item) i.querySelector('.faq-answer').style.maxHeight = null;
-      });
+      if(question && answer){
+        question.addEventListener('click', () => {
 
-      // ouvrir ou fermer celui-ci
-      if (answer.style.maxHeight) {
-        answer.style.maxHeight = null;
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
+          // fermer autres
+          faqItems.forEach(i => {
+            const a = i.querySelector('.faq-answer');
+            if(i !== item && a){
+              a.style.maxHeight = null;
+            }
+          });
+
+          // toggle actuel
+          answer.style.maxHeight =
+            answer.style.maxHeight ? null : answer.scrollHeight + "px";
+        });
       }
     });
-  });
+  }
 
-  // AOS Init
-  AOS.init({
-    duration: 800,
-    once: true
-  });
-
-  // Burger menu
+  // ================= BURGER =================
   const burger = document.querySelector('.burger');
   const nav = document.querySelector('.nav-links');
-  burger.addEventListener('click', () => nav.classList.toggle('active'));
+
+  if(burger && nav){
+    burger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  }
+
+  // ================= AOS =================
+  if (typeof AOS !== "undefined") {
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  }
+
+});
 </script>
-<script src="script-faq.js"></script>
 <!-- ===== FOOTER CONTACT PREMIUM ===== -->
 <footer class="premium-contact">
   <div class="contact-container">
