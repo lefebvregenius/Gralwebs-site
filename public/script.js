@@ -1464,25 +1464,74 @@ if (burgerRed) {
   });
 
 }
-// ================= HAPTIC FEEDBACK PREMIUM =================
+// ================= HAPTIC FEEDBACK PREMIUM ================= 
 const burgerHaptic = document.querySelector(".burger");
 
 if (burgerHaptic) {
-
   burgerHaptic.addEventListener("click", () => {
-
-    // 📳 vibration mobile (Android)
+    // 📳 Vibration ultra douce sur Android
     if (navigator.vibrate) {
-      navigator.vibrate(10); // ultra douce
+      navigator.vibrate(10);
     }
 
-    // 🍏 iPhone / devices modernes
-    if (window.navigator && window.navigator.hapticFeedback) {
-      try {
-        window.navigator.hapticFeedback.impactOccurred("light");
-      } catch(e){}
-    }
+    // 🍏 iOS / devices modernes
+    // Note : la plupart des iPhones utilisent l'effet haptique natif sur click automatique, 
+    // il n'y a pas de API standard. On laisse juste la vibration Android pour compatibilité.
+  });
+}
 
+// ================= STYLE LIQUID GLASS POUR NAV =================
+const allNavs = document.querySelectorAll('.nav-links');
+
+allNavs.forEach(nav => {
+  nav.style.background = "rgba(20, 20, 20, 0.55)";
+  nav.style.backdropFilter = "blur(18px) saturate(160%)";
+  nav.style.WebkitBackdropFilter = "blur(18px) saturate(160%)";
+  nav.style.borderTop = "1px solid rgba(255,255,255,0.08)";
+  nav.style.boxShadow = "0 8px 32px rgba(0,0,0,0.6)";
+  nav.style.flexDirection = "column";
+  nav.style.alignItems = "center";
+  nav.style.padding = "20px 0";
+  nav.style.zIndex = "99999";
+  nav.style.display = "none"; // cache par défaut
+  nav.style.animation = "fadeGlass 0.3s ease";
+});
+
+// Ajoute keyframes pour l'animation (une seule fois)
+const styleSheet = document.createElement("style");
+styleSheet.innerHTML = `
+@keyframes fadeGlass {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+`;
+document.head.appendChild(styleSheet);
+
+// Style pour tous les liens
+const allLinks = document.querySelectorAll('.nav-links a');
+allLinks.forEach(a => {
+  a.style.display = "block";
+  a.style.width = "90%";
+  a.style.margin = "8px auto";
+  a.style.padding = "12px 20px";
+  a.style.borderRadius = "12px";
+  a.style.color = "white";
+  a.style.fontWeight = "500";
+  a.style.letterSpacing = "0.5px";
+  a.style.background = "rgba(255,255,255,0.05)";
+  a.style.border = "1px solid rgba(255,255,255,0.08)";
+  a.style.transition = "all 0.3s ease";
+  a.style.position = "relative";
+
+  a.addEventListener('mouseenter', () => {
+    a.style.background = "rgba(255,255,255,0.12)";
+    a.style.transform = "scale(1.05)";
+    a.style.boxShadow = "0 4px 20px rgba(255,255,255,0.1)";
   });
 
-}
+  a.addEventListener('mouseleave', () => {
+    a.style.background = "rgba(255,255,255,0.05)";
+    a.style.transform = "scale(1)";
+    a.style.boxShadow = "none";
+  });
+});

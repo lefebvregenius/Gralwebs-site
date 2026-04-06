@@ -251,7 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if(burger && nav){
     burger.addEventListener('click', () => {
-      nav.classList.toggle('active');
+      if (nav.style.display === "flex") {
+  nav.style.display = "none";
+} else {
+  nav.style.display = "flex";
+}
     });
   }
 
@@ -265,7 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
-<script src="script-faq.js"></script>
 <!-- ===== FOOTER CONTACT PREMIUM ===== -->
 <footer class="premium-contact">
   <div class="contact-container">
@@ -321,6 +324,28 @@ document.addEventListener("DOMContentLoaded", () => {
 .premium-contact .contact-container .phone:hover {
   color: #720a68;
   transition: 0.3s ease-in-out;
+}/* ===== FIX FINAL BURGER FAQ ===== */
+
+.nav-links {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: #111;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 99999;
+}
+
+.nav-links li {
+  margin: 15px 0;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 1.2rem;
 }
 </style>
 </body>
