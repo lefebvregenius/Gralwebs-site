@@ -3623,3 +3623,8 @@ body.voschoix-active::before {
   }
 
 }
+@media (max-width: 768px) {
+  .nav-links.active {
+    display: flex;
+  }
+}

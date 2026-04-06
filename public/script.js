@@ -1493,7 +1493,7 @@ allNavs.forEach(nav => {
   nav.style.alignItems = "center";
   nav.style.padding = "20px 0";
   nav.style.zIndex = "99999";
-  nav.style.display = "none"; // cache par défaut
+  // cache par défaut
   nav.style.animation = "fadeGlass 0.3s ease";
 });
 
