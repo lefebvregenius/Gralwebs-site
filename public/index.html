@@ -10,7 +10,7 @@
 <meta http-equiv="Pragma" content="cache">
 
 <!-- Titre et description premium -->
-<title>Gralwebs Solution | Création Web Premium & Cybersécurité</title>
+<title>Gralwebs Solution | Création Web Premium & Cybersécurité à Madagascar</title>
 <meta name="description" content="Gralwebs Solution : création de sites web professionnels, cybersécurité avancée et solutions SaaS pour entreprises. Modernité, sécurité et performance garantie.">
 <meta name="keywords" content="Gralwebs, création site web, cybersécurité, SaaS, développement web, Antananarivo, Madagascar">
 <meta name="author" content="Gralwebs Solution">
@@ -20,7 +20,7 @@
 <link rel="icon" href="/logo.png" type="image/png">
 
 <!-- Open Graph -->
-<meta property="og:image" content="https://gralwebs-site.vercel.app/media/profil.jpg">
+<meta property="og:image" content="https://gralwebs-site.vercel.app/media/profile2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
 <meta property="og:image:alt" content="Photo profil Gralwebs Solution">
@@ -29,7 +29,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Gralwebs Solution | Création Web Premium">
 <meta name="twitter:description" content="Sites web modernes et sécurisés, cybersécurité et solutions SaaS avancées pour entreprises.">
-<meta name="twitter:image" content="https://gralwebs-site.vercel.app/logo.png">
+<meta name="twitter:image" content="https://gralwebs-site.vercel.app/profile2.png">
 
 <!-- JSON-LD Structured Data SEO -->
 <script type="application/ld+json">
@@ -40,7 +40,7 @@
   "alternateName": "Gralwebs",
   "url": "https://gralwebs-site.vercel.app",
   "logo": "https://gralwebs-site.vercel.app/logo.png",
-  "image": "https://gralwebs-site.vercel.app/media/profil.jpg",
+  "image": "https://gralwebs-site.vercel.app/media/profile2.png",
   "description": "Gralwebs Solution est une plateforme moderne spécialisée dans la création de sites web, cybersécurité.",
   
   "contactPoint": {
@@ -53,7 +53,7 @@
 
   "sameAs": [
     "https://www.facebook.com/Gralwebs Solution: Création Web Prémium",
-    "https://www.tiktok.com/@lefebvregenius"
+    
   ]
 }
 </script>
@@ -1764,6 +1764,33 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("http://localhost:5000/api/track", {
     method: "POST"
   });
+</script>
+<script>
+(function () {
+  const start = Date.now();
+
+  function send(type) {
+    fetch("http://localhost:5000/track", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        type,
+        url: location.href,
+        duration: Date.now() - start
+      })
+    });
+  }
+
+  // visite
+  send("visit");
+
+  // quitter page
+  window.addEventListener("beforeunload", () => {
+    send("leave");
+  });
+})();
 </script>
 
 </body>
