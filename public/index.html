@@ -17,7 +17,7 @@
 <meta name="theme-color" content="#000000">
 
 <!-- Favicon -->
-<link rel="icon" href="/logo.png" type="image/png">
+<link rel="icon" href="/profile2.png" type="image/png">
 
 <!-- Open Graph -->
 <meta property="og:image" content="https://gralwebs-site.vercel.app/media/profile2.png">
@@ -1761,35 +1761,37 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 </style>
 <script>
-  fetch("http://localhost:5000/api/track", {
-    method: "POST"
-  });
-</script>
-<script>
 (function () {
   const start = Date.now();
 
+  const API = "https://quanty-ultra.onrender.com/api/track"; // ⚠️ backend principal
+
   function send(type) {
-    fetch("http://localhost:5000/track", {
+    fetch(API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        type,
-        url: location.href,
-        duration: Date.now() - start
+        type: type,
+        url: window.location.href,
+        duration: Date.now() - start,
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString()
       })
-    });
+    }).catch(() => {}); // évite les erreurs console
   }
 
-  // visite
+  // 🔥 visite
   send("visit");
 
-  // quitter page
-  window.addEventListener("beforeunload", () => {
-    send("leave");
+  // 🔥 quitter page (plus fiable)
+  window.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      send("leave");
+    }
   });
+
 })();
 </script>
 
