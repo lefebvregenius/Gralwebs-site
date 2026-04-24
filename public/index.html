@@ -1780,15 +1780,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(() => {});
   }
 
-  // 🔥 VISITE
+  // VISITE
   send({ type: "visit" });
 
-  // 🔴 HEARTBEAT (présence réelle)
+  // LIVE USER (heartbeat)
   setInterval(() => {
     send({ type: "heartbeat" });
   }, 10000);
 
-  // ⏱ TEMPS PASSÉ (plus fiable que beforeunload)
+  // TEMPS PASSÉ
   window.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
       send({
@@ -1798,23 +1798,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ⚡ PERFORMANCE NAVIGATION (réel)
-  window.addEventListener("load", () => {
-    const perf = performance.getEntriesByType("navigation")[0];
-
-    if (perf) {
-      send({
-        type: "network",
-        ttfb: perf.responseStart,
-        load: perf.loadEventEnd
-      });
-    }
-  });
-
 })();
 </script>
 <script type="module">
-import { getLCP, getCLS, getFID } from "https://unpkg.com/web-vitals?module";
+import { onCLS, onLCP, onINP } from "https://unpkg.com/web-vitals@3?module";
 
 const API = "https://quanty-ultra.onrender.com/api/track";
 
@@ -1831,9 +1818,9 @@ function sendMetric(name, value) {
   });
 }
 
-getLCP((m) => sendMetric("LCP", m.value));
-getCLS((m) => sendMetric("CLS", m.value));
-getFID((m) => sendMetric("FID", m.value));
+onLCP((m) => sendMetric("LCP", m.value));
+onCLS((m) => sendMetric("CLS", m.value));
+onINP((m) => sendMetric("INP", m.value));
 </script>
 
 </body>
