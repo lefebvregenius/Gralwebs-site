@@ -1763,36 +1763,77 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 (function () {
   const start = Date.now();
+  const API = "https://quanty-ultra.onrender.com/api/track";
 
-  const API = "https://quanty-ultra.onrender.com/api/track"; // ⚠️ backend principal
-
-  function send(type) {
+  function send(data) {
     fetch(API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        type: type,
+        ...data,
         url: window.location.href,
-        duration: Date.now() - start,
         userAgent: navigator.userAgent,
-        timestamp: new Date().toISOString()
+        timestamp: Date.now()
       })
-    }).catch(() => {}); // évite les erreurs console
+    }).catch(() => {});
   }
 
-  // 🔥 visite
-  send("visit");
+  // 🔥 VISITE
+  send({ type: "visit" });
 
-  // 🔥 quitter page (plus fiable)
+  // 🔴 HEARTBEAT (présence réelle)
+  setInterval(() => {
+    send({ type: "heartbeat" });
+  }, 10000);
+
+  // ⏱ TEMPS PASSÉ (plus fiable que beforeunload)
   window.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
-      send("leave");
+      send({
+        type: "leave",
+        duration: Date.now() - start
+      });
+    }
+  });
+
+  // ⚡ PERFORMANCE NAVIGATION (réel)
+  window.addEventListener("load", () => {
+    const perf = performance.getEntriesByType("navigation")[0];
+
+    if (perf) {
+      send({
+        type: "network",
+        ttfb: perf.responseStart,
+        load: perf.loadEventEnd
+      });
     }
   });
 
 })();
+</script>
+<script type="module">
+import { getLCP, getCLS, getFID } from "https://unpkg.com/web-vitals?module";
+
+const API = "https://quanty-ultra.onrender.com/api/track";
+
+function sendMetric(name, value) {
+  fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      type: "performance",
+      metric: name,
+      value: value,
+      timestamp: Date.now()
+    })
+  });
+}
+
+getLCP((m) => sendMetric("LCP", m.value));
+getCLS((m) => sendMetric("CLS", m.value));
+getFID((m) => sendMetric("FID", m.value));
 </script>
 
 </body>
