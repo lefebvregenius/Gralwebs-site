@@ -30,11 +30,60 @@ card.style.transform =
 });
 
 
+/* ==========================================
+   NAVBAR RETRACTABLE
+========================================== */
+
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
-  navbar.classList.toggle(
-    "scrolled",
-    window.scrollY > 50
-  );
+
+    if(window.scrollY > 50){
+        navbar.classList.add("scrolled");
+    }else{
+        navbar.classList.remove("scrolled");
+    }
+
+});
+/* ==========================================
+   BURGER MENU PREMIUM
+========================================== */
+
+const burger = document.querySelector(".burger");
+const navLinks = document.querySelector(".nav-links");
+
+burger.addEventListener("click", () => {
+
+    burger.classList.toggle("active");
+    navLinks.classList.toggle("active");
+
+});
+
+/* Fermeture automatique après clic */
+
+document.querySelectorAll(".nav-links a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        burger.classList.remove("active");
+        navLinks.classList.remove("active");
+
+    });
+
+});
+
+
+document.addEventListener("click", (e) => {
+
+    if(
+        !burger.contains(e.target) &&
+        !navLinks.contains(e.target)
+    ){
+
+        burger.classList.remove("active");
+        navLinks.classList.remove("active");
+
+    }
+
 });
