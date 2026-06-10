@@ -1,0 +1,439 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+.bg-blur{
+position:fixed;
+border-radius:50%;
+filter:blur(150px);
+z-index:-1;
+}
+
+.blur1{
+width:400px;
+height:400px;
+background:#ff0000;
+top:-100px;
+left:-100px;
+}
+
+.blur2{
+width:400px;
+height:400px;
+background:#0066ff;
+bottom:-100px;
+right:-100px;
+}
+
+.hero{
+min-height:60vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:60px 20px;
+}
+
+.hero-content{
+max-width:900px;
+}
+
+.badge{
+padding:10px 20px;
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.05);
+border-radius:50px;
+backdrop-filter:blur(20px);
+}
+
+.hero h1{
+font-size:4rem;
+margin-top:20px;
+}
+
+.hero h1 span{
+display:block;
+background:linear-gradient(
+90deg,
+#ff0000,
+#ff6600,
+#00ffff
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+margin-top:20px;
+opacity:.8;
+line-height:1.8;
+}
+
+.portfolio{
+padding:100px 8%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:60px;
+}
+
+.section-title h2{
+font-size:2.5rem;
+}
+
+.section-title p{
+opacity:.7;
+}
+
+.portfolio-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:40px;
+}
+
+.project-card{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:30px;
+overflow:hidden;
+transition:.5s;
+}
+
+.project-card:hover{
+transform:translateY(-15px);
+box-shadow:0 0 40px rgba(255,0,0,.25);
+}
+
+.project-image{
+height:250px;
+overflow:hidden;
+}
+
+.project-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.5s;
+}
+
+.project-card:hover img{
+transform:scale(1.1);
+}
+
+.project-content{
+padding:30px;
+}
+
+.project-tag{
+display:inline-block;
+padding:8px 15px;
+border-radius:30px;
+background:rgba(255,255,255,.08);
+margin-bottom:15px;
+}
+
+.project-content h3{
+font-size:1.8rem;
+margin-bottom:15px;
+}
+
+.project-content p{
+opacity:.8;
+line-height:1.7;
+}
+
+.visit-btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 30px;
+border-radius:50px;
+text-decoration:none;
+color:white;
+background:linear-gradient(
+90deg,
+#ff0000,
+#ff6600
+);
+transition:.4s;
+}
+
+.visit-btn:hover{
+transform:scale(1.05);
+}
+
+.future-projects{
+padding:100px 8%;
+}
+
+.future-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.future-card{
+height:250px;
+border:2px dashed rgba(255,255,255,.2);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-size:4rem;
+border-radius:25px;
+transition:.4s;
+}
+
+.future-card:hover{
+background:rgba(255,255,255,.05);
+}
+
+.future-card h3{
+font-size:1.2rem;
+margin-top:20px;
+}
+
+footer{
+padding:50px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+}
+/* ================== portfolio premium ======================== */
+
+.project-preview{
+    position:relative;
+    height:260px;
+    overflow:hidden;
+}
+
+.project-preview iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    transform:scale(.65);
+    transform-origin:top center;
+    pointer-events:none;
+}
+/* ================= HALO ================= */
+
+.project-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.project-card::before{
+    content:'';
+    position:absolute;
+    inset:-2px;
+
+    background:linear-gradient(
+    45deg,
+    #ff0000,
+    #ff8800,
+    #00ffff,
+    #0066ff,
+    #ff00ff,
+    #ff0000);
+
+    background-size:400% 400%;
+
+    animation:rgbBorder 10s linear infinite;
+
+    z-index:-1;
+
+    filter:blur(12px);
+}
+
+@keyframes rgbBorder{
+
+0%{
+background-position:0% 50%;
+}
+
+100%{
+background-position:400% 50%;
+}
+
+}
+/* =================== REFLET APPLE GLASS ===================== */
+
+.project-card::after{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:-120%;
+
+width:60%;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.15),
+transparent);
+
+transform:skewX(-25deg);
+
+transition:1.2s;
+}
+
+.project-card:hover::after{
+left:150%;
+}
+/* ======================= FOOTER PREMIUM ======================== */
+
+footer{
+
+position:relative;
+
+overflow:hidden;
+
+padding:80px 20px;
+
+text-align:center;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+background:#050505;
+}
+footer::before{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:2px;
+
+background:linear-gradient(
+90deg,
+red,
+orange,
+yellow,
+lime,
+cyan,
+blue,
+violet,
+magenta,
+red);
+
+background-size:400%;
+
+animation:footerRGB 8s linear infinite;
+}
+
+@keyframes footerRGB{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:400%;
+}
+
+}
+/* =================== Copiwrit ==================== */
+
+.copyright{
+
+margin-top:25px;
+
+font-size:.95rem;
+
+letter-spacing:2px;
+
+opacity:.8;
+
+text-transform:uppercase;
+}
+/* ======================== STATS ======================== */
+
+.stats{
+
+display:flex;
+justify-content:center;
+gap:50px;
+flex-wrap:wrap;
+
+padding:80px 20px;
+}
+
+.stat{
+
+padding:30px;
+
+min-width:220px;
+
+text-align:center;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(20px);
+
+border-radius:25px;
+}
+
+.stat h2{
+
+font-size:3rem;
+
+background:linear-gradient(
+90deg,
+#ff0000,
+#00ffff);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+/* ================= badges activation ==================== */
+
+.online-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:8px 15px;
+
+border-radius:50px;
+
+background:rgba(0,255,100,.1);
+
+color:#00ff88;
+
+font-size:.8rem;
+
+font-weight:600;
+}
+/* =================== SURVOL PREMIUM ===================== */
+
+.project-card:hover{
+
+transform:
+translateY(-15px)
+scale(1.02);
+
+box-shadow:
+0 0 30px rgba(255,0,0,.2),
+0 0 60px rgba(0,255,255,.15),
+0 0 100px rgba(255,0,255,.1);
+}
