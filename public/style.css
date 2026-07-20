@@ -3350,7 +3350,7 @@ body.voschoix-active::before {
 /* ================= MOBILE ONLY ================= */
 @media screen and (max-width: 768px) {
 
-  /* 🔥 RESET (important pour éviter ton bug actuel) */
+  /* 🔥 RESET (important pour éviter le bug actuel) */
   .burger {
     all: unset;
   }
@@ -3384,7 +3384,7 @@ body.voschoix-active::before {
     transition: all 0.3s ease;
   }
 
-  /* 🔥 effet press Apple */
+  /* 🔥 effet press Apple perso gralwebs */
   .burger:active {
     transform: translateX(-50%) scale(0.9);
   }
