@@ -594,7 +594,7 @@ let clock = new THREE.Clock();
 
 const canvas = document.querySelector("#portfolio-canvas");
 
-const MODEL_PATH = "./models/avatar.glb";
+const MODEL_PATH = "/models/portrait.glb";
 
 
 /* ==========================================================
@@ -3786,3 +3786,27 @@ overlay.onclick=()=>{
     overlay.classList.remove("active");
 
 };
+
+let lastScroll=0;
+
+window.addEventListener("scroll",()=>{
+
+const nav=document.querySelector(".header");
+
+const current=window.pageYOffset;
+
+if(current>lastScroll){
+
+nav.classList.add("hide-nav");
+
+}
+
+else{
+
+nav.classList.remove("hide-nav");
+
+}
+
+lastScroll=current;
+
+});
