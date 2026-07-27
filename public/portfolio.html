@@ -1,0 +1,4409 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <!-- ===========================
+        META
+    ============================ -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Portfolio | GralWebs Solutions
+    </title>
+
+    <meta
+        name="description"
+        content="Portfolio interactif 3D de GralWebs Solutions. Développement Web Premium, Three.js, GSAP, JavaScript, React, UI/UX et expériences immersives.">
+
+    <meta
+        name="keywords"
+        content="GralWebs, Portfolio, Three.js, GSAP, Développeur Web, Madagascar, JavaScript, HTML, CSS, React">
+
+    <meta
+        name="author"
+        content="GralWebs Solutions">
+
+    <meta
+        name="robots"
+        content="index,follow">
+
+    <meta
+        name="theme-color"
+        content="#000000">
+
+    <!-- ===========================
+        OPEN GRAPH
+    ============================ -->
+
+    <meta
+        property="og:title"
+        content="Portfolio | GralWebs Solutions">
+
+    <meta
+        property="og:description"
+        content="Découvrez un portfolio immersif en 3D développé avec Three.js et GSAP.">
+
+    <meta
+        property="og:type"
+        content="website">
+
+    <meta
+        property="og:image"
+        content="images/preview.jpg">
+
+    <meta
+        property="og:url"
+        content="https://gralwebs-site.vercel.app">
+
+    <!-- ===========================
+        TWITTER
+    ============================ -->
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image">
+
+    <meta
+        name="twitter:title"
+        content="Portfolio GralWebs">
+
+    <meta
+        name="twitter:description"
+        content="Portfolio Premium 3D avec Three.js.">
+
+    <meta
+        name="twitter:image"
+        content="images/preview.jpg">
+
+    <!-- ===========================
+        FAVICON
+    ============================ -->
+
+    <link
+        rel="icon"
+        href="favicon.ico">
+
+    <!-- ===========================
+        GOOGLE FONTS
+    ============================ -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- ===========================
+        ICONS
+    ============================ -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <!-- ===========================
+        CSS
+    ============================ -->
+
+    <link
+        rel="stylesheet"
+        href="portfolio.css">
+
+</head>
+
+<body>
+
+    <!--===========================
+        LOADER
+    ===========================-->
+
+    <div id="loader">
+
+        <div class="loader-logo">
+
+            <span>GRALWEBS</span>
+
+            
+
+        </div>
+
+        <div class="loader-bar">
+
+            <div class="loader-progress"></div>
+
+        </div>
+
+        <p>
+            Chargement de votre expérience...
+        </p>
+
+    </div>
+
+    <!--===========================
+        BACKGROUND EFFECT
+    ===========================-->
+
+    <div class="animated-bg">
+
+        <div class="gradient-one"></div>
+
+        <div class="gradient-two"></div>
+
+        <div class="noise-layer"></div>
+
+    </div>
+
+    <!--===========================
+        THREE.JS CANVAS
+    ===========================-->
+
+    <canvas id="webgl"></canvas>
+
+        <!--=========================================
+            NAVIGATION
+    ==========================================-->
+
+    <header class="header">
+
+        <nav class="navbar container">
+
+            <!--==================
+                    LOGO
+            ===================-->
+
+            <a href="#" class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-cube"></i>
+                </span>
+
+                <span class="logo-text">
+
+                    <strong>Gralwebs</strong>
+
+                </span>
+
+            </a>
+
+            <!--==================
+                  MENU
+            ===================-->
+
+            <ul class="nav-links">
+
+                 <li>
+                    <a href="index.html">
+                        Accueil
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#hero">
+                        Titre
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#about">
+                        À propos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#skills">
+                        Compétences
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#timeline">
+                        Expérience
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#portfolio">
+                        Portfolio
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+            <!--==================
+                 CTA
+            ===================-->
+
+            <div class="nav-buttons">
+
+                <a href="#contact" class="btn-primary">
+
+                    Discutons
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <!--==================
+              MENU MOBILE
+            ===================-->
+
+            <button class="menu-toggle">
+
+                <span></span>
+
+                <span></span>
+
+                <span></span>
+
+            </button>
+
+        </nav>
+
+    </header>
+
+    <!--=========================================
+          MOBILE MENU
+    ==========================================-->
+
+    <aside class="mobile-menu">
+
+        <div class="mobile-header">
+
+            <h2>
+
+                <strong>Gralwebs</strong>
+
+            </h2>
+
+            <button class="close-menu">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="index.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Accueil
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#about">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    À propos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#skills">
+
+                    <i class="fa-solid fa-code"></i>
+
+                    Compétences
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#timeline">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    Expérience
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#portfolio">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Portfolio
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#contact">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    Contact
+
+                </a>
+
+            </li>
+
+        </ul>
+
+        <div class="mobile-social">
+
+            <a href="#">
+
+                <i class="fab fa-facebook-f"></i>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fab fa-linkedin-in"></i>
+
+            </a>
+
+            <a href="#">
+
+                <i class="fab fa-github"></i>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!--=========================================
+          OVERLAY
+    ==========================================-->
+
+    <div class="menu-overlay"></div>
+
+        <!--==========================================================
+        HERO SECTION
+    ===========================================================-->
+
+    <main id="hero" class="hero">
+
+        <!-- Halo lumineux -->
+        <div class="hero-light hero-light-left"></div>
+        <div class="hero-light hero-light-right"></div>
+
+        <div class="container hero-container">
+
+            <!--=================================
+                CONTENU TEXTE
+            =================================-->
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    <i class="fa-solid fa-sparkles"></i>
+                    Développeur Web • UI/UX • Expériences 3D
+                </span>
+
+                <h1 class="hero-title">
+
+                    Je crée des
+
+                    <span class="gradient-text">
+                        expériences digitales
+                    </span>
+
+                    modernes, immersives
+                    et performantes.
+
+                </h1>
+
+                <p class="hero-description">
+
+                    Bienvenue dans mon univers.
+
+                    Je suis développeur Full Stack passionné par la création
+                    d'interfaces haut de gamme mêlant Design, Three.js,
+                    animations GSAP et expériences utilisateur réalistes.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="realisations.html" class="btn-primary">
+
+                        Voir mes projets
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                    <a href="#contact" class="btn-secondary">
+
+                        Me contacter
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!--=================================
+                AVATAR 3D
+            =================================-->
+
+            <div class="hero-3d">
+
+                <!--
+                    Le modèle GLB sera injecté ici
+                    via Three.js
+                -->
+
+                <div id="avatar-container">
+
+                    <div class="avatar-glow"></div>
+
+                    <div class="glass-ring"></div>
+
+                    <div class="glass-ring second-ring"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--=================================
+            CARTES FLOTTANTES
+        =================================-->
+
+        <div class="floating-card card-one">
+
+            <i class="fa-brands fa-html5"></i>
+
+            <h4>HTML5</h4>
+
+            <p>Interfaces modernes</p>
+
+        </div>
+
+        <div class="floating-card card-two">
+
+            <i class="fa-brands fa-css3-alt"></i>
+
+            <h4>CSS3</h4>
+
+            <p>Glassmorphism Premium</p>
+
+        </div>
+
+        <div class="floating-card card-three">
+
+            <i class="fa-brands fa-js"></i>
+
+            <h4>JavaScript</h4>
+
+            <p>Interactions avancées</p>
+
+        </div>
+
+        <div class="floating-card card-four">
+
+            <i class="fa-solid fa-cube"></i>
+
+            <h4>Three.js</h4>
+
+            <p>Expériences immersives</p>
+
+        </div>
+
+        <!--=================================
+            SCROLL INDICATOR
+        =================================-->
+
+        <div class="scroll-indicator">
+
+            <span></span>
+
+            <p>Scroll</p>
+
+        </div>
+
+    </main>
+
+    <!--==========================================================
+        FIN HERO
+    ===========================================================-->
+
+        <!--==========================================================
+        ABOUT
+    ===========================================================-->
+
+    <section id="about" class="about section">
+
+        <div class="container">
+
+            <!--========================
+                TITRE
+            ========================-->
+
+            <div class="section-title">
+
+                <span class="section-subtitle">
+
+                    À PROPOS
+
+                </span>
+
+                <h2>
+
+                    Transformer des idées
+                    en expériences numériques
+                    haut de gamme.
+
+                </h2>
+
+                <p>
+
+                    Chez <strong>GralWebs Solutions</strong>,
+                    chaque projet est pensé pour offrir une
+                    identité visuelle forte, une excellente
+                    expérience utilisateur et des performances
+                    optimales.
+
+                </p>
+
+            </div>
+
+            <!--========================
+                CONTENU
+            ========================-->
+
+            <div class="about-grid">
+
+                <!-- Carte principale -->
+
+                <div class="about-card large-card">
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                    </div>
+
+                    <h3>
+
+                        Développeur Full Stack
+
+                    </h3>
+
+                    <p>
+
+                        Je développe des applications web modernes,
+                        des plateformes professionnelles et des
+                        expériences interactives utilisant les
+                        dernières technologies du Web.
+
+                    </p>
+
+                </div>
+
+                <!-- Carte -->
+
+                <div class="about-card">
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-cube"></i>
+
+                    </div>
+
+                    <h3>
+
+                        Expériences 3D
+
+                    </h3>
+
+                    <p>
+
+                        Intégration de modèles GLB,
+                        animations GSAP,
+                        Three.js,
+                        ScrollTrigger
+                        et effets cinématiques.
+
+                    </p>
+
+                </div>
+
+                <!-- Carte -->
+
+                <div class="about-card">
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-palette"></i>
+
+                    </div>
+
+                    <h3>
+
+                        UI / UX Premium
+
+                    </h3>
+
+                    <p>
+
+                        Interfaces modernes inspirées
+                        d'Apple, Framer,
+                        Stripe et Awwwards
+                        avec une attention particulière
+                        portée aux détails.
+
+                    </p>
+
+                </div>
+
+                <!-- Carte -->
+
+                <div class="about-card">
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-rocket"></i>
+
+                    </div>
+
+                    <h3>
+
+                        Performance
+
+                    </h3>
+
+                    <p>
+
+                        Sites optimisés,
+                        référencement naturel,
+                        vitesse de chargement,
+                        responsive
+                        et accessibilité.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!--========================
+                STATISTIQUES
+            ========================-->
+
+            <div class="about-stats">
+
+                <div class="stat-box">
+
+                    <h2>
+
+                        <span class="counter"
+                              data-target="20">0</span>
+
+                        +
+
+                    </h2>
+
+                    <p>
+
+                        Projets réalisés
+
+                    </p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h2>
+
+                        <span class="counter"
+                              data-target="8">0</span>
+
+                        +
+
+                    </h2>
+
+                    <p>
+
+                        Technologies maîtrisées
+
+                    </p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h2>
+
+                        <span class="counter"
+                              data-target="100">0</span>
+
+                        %
+
+                    </h2>
+
+                    <p>
+
+                        Responsive Design
+
+                    </p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <h2>
+
+                        <span class="counter"
+                              data-target="24">0</span>
+
+                        h
+
+                    </h2>
+
+                    <p>
+
+                        Support & disponibilité
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--==========================================================
+        FIN ABOUT
+    ===========================================================-->
+
+    <!-- ========================= -->
+<!-- EXPERIENCE / TIMELINE -->
+<!-- ========================= -->
+
+<section id="experience" class="timeline-section">
+
+    <div class="section-title">
+        <span>Mon parcours</span>
+        <h2>Expérience & Évolution</h2>
+        <p>
+            Chaque projet représente une étape importante dans
+            l'évolution de mes compétences en développement web,
+            design et expérience utilisateur.
+        </p>
+    </div>
+
+    <div class="timeline">
+
+        <!-- ITEM 1 -->
+        <div class="timeline-item left reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card glass">
+
+                <span class="timeline-date">
+                    2022
+                </span>
+
+                <h3>
+                    Début du développement Web
+                </h3>
+
+                <p>
+                    Découverte de HTML, CSS et JavaScript avec
+                    une forte orientation vers la création
+                    d'interfaces modernes et responsives.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM 2 -->
+
+        <div class="timeline-item right reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card glass">
+
+                <span class="timeline-date">
+                    2023
+                </span>
+
+                <h3>
+                    UI / UX Design
+                </h3>
+
+                <p>
+                    Création d'interfaces premium,
+                    animations fluides,
+                    optimisation responsive
+                    et amélioration de l'expérience utilisateur.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM 3 -->
+
+        <div class="timeline-item left reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card glass">
+
+                <span class="timeline-date">
+                    2024
+                </span>
+
+                <h3>
+                    Développement Full Stack
+                </h3>
+
+                <p>
+                    Développement d'applications utilisant
+                    JavaScript moderne,
+                    API REST,
+                    Node.js,
+                    Express
+                    et intégration de bases de données.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM 4 -->
+
+        <div class="timeline-item right reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card glass">
+
+                <span class="timeline-date">
+                    2025
+                </span>
+
+                <h3>
+                    Fondation de GralWebs
+                </h3>
+
+                <p>
+                    Création de GralWebs Solutions,
+                    agence spécialisée dans les
+                    sites web premium,
+                    SEO,
+                    identité numérique
+                    et automatisation.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ITEM 5 -->
+
+        <div class="timeline-item left reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card glass">
+
+                <span class="timeline-date">
+                    2026
+                </span>
+
+                <h3>
+                    Intelligence Artificielle
+                </h3>
+
+                <p>
+                    Développement d'outils assistés par IA,
+                    intégration de modèles génératifs,
+                    assistants intelligents
+                    et expériences immersives.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Transition lumineuse -->
+<!-- ========================= -->
+
+<div class="section-divider">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+<!-- ======================================== -->
+<!-- PROJECTS SECTION -->
+<!-- ======================================== -->
+
+<section id="projects" class="projects-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-subtitle">
+                Portfolio
+            </span>
+
+            <h2 class="section-title">
+                Projets Sélectionnés
+            </h2>
+
+            <p class="section-description">
+                Quelques réalisations illustrant mon approche :
+                design premium, performances, SEO,
+                expériences interactives et développement Full Stack.
+            </p>
+
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- ======================= -->
+            <!-- CARD 1 -->
+            <!-- ======================= -->
+
+            <article class="project-card glass reveal">
+
+                <div class="project-image">
+
+                    <img
+                        src="images/logo.png"
+                        alt="GralWebs Solutions">
+
+                    <div class="project-overlay">
+
+                        <span>
+                            Site Professionnel
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <h3>
+                        GralWebs Solutions
+                    </h3>
+
+                    <p>
+
+                        Plateforme professionnelle
+                        dédiée à la création
+                        de sites web premium,
+                        SEO,
+                        identité numérique
+                        et solutions digitales.
+
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                        <span>Three.js</span>
+
+                    </div>
+
+                    <div class="project-buttons">
+
+                        <a
+                            href="#"
+                            class="btn-primary">
+
+                            Voir le projet
+
+                        </a>
+
+                        <a
+                            href="#"
+                            class="btn-secondary">
+
+                            Code
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ======================= -->
+            <!-- CARD 2 -->
+            <!-- ======================= -->
+
+            <article class="project-card glass reveal">
+
+                <div class="project-image">
+
+                    <img
+                        src="assets/projects/zarabesso.jpg"
+                        alt="Zarabesso">
+
+                    <div class="project-overlay">
+
+                        <span>
+
+                            Streaming Cloud
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <h3>
+
+                        Zarabesso Cloud
+
+                    </h3>
+
+                    <p>
+
+                        Plateforme cloud
+                        destinée au stockage
+                        et au streaming vidéo
+                        avec interface moderne,
+                        gestion des médias
+                        et optimisation.
+
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span>Node.js</span>
+                        <span>Cloudflare R2</span>
+                        <span>Vercel</span>
+                        <span>API</span>
+
+                    </div>
+
+                    <div class="project-buttons">
+
+                        <a
+                            href="#"
+                            class="btn-primary">
+
+                            Découvrir
+
+                        </a>
+
+                        <a
+                            href="#"
+                            class="btn-secondary">
+
+                            Détails
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ======================= -->
+            <!-- CARD 3 -->
+            <!-- ======================= -->
+
+            <article class="project-card glass reveal">
+
+                <div class="project-image">
+
+                    <img
+                        src="assets/projects/architecture.jpg"
+                        alt="Architecture">
+
+                    <div class="project-overlay">
+
+                        <span>
+
+                            Architecture
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <h3>
+
+                        StructArchi
+
+                    </h3>
+
+                    <p>
+
+                        Présentation moderne
+                        pour un cabinet
+                        d'architecture,
+                        avec animations,
+                        responsive design
+                        et identité visuelle.
+
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>GSAP</span>
+                        <span>SEO</span>
+
+                    </div>
+
+                    <div class="project-buttons">
+
+                        <a
+                            href="#"
+                            class="btn-primary">
+
+                            Explorer
+
+                        </a>
+
+                        <a
+                            href="#"
+                            class="btn-secondary">
+
+                            Plus
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================== -->
+<!-- BACKGROUND LIGHT -->
+<!-- ======================================== -->
+
+<div class="projects-light">
+
+    <div class="light-orb orb-1"></div>
+
+    <div class="light-orb orb-2"></div>
+
+    <div class="light-orb orb-3"></div>
+
+</div>
+<!-- ======================================== -->
+<!-- SKILLS SECTION -->
+<!-- ======================================== -->
+
+<section id="skills" class="skills-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-subtitle">
+                Compétences
+            </span>
+
+            <h2 class="section-title">
+                Technologies & Expertises
+            </h2>
+
+            <p class="section-description">
+
+                Une combinaison entre développement,
+                design, optimisation des performances
+                et expériences interactives.
+
+            </p>
+
+        </div>
+
+        <!-- =============================== -->
+        <!-- CIRCULAR SKILLS -->
+        <!-- =============================== -->
+
+        <div class="skills-grid">
+
+            <!-- HTML -->
+
+            <div class="skill-card glass reveal">
+
+                <div class="skill-circle"
+                     data-percent="98">
+
+                    <svg>
+
+                        <circle
+                            class="bg"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                        <circle
+                            class="progress html-progress"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                    </svg>
+
+                    <div class="skill-value">
+                        98%
+                    </div>
+
+                </div>
+
+                <h3>HTML5</h3>
+
+                <p>
+
+                    Structure moderne,
+                    accessibilité,
+                    SEO
+                    et performances.
+
+                </p>
+
+            </div>
+
+            <!-- CSS -->
+
+            <div class="skill-card glass reveal">
+
+                <div class="skill-circle"
+                     data-percent="96">
+
+                    <svg>
+
+                        <circle class="bg"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                        <circle
+                            class="progress css-progress"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                    </svg>
+
+                    <div class="skill-value">
+                        96%
+                    </div>
+
+                </div>
+
+                <h3>CSS3</h3>
+
+                <p>
+
+                    Glassmorphism,
+                    Responsive,
+                    Animations,
+                    Interfaces Premium.
+
+                </p>
+
+            </div>
+
+            <!-- JS -->
+
+            <div class="skill-card glass reveal">
+
+                <div class="skill-circle"
+                     data-percent="94">
+
+                    <svg>
+
+                        <circle class="bg"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                        <circle
+                            class="progress js-progress"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                    </svg>
+
+                    <div class="skill-value">
+                        94%
+                    </div>
+
+                </div>
+
+                <h3>JavaScript</h3>
+
+                <p>
+
+                    Applications interactives,
+                    API,
+                    animations
+                    et logique métier.
+
+                </p>
+
+            </div>
+
+            <!-- THREE -->
+
+            <div class="skill-card glass reveal">
+
+                <div class="skill-circle"
+                     data-percent="88">
+
+                    <svg>
+
+                        <circle class="bg"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                        <circle
+                            class="progress three-progress"
+                            cx="70"
+                            cy="70"
+                            r="60">
+                        </circle>
+
+                    </svg>
+
+                    <div class="skill-value">
+                        88%
+                    </div>
+
+                </div>
+
+                <h3>Three.js</h3>
+
+                <p>
+
+                    Scènes 3D,
+                    modèles GLB,
+                    éclairage,
+                    expériences immersives.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- =============================== -->
+        <!-- TECHNOLOGIES -->
+        <!-- =============================== -->
+
+        <div class="tech-stack reveal">
+
+            <span>GSAP</span>
+            <span>ScrollTrigger</span>
+            <span>Node.js</span>
+            <span>Express</span>
+            <span>Cloudflare R2</span>
+            <span>REST API</span>
+            <span>Git</span>
+            <span>GitHub</span>
+            <span>Vercel</span>
+            <span>SEO</span>
+            <span>Responsive Design</span>
+            <span>Performance</span>
+
+        </div>
+
+    </div>
+
+    <!-- =============================== -->
+    <!-- FLOATING ICONS -->
+    <!-- =============================== -->
+
+    <div class="floating-icons">
+
+        <div class="float html">HTML</div>
+
+        <div class="float css">CSS</div>
+
+        <div class="float js">JS</div>
+
+        <div class="float three">
+            THREE
+        </div>
+
+        <div class="float node">
+            NODE
+        </div>
+
+        <div class="float api">
+            API
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================== -->
+<!-- Decorative Blur -->
+<!-- ======================================== -->
+
+<div class="skills-background">
+
+    <div class="blur blur-1"></div>
+
+    <div class="blur blur-2"></div>
+
+    <div class="blur blur-3"></div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- SERVICES -->
+<!-- ================================================= -->
+
+<section id="services" class="services-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-subtitle">
+                Services
+            </span>
+
+            <h2 class="section-title">
+                Ce que je peux réaliser
+            </h2>
+
+            <p class="section-description">
+
+                J'accompagne les entreprises,
+                entrepreneurs et organisations
+                dans la création d'expériences
+                numériques modernes, performantes
+                et durables.
+
+            </p>
+
+        </div>
+
+        <div class="services-grid">
+
+            <!-- CARD 1 -->
+
+            <article class="service-card glass reveal">
+
+                <div class="service-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    Sites Web Premium
+                </h3>
+
+                <p>
+
+                    Création de sites vitrines,
+                    institutionnels,
+                    portfolios,
+                    landing pages
+                    et plateformes professionnelles
+                    entièrement responsives.
+
+                </p>
+
+            </article>
+
+            <!-- CARD 2 -->
+
+            <article class="service-card glass reveal">
+
+                <div class="service-icon">
+                    ⚡
+                </div>
+
+                <h3>
+
+                    Optimisation SEO
+
+                </h3>
+
+                <p>
+
+                    Optimisation des performances,
+                    référencement naturel,
+                    indexation Google,
+                    vitesse de chargement
+                    et Core Web Vitals.
+
+                </p>
+
+            </article>
+
+            <!-- CARD 3 -->
+
+            <article class="service-card glass reveal">
+
+                <div class="service-icon">
+                    🎨
+                </div>
+
+                <h3>
+
+                    UI / UX Design
+
+                </h3>
+
+                <p>
+
+                    Interfaces élégantes,
+                    animations fluides,
+                    glassmorphism,
+                    design responsive
+                    et expérience utilisateur.
+
+                </p>
+
+            </article>
+
+            <!-- CARD 4 -->
+
+            <article class="service-card glass reveal">
+
+                <div class="service-icon">
+                    🤖
+                </div>
+
+                <h3>
+
+                    IA & Automatisation
+
+                </h3>
+
+                <p>
+
+                    Développement
+                    d'outils intelligents,
+                    automatisation,
+                    intégration API
+                    et assistants IA.
+
+                </p>
+
+            </article>
+
+            <!-- CARD 5 -->
+
+            <article class="service-card glass reveal">
+
+                <div class="service-icon">
+                    ☁️
+                </div>
+
+                <h3>
+
+                    Solutions Cloud
+
+                </h3>
+
+                <p>
+
+                    Déploiement sécurisé,
+                    stockage cloud,
+                    Cloudflare,
+                    Vercel,
+                    API Serverless
+                    et sauvegardes.
+
+                </p>
+
+            </article>
+
+            <!-- CARD 6 -->
+
+            <article class="service-card glass reveal">
+
+                <div class="service-icon">
+                    🚀
+                </div>
+
+                <h3>
+
+                    Accompagnement
+
+                </h3>
+
+                <p>
+
+                    Conseils,
+                    maintenance,
+                    évolution,
+                    sécurité,
+                    suivi technique
+                    et assistance.
+
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- AVATAR INTERACTION ZONE -->
+<!-- ====================================== -->
+
+<section class="avatar-interaction">
+
+    <div class="avatar-content">
+
+        <span class="mini-title">
+
+            Expérience immersive
+
+        </span>
+
+        <h2>
+
+            Votre navigation
+            fait vivre mon avatar.
+
+        </h2>
+
+        <p>
+
+            À mesure que vous faites défiler la page,
+            le personnage 3D tourne progressivement,
+            relève la tête,
+            établit un contact visuel
+            puis accompagne naturellement
+            la découverte de mon univers.
+
+        </p>
+
+        <div class="interaction-features">
+
+            <div class="feature">
+
+                <span>✔</span>
+
+                Rotation progressive
+
+            </div>
+
+            <div class="feature">
+
+                <span>✔</span>
+
+                Regard vers le visiteur
+
+            </div>
+
+            <div class="feature">
+
+                <span>✔</span>
+
+                Animation synchronisée au scroll
+
+            </div>
+
+            <div class="feature">
+
+                <span>✔</span>
+
+                Éclairage dynamique
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="avatar-effects">
+
+        <div class="ring ring-1"></div>
+
+        <div class="ring ring-2"></div>
+
+        <div class="ring ring-3"></div>
+
+        <div class="light light-1"></div>
+
+        <div class="light light-2"></div>
+
+        <div class="light light-3"></div>
+
+        <!--
+            L'avatar GLB est déjà présent
+            dans la scène Three.js.
+
+            Cette zone sert uniquement
+            de repère pour les animations GSAP
+            (rotation, caméra, éclairage,
+            profondeur de champ, etc.).
+        -->
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- TRANSITION -->
+<!-- ====================================== -->
+
+<div class="cinematic-transition">
+
+    <div class="gradient-line"></div>
+
+    <div class="transition-glow"></div>
+
+    <div class="transition-particles"></div>
+
+</div>
+
+<!-- ======================================== -->
+<!-- CONTACT -->
+<!-- ======================================== -->
+
+<section id="contact" class="contact-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-subtitle">
+                Contact
+            </span>
+
+            <h2 class="section-title">
+                Donnons vie à votre projet
+            </h2>
+
+            <p class="section-description">
+
+                Vous souhaitez créer un site web,
+                moderniser votre présence numérique
+                ou développer une solution sur mesure ?
+                Parlons de votre projet.
+
+            </p>
+
+        </div>
+
+        <div class="contact-wrapper">
+
+            <!-- ======================= -->
+            <!-- LEFT -->
+            <!-- ======================= -->
+
+            <div class="contact-info glass reveal">
+
+                <h3>
+                    Restons en contact
+                </h3>
+
+                <p>
+
+                    Je réponds rapidement aux demandes
+                    concernant la création de sites web,
+                    le développement d'applications,
+                    les solutions cloud
+                    et l'accompagnement numérique.
+
+                </p>
+
+                <div class="contact-list">
+
+                    <div class="contact-item">
+
+                        <i class="fas fa-envelope"></i>
+
+                        <div>
+
+                            <h4>Email</h4>
+
+                            <span>
+                                lefebvregenius@gmail.com
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="contact-item">
+
+                        <i class="fas fa-phone"></i>
+
+                        <div>
+
+                            <h4>Téléphone</h4>
+
+                            <span>
+                                +261 34 11 453 99
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="contact-item">
+
+                        <i class="fas fa-location-dot"></i>
+
+                        <div>
+
+                            <h4>Localisation</h4>
+
+                            <span>
+                                Antananarivo,
+                                Madagascar
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- SOCIAL -->
+
+                <div class="social-links">
+
+                    <a href="#Gralwebs solution: premium">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#lefebvregenius@gmail.com">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="#lefebvregenius@gmail.com">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                    <a href="#lefebvregenius">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- ======================= -->
+            <!-- FORM -->
+            <!-- ======================= -->
+
+            <div class="contact-form glass reveal">
+
+                <form>
+
+                    <div class="input-group">
+
+                        <input
+                            type="text"
+                            placeholder="Votre nom"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input
+                            type="email"
+                            placeholder="Adresse email"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input
+                            type="text"
+                            placeholder="Sujet">
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <textarea
+                            rows="6"
+                            placeholder="Décrivez votre projet..."
+                            required></textarea>
+
+                    </div>
+
+                    <button
+                        class="btn-primary"
+                        type="submit">
+
+                        Envoyer le message
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- ======================= -->
+        <!-- STATS -->
+        <!-- ======================= -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card glass reveal">
+
+                <h3>20+</h3>
+
+                <span>
+                    Projets réalisés
+                </span>
+
+            </div>
+
+            <div class="stat-card glass reveal">
+
+                <h3>100%</h3>
+
+                <span>
+                    Responsive
+                </span>
+
+            </div>
+
+            <div class="stat-card glass reveal">
+
+                <h3>24/7</h3>
+
+                <span>
+                    Support
+                </span>
+
+            </div>
+
+            <div class="stat-card glass reveal">
+
+                <h3>SEO</h3>
+
+                <span>
+                    Optimisation complète
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================== -->
+<!-- FOOTER -->
+<!-- ======================================== -->
+
+<footer class="footer">
+
+    <div class="footer-glow"></div>
+
+    <div class="container">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <h2>
+                    GralWebs
+                </h2>
+
+                <p>
+
+                    Création de solutions
+                    numériques modernes,
+                    élégantes
+                    et performantes.
+
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h4>
+                    Navigation
+                </h4>
+
+                <a href="#home">
+                    Accueil
+                </a>
+
+                <a href="#about">
+                    À propos
+                </a>
+
+                <a href="#projects">
+                    Projets
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h4>
+                    Technologies
+                </h4>
+
+                <span>Three.js</span>
+                <span>GSAP</span>
+                <span>JavaScript</span>
+                <span>Node.js</span>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 GralWebs Solutions.
+                Tous droits réservés.
+
+            </p>
+
+            <div class="footer-social">
+
+                <a href="#">
+                    Facebook
+                </a>
+
+                <a href="#">
+                    LinkedIn
+                </a>
+
+                <a href="#">
+                    GitHub
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+/*====================================================
+    GRALWEBS PORTFOLIO
+    portfolio.js
+    PARTIE 10.1
+=====================================================*/
+
+//====================================================
+// IMPORTS
+//====================================================
+
+import * as THREE from "https://unpkg.com/three@0.164.1/build/three.module.js";
+
+import { GLTFLoader }
+
+from "https://unpkg.com/three@0.164.1/examples/jsm/loaders/GLTFLoader.js";
+
+import { OrbitControls }
+
+from "https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js";
+
+gsap.registerPlugin(ScrollTrigger);
+
+//====================================================
+// VARIABLES
+//====================================================
+
+let scene;
+let camera;
+let renderer;
+
+let avatar;
+
+let mixer;
+
+let clock = new THREE.Clock();
+
+let controls;
+
+const canvas =
+document.querySelector("#three-canvas");
+
+const loadingBar =
+document.querySelector(".loading-bar");
+
+const loadingText =
+document.querySelector(".loading-text");
+
+//====================================================
+// INITIALISATION
+//====================================================
+
+initScene();
+
+loadAvatar();
+
+animate();
+
+//====================================================
+// SCENE
+//====================================================
+
+function initScene(){
+
+scene = new THREE.Scene();
+
+scene.background = null;
+
+//====================================================
+// CAMERA
+//====================================================
+
+camera = new THREE.PerspectiveCamera(
+
+35,
+
+window.innerWidth /
+window.innerHeight,
+
+0.1,
+
+100
+
+);
+
+camera.position.set(
+
+0,
+
+1.6,
+
+4.5
+
+);
+
+//====================================================
+// RENDERER
+//====================================================
+
+renderer = new THREE.WebGLRenderer({
+
+canvas,
+
+alpha:true,
+
+antialias:true,
+
+powerPreference:"high-performance"
+
+});
+
+renderer.setSize(
+
+window.innerWidth,
+
+window.innerHeight
+
+);
+
+renderer.setPixelRatio(
+
+Math.min(
+
+window.devicePixelRatio,
+
+2
+
+)
+
+);
+
+renderer.shadowMap.enabled=true;
+
+renderer.shadowMap.type=
+
+THREE.PCFSoftShadowMap;
+
+renderer.outputColorSpace=
+
+THREE.SRGBColorSpace;
+
+renderer.toneMapping=
+
+THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure=
+
+1.25;
+
+//====================================================
+// CONTROLS
+//====================================================
+
+controls =
+
+new OrbitControls(
+
+camera,
+
+renderer.domElement
+
+);
+
+controls.enableZoom=false;
+
+controls.enablePan=false;
+
+controls.enableRotate=false;
+
+}
+
+//====================================================
+// LIGHTS
+//====================================================
+
+const ambientLight =
+
+new THREE.AmbientLight(
+
+0xffffff,
+
+1.8
+
+);
+
+scene.add(
+
+ambientLight
+
+);
+
+const hemiLight=
+
+new THREE.HemisphereLight(
+
+0xffffff,
+
+0x222233,
+
+1.6
+
+);
+
+scene.add(
+
+hemiLight
+
+);
+
+const directionalLight=
+
+new THREE.DirectionalLight(
+
+0xffffff,
+
+3
+
+);
+
+directionalLight.position.set(
+
+5,
+
+10,
+
+6
+
+);
+
+directionalLight.castShadow=true;
+
+scene.add(
+
+directionalLight
+
+);
+
+// Rim Light
+
+const rimLight=
+
+new THREE.DirectionalLight(
+
+0x88ccff,
+
+2
+
+);
+
+rimLight.position.set(
+
+-4,
+
+3,
+
+-5
+
+);
+
+scene.add(
+
+rimLight);
+
+//====================================================
+// FLOOR
+//====================================================
+
+const floor=
+
+new THREE.Mesh(
+
+new THREE.CircleGeometry(
+
+20,
+
+80
+
+),
+
+new THREE.ShadowMaterial({
+
+opacity:0.18
+
+})
+
+);
+
+floor.rotation.x=
+
+-Math.PI/2;
+
+floor.receiveShadow=true;
+
+scene.add(
+
+floor
+
+);
+
+//====================================================
+// LOADER
+//====================================================
+
+const loader=
+
+new GLTFLoader();
+
+const loadingManager=
+
+new THREE.LoadingManager();
+
+loadingManager.onProgress=(
+
+url,
+
+loaded,
+
+total
+
+)=>{
+
+const percent=
+
+Math.floor(
+
+loaded/total*100
+
+);
+
+loadingBar.style.width=
+
+percent+"%";
+
+loadingText.innerHTML=
+
+percent+"%";
+
+};
+
+loadingManager.onLoad=()=>{
+
+gsap.to(
+
+".loader",
+
+{
+
+opacity:0,
+
+duration:1,
+
+pointerEvents:"none"
+
+}
+
+);
+
+};
+
+loader.manager=
+
+loadingManager;
+
+/*====================================================
+    PARTIE 10.2
+    CHARGEMENT DE L'AVATAR GLB
+=====================================================*/
+
+function loadAvatar(){
+
+    loader.load(
+
+        "/models/portrait.glb",
+
+        (gltf)=>{
+
+            avatar = gltf.scene;
+
+            //--------------------------------------------------
+            // POSITION
+            //--------------------------------------------------
+
+            avatar.position.set(
+                0,
+                -1.05,
+                0
+            );
+
+            //--------------------------------------------------
+            // ECHELLE
+            //--------------------------------------------------
+
+            avatar.scale.set(
+                1.18,
+                1.18,
+                1.18
+            );
+
+            //--------------------------------------------------
+            // ROTATION
+            // Commence de dos
+            //--------------------------------------------------
+
+            avatar.rotation.y = Math.PI;
+
+            //--------------------------------------------------
+            // SHADOWS
+            //--------------------------------------------------
+
+            avatar.traverse((child)=>{
+
+                if(child.isMesh){
+
+                    child.castShadow = true;
+
+                    child.receiveShadow = true;
+
+                    child.frustumCulled = false;
+
+                    //--------------------------------------------------
+                    // Optimisation matériaux
+                    //--------------------------------------------------
+
+                    if(child.material){
+
+                        child.material.envMapIntensity = 1.25;
+
+                        child.material.needsUpdate = true;
+
+                    }
+
+                }
+
+            });
+
+            //--------------------------------------------------
+            // AJOUT SCENE
+            //--------------------------------------------------
+
+            scene.add(avatar);
+
+            //--------------------------------------------------
+            // MIXER
+            //--------------------------------------------------
+
+            if(gltf.animations.length){
+
+                mixer = new THREE.AnimationMixer(avatar);
+
+                const idle =
+                mixer.clipAction(
+                    gltf.animations[0]
+                );
+
+                idle.play();
+
+            }
+
+            //--------------------------------------------------
+            // ANIMATION D'ENTREE
+            //--------------------------------------------------
+
+            gsap.from(
+
+                avatar.position,
+
+                {
+
+                    y:-2,
+
+                    duration:2.2,
+
+                    ease:"power3.out"
+
+                }
+
+            );
+
+            gsap.from(
+
+                avatar.scale,
+
+                {
+
+                    x:0,
+
+                    y:0,
+
+                    z:0,
+
+                    duration:2,
+
+                    ease:"back.out(1.7)"
+
+                }
+
+            );
+
+            //--------------------------------------------------
+            // ROTATION DOS -> VISAGE
+            //--------------------------------------------------
+
+            gsap.to(
+
+                avatar.rotation,
+
+                {
+
+                    y:0,
+
+                    duration:2.8,
+
+                    delay:.8,
+
+                    ease:"power2.inOut"
+
+                }
+
+            );
+
+            //--------------------------------------------------
+            // LEGER MOUVEMENT RESPIRATION
+            //--------------------------------------------------
+
+            gsap.to(
+
+                avatar.position,
+
+                {
+
+                    y:"+=0.05",
+
+                    repeat:-1,
+
+                    yoyo:true,
+
+                    duration:2.6,
+
+                    ease:"sine.inOut"
+
+                }
+
+            );
+
+            //--------------------------------------------------
+            // LEGER BALANCEMENT
+            //--------------------------------------------------
+
+            gsap.to(
+
+                avatar.rotation,
+
+                {
+
+                    z:0.02,
+
+                    repeat:-1,
+
+                    yoyo:true,
+
+                    duration:3,
+
+                    ease:"sine.inOut"
+
+                }
+
+            );
+
+            //--------------------------------------------------
+            // APPARITION DU TITRE HERO
+            //--------------------------------------------------
+
+            gsap.from(
+
+                ".hero-title",
+
+                {
+
+                    opacity:0,
+
+                    y:60,
+
+                    duration:1.2,
+
+                    delay:1
+
+                }
+
+            );
+
+            gsap.from(
+
+                ".hero-subtitle",
+
+                {
+
+                    opacity:0,
+
+                    y:40,
+
+                    duration:1.2,
+
+                    delay:1.25
+
+                }
+
+            );
+
+            gsap.from(
+
+                ".hero-buttons",
+
+                {
+
+                    opacity:0,
+
+                    y:30,
+
+                    duration:1,
+
+                    delay:1.45
+
+                }
+
+            );
+
+        },
+
+        (xhr)=>{
+
+            //--------------------------------------------------
+            // Progression GLB
+            //--------------------------------------------------
+
+            if(xhr.total){
+
+                const progress =
+
+                (xhr.loaded/xhr.total)*100;
+
+                loadingBar.style.width =
+
+                progress + "%";
+
+                loadingText.innerHTML =
+
+                Math.floor(progress)+"%";
+
+            }
+
+        },
+
+        (error)=>{
+
+            console.error(
+
+                "Erreur GLB :",error
+
+            );
+
+        }
+
+    );
+
+}
+/*====================================================
+    PARTIE 10.3
+    GSAP + SCROLLTRIGGER
+=====================================================*/
+
+//====================================================
+// Enregistrement
+//====================================================
+
+gsap.registerPlugin(ScrollTrigger);
+
+//====================================================
+// HERO
+//====================================================
+
+ScrollTrigger.create({
+
+    trigger:"#hero",
+
+    start:"top top",
+
+    end:"bottom top",
+
+    scrub:1,
+
+    onUpdate:(self)=>{
+
+        if(!avatar) return;
+
+        avatar.rotation.y =
+        self.progress *
+        0.30;
+
+        avatar.position.y =
+        -1.05 +
+        (self.progress*0.08);
+
+    }
+
+});
+
+//====================================================
+// ABOUT
+//====================================================
+
+gsap.timeline({
+
+    scrollTrigger:{
+
+        trigger:"#about",
+
+        start:"top 75%",
+
+        end:"bottom center",
+
+        scrub:1
+
+    }
+
+})
+
+.to(camera.position,{
+
+    x:0.25,
+
+    y:1.65,
+
+    z:4
+
+})
+
+.to(avatar.rotation,{
+
+    y:-0.35
+
+},0);
+
+//====================================================
+// EXPERIENCE
+//====================================================
+
+gsap.timeline({
+
+    scrollTrigger:{
+
+        trigger:"#experience",
+
+        start:"top center",
+
+        end:"bottom center",
+
+        scrub:1
+
+    }
+
+})
+
+.to(avatar.rotation,{
+
+    y:0.45
+
+})
+
+.to(avatar.position,{
+
+    x:0.18
+
+},0);
+
+//====================================================
+// PROJECTS
+//====================================================
+
+gsap.timeline({
+
+    scrollTrigger:{
+
+        trigger:"#projects",
+
+        start:"top center",
+
+        end:"bottom center",
+
+        scrub:true
+
+    }
+
+})
+
+.to(camera.position,{
+
+    z:3.5
+
+})
+
+.to(avatar.rotation,{
+
+    y:-0.15
+
+},0);
+
+//====================================================
+// SKILLS
+//====================================================
+
+gsap.timeline({
+
+    scrollTrigger:{
+
+        trigger:"#skills",
+
+        start:"top center",
+
+        end:"bottom center",
+
+        scrub:true
+
+    }
+
+})
+
+.to(avatar.rotation,{
+
+    y:0.25
+
+})
+
+.to(camera.position,{
+
+    x:-0.25
+
+},0);
+
+//====================================================
+// SERVICES
+//====================================================
+
+gsap.timeline({
+
+    scrollTrigger:{
+
+        trigger:"#services",
+
+        start:"top center",
+
+        end:"bottom center",
+
+        scrub:true
+
+    }
+
+})
+
+.to(avatar.rotation,{
+
+    y:-0.28
+
+})
+
+.to(camera.position,{
+
+    z:4.2
+
+},0);
+
+//====================================================
+// CONTACT
+//====================================================
+
+gsap.timeline({
+
+    scrollTrigger:{
+
+        trigger:"#contact",
+
+        start:"top center",
+
+        end:"bottom center",
+
+        scrub:true
+
+    }
+
+})
+
+.to(avatar.rotation,{
+
+    y:0
+
+})
+
+.to(camera.position,{
+
+    x:0,
+
+    y:1.6,
+
+    z:4.5
+
+},0);
+
+//====================================================
+// REVEAL
+//====================================================
+
+gsap.utils.toArray(".reveal").forEach(element=>{
+
+    gsap.from(element,{
+
+        opacity:0,
+
+        y:80,
+
+        duration:1.1,
+
+        ease:"power3.out",
+
+        scrollTrigger:{
+
+            trigger:element,
+
+            start:"top 85%"
+
+        }
+
+    });
+
+});
+
+//====================================================
+// PARALLAX
+//====================================================
+
+gsap.utils.toArray(".parallax").forEach(layer=>{
+
+    gsap.to(layer,{
+
+        y:-150,
+
+        ease:"none",
+
+        scrollTrigger:{
+
+            trigger:layer,
+
+            scrub:true
+
+        }
+
+    });
+
+});
+
+//====================================================
+// FLOATING LIGHTS
+//====================================================
+
+gsap.to(".light-1",{
+
+    y:-40,
+
+    repeat:-1,
+
+    yoyo:true,
+
+    duration:4,
+
+    ease:"sine.inOut"
+
+});
+
+gsap.to(".light-2",{
+
+    y:30,
+
+    repeat:-1,
+
+    yoyo:true,
+
+    duration:5,
+
+    ease:"sine.inOut"
+
+});
+
+gsap.to(".light-3",{
+
+    x:25,
+
+    repeat:-1,
+
+    yoyo:true,
+
+    duration:6,
+
+    ease:"sine.inOut"
+
+});
+
+//====================================================
+// GLASS CARDS
+//====================================================
+
+document.querySelectorAll(".glass")
+
+.forEach(card=>{
+
+    card.addEventListener(
+
+        "mousemove",
+
+        e=>{
+
+            const rect=
+
+            card.getBoundingClientRect();
+
+            const x=
+
+            e.clientX-
+
+            rect.left;
+
+            const y=
+
+            e.clientY-
+
+            rect.top;
+
+            gsap.to(card,{
+
+                rotationY:
+
+                (x-rect.width/2)/22,
+
+                rotationX:
+
+                -(y-rect.height/2)/22,
+
+                duration:.4
+
+            });
+
+        }
+
+    );
+
+    card.addEventListener(
+
+        "mouseleave",
+
+        ()=>{
+
+            gsap.to(card,{
+
+                rotationX:0,
+
+                rotationY:0,
+
+                duration:.6
+
+            });
+
+        }
+
+    );
+
+});
+
+/*====================================================
+    PARTIE 10.4
+    RENDER LOOP + PARTICULES + OPTIMISATIONS
+=====================================================*/
+
+
+//====================================================
+// CLOCK UPDATE + RENDER LOOP
+//====================================================
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+
+    const delta =
+    clock.getDelta();
+
+
+    //------------------------------------------------
+    // Animation GLB
+    //------------------------------------------------
+
+    if(mixer){
+
+        mixer.update(delta);
+
+    }
+
+
+    //------------------------------------------------
+    // Mouvement naturel avatar
+    //------------------------------------------------
+
+    if(avatar){
+
+        avatar.position.y +=
+
+        Math.sin(
+            clock.elapsedTime * 1.5
+        ) * 0.0005;
+
+    }
+
+
+    //------------------------------------------------
+    // RENDER
+    //------------------------------------------------
+
+    renderer.render(
+
+        scene,
+
+        camera
+
+    );
+
+}
+
+
+//====================================================
+// PARTICULES 3D
+//====================================================
+
+function createParticles(){
+
+
+    const geometry =
+
+    new THREE.BufferGeometry();
+
+
+    const count = 900;
+
+
+    const positions =
+
+    new Float32Array(
+
+        count * 3
+
+    );
+
+
+    for(
+        let i=0;
+        i<count*3;
+        i++
+    ){
+
+        positions[i] =
+
+        (Math.random()-0.5)*18;
+
+    }
+
+
+    geometry.setAttribute(
+
+        "position",
+
+        new THREE.BufferAttribute(
+
+            positions,
+
+            3
+
+        )
+
+    );
+
+
+    const material =
+
+    new THREE.PointsMaterial({
+
+        size:0.025,
+
+        transparent:true,
+
+        opacity:0.55,
+
+        depthWrite:false
+
+    });
+
+
+    const particles =
+
+    new THREE.Points(
+
+        geometry,
+
+        material
+
+    );
+
+
+    scene.add(
+
+        particles
+
+    );
+
+
+    //------------------------------------------------
+    // Animation particules
+    //------------------------------------------------
+
+    gsap.to(
+
+        particles.rotation,
+
+        {
+
+            y:Math.PI*2,
+
+            duration:80,
+
+            repeat:-1,
+
+            ease:"none"
+
+        }
+
+    );
+
+
+}
+
+
+createParticles();
+
+
+//====================================================
+// SUIVI SOURIS
+//====================================================
+
+const mouse = {
+
+    x:0,
+
+    y:0
+
+};
+
+
+window.addEventListener(
+
+    "mousemove",
+
+    (event)=>{
+
+
+        mouse.x =
+
+        (event.clientX /
+
+        window.innerWidth)
+
+        *2-1;
+
+
+        mouse.y =
+
+        -(event.clientY /
+
+        window.innerHeight)
+
+        *2+1;
+
+
+    }
+
+);
+
+
+
+function mouseFollow(){
+
+    
+    if(camera){
+
+        camera.position.x +=
+
+        (
+
+        mouse.x *0.15
+
+        -
+
+        camera.position.x
+
+        )*0.03;
+
+
+
+        camera.position.y +=
+
+        (
+
+        1.6 +
+
+        mouse.y*0.08
+
+        -
+
+        camera.position.y
+
+        )*0.03;
+
+    }
+
+
+    requestAnimationFrame(
+
+        mouseFollow
+
+    );
+
+}
+
+
+mouseFollow();
+
+
+//====================================================
+// SKILLS CIRCLE ANIMATION
+//====================================================
+
+
+gsap.utils.toArray(
+
+".skill-circle"
+
+)
+
+.forEach(circle=>{
+
+
+    const percent =
+
+    circle.dataset.percent;
+
+
+    const progress =
+
+    circle.querySelector(
+
+        ".progress"
+
+    );
+
+
+    if(progress){
+
+
+        const circumference =
+
+        377;
+
+
+        progress.style.strokeDasharray =
+
+        circumference;
+
+
+        progress.style.strokeDashoffset =
+
+        circumference;
+
+
+
+        gsap.to(
+
+            progress.style,
+
+            {
+
+                strokeDashoffset:
+
+                circumference -
+
+                (
+
+                circumference *
+
+                percent /
+
+                100
+
+                ),
+
+
+                duration:2,
+
+
+                scrollTrigger:{
+
+
+                    trigger:circle,
+
+
+                    start:"top 80%"
+
+
+                }
+
+            }
+
+        );
+
+
+    }
+
+
+});
+
+
+//====================================================
+// COMPTEURS
+//====================================================
+
+
+gsap.utils.toArray(
+
+".stat-card h3"
+
+)
+
+.forEach(counter=>{
+
+
+    const value =
+
+    counter.innerHTML;
+
+
+    if(
+
+    value.includes("+") ||
+
+    value.includes("%")
+
+    ){
+
+
+        const number =
+
+        parseInt(value);
+
+
+
+        gsap.fromTo(
+
+            counter,
+
+            {
+
+                innerHTML:0
+
+            },
+
+            {
+
+
+                innerHTML:number,
+
+
+                duration:2,
+
+
+                snap:{
+
+                    innerHTML:1
+
+                },
+
+
+                scrollTrigger:{
+
+
+                    trigger:counter,
+
+
+                    start:"top 85%"
+
+
+                },
+
+
+                onUpdate:function(){
+
+
+                    counter.innerHTML =
+
+                    Math.floor(
+
+                    this.targets()[0].innerHTML
+
+                    )
+
+                    +
+
+                    value.replace(
+
+                    number,
+
+                    ""
+
+                    );
+
+
+                }
+
+
+            }
+
+        );
+
+
+    }
+
+
+});
+
+
+//====================================================
+// RESPONSIVE
+//====================================================
+
+
+window.addEventListener(
+
+"resize",
+
+()=>{
+
+
+    camera.aspect =
+
+    window.innerWidth /
+
+    window.innerHeight;
+
+
+    camera.updateProjectionMatrix();
+
+
+
+    renderer.setSize(
+
+        window.innerWidth,
+
+        window.innerHeight
+
+    );
+
+
+    renderer.setPixelRatio(
+
+        Math.min(
+
+            window.devicePixelRatio,
+
+            2
+
+        )
+
+    );
+
+
+});
+
+
+//====================================================
+// PERFORMANCE MODE MOBILE
+//====================================================
+
+
+function optimizeDevice(){
+
+
+    const mobile =
+
+    window.innerWidth < 768;
+
+
+
+    if(mobile){
+
+
+        renderer.setPixelRatio(1);
+
+
+        if(avatar){
+
+            avatar.traverse(
+
+            obj=>{
+
+                if(obj.isMesh){
+
+                    obj.castShadow=false;
+
+                }
+
+            });
+
+        }
+
+
+    }
+
+
+}
+
+
+optimizeDevice();
+
+/*====================================================
+    PARTIE 10.5
+    FINALISATION PRODUCTION
+=====================================================*/
+
+
+//====================================================
+// DETECTION WEBGL
+//====================================================
+
+function checkWebGL(){
+
+    try{
+
+        const canvas =
+        document.createElement("canvas");
+
+
+        const context =
+        canvas.getContext(
+            "webgl2"
+        )
+        ||
+        canvas.getContext(
+            "webgl"
+        );
+
+
+        if(!context){
+
+            document.body.classList.add(
+                "no-webgl"
+            );
+
+
+            console.warn(
+                "WebGL non disponible"
+            );
+
+            return false;
+
+        }
+
+
+        return true;
+
+
+    }catch(error){
+
+
+        return false;
+
+    }
+
+}
+
+
+checkWebGL();
+
+
+//====================================================
+// PRELOADER FINAL
+//====================================================
+
+
+window.addEventListener(
+
+"load",
+
+()=>{
+
+
+    const loaderScreen =
+
+    document.querySelector(
+
+        ".loader"
+
+    );
+
+
+    if(loaderScreen){
+
+
+        gsap.to(
+
+            loaderScreen,
+
+            {
+
+                opacity:0,
+
+                duration:1.2,
+
+                delay:.5,
+
+                ease:"power3.out",
+
+                onComplete:()=>{
+
+
+                    loaderScreen.style.display=
+
+                    "none";
+
+
+                }
+
+
+            }
+
+        );
+
+
+    }
+
+
+});
+
+
+//====================================================
+// CURSEUR PREMIUM
+//====================================================
+
+
+const cursor =
+
+document.querySelector(
+
+".custom-cursor"
+
+);
+
+
+const cursorFollower =
+
+document.querySelector(
+
+".cursor-follower"
+
+);
+
+
+
+if(cursor && cursorFollower){
+
+
+window.addEventListener(
+
+"mousemove",
+
+(e)=>{
+
+
+    gsap.to(
+
+        cursor,
+
+        {
+
+            x:e.clientX,
+
+            y:e.clientY,
+
+            duration:.15
+
+        }
+
+    );
+
+
+    gsap.to(
+
+        cursorFollower,
+
+        {
+
+            x:e.clientX,
+
+            y:e.clientY,
+
+            duration:.5
+
+        }
+
+    );
+
+
+});
+
+
+document
+
+.querySelectorAll(
+
+"a,button,.project-card,.service-card"
+
+)
+
+.forEach(element=>{
+
+
+    element.addEventListener(
+
+        "mouseenter",
+
+        ()=>{
+
+
+            gsap.to(
+
+                cursor,
+
+                {
+
+                    scale:2,
+
+                    duration:.3
+
+                }
+
+            );
+
+
+        }
+
+    );
+
+
+    element.addEventListener(
+
+        "mouseleave",
+
+        ()=>{
+
+
+            gsap.to(
+
+                cursor,
+
+                {
+
+                    scale:1,
+
+                    duration:.3
+
+                }
+
+            );
+
+
+        }
+
+    );
+
+
+});
+
+
+}
+
+
+//====================================================
+// SMOOTH SCROLL
+//====================================================
+
+
+document
+
+.querySelectorAll(
+
+'a[href^="#"]'
+
+)
+
+.forEach(link=>{
+
+
+    link.addEventListener(
+
+        "click",
+
+        function(e){
+
+
+            const target =
+
+            document.querySelector(
+
+                this.getAttribute("href")
+
+            );
+
+
+            if(target){
+
+
+                e.preventDefault();
+
+
+                target.scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+
+            }
+
+
+        }
+
+    );
+
+
+});
+
+
+//====================================================
+// SECTION ACTIVE NAVIGATION
+//====================================================
+
+
+const sections =
+
+document.querySelectorAll(
+
+"section"
+
+);
+
+
+const navLinks =
+
+document.querySelectorAll(
+
+".nav-link"
+
+);
+
+
+
+window.addEventListener(
+
+"scroll",
+
+()=>{
+
+
+    let current="";
+
+
+    sections.forEach(section=>{
+
+
+        const top =
+
+        window.scrollY;
+
+
+        const offset =
+
+        section.offsetTop - 300;
+
+
+        if(top >= offset){
+
+            current = section.id;
+
+        }
+
+
+    });
+
+
+
+    navLinks.forEach(link=>{
+
+
+        link.classList.remove(
+
+            "active"
+
+        );
+
+
+        if(
+
+        link.href.includes(current)
+
+        ){
+
+            link.classList.add(
+
+                "active"
+
+            );
+
+        }
+
+
+    });
+
+
+});
+
+
+//====================================================
+// MEMORY CLEANUP THREE.JS
+//====================================================
+
+
+function disposeScene(){
+
+
+    if(!scene)
+
+    return;
+
+
+
+    scene.traverse(
+
+    object=>{
+
+
+        if(object.geometry){
+
+
+            object.geometry.dispose();
+
+
+        }
+
+
+
+        if(object.material){
+
+
+
+            if(
+
+            Array.isArray(
+
+            object.material
+
+            )
+
+            ){
+
+
+                object.material
+
+                .forEach(
+
+                material=>{
+
+
+                    material.dispose();
+
+
+                });
+
+
+            }
+
+            else{
+
+
+                object.material.dispose();
+
+
+            }
+
+
+        }
+
+
+    });
+
+
+    renderer.dispose();
+
+
+}
+
+
+//====================================================
+// VISIBILITY OPTIMIZATION
+//====================================================
+
+
+document.addEventListener(
+
+"visibilitychange",
+
+()=>{
+
+
+    if(document.hidden){
+
+
+        renderer.setAnimationLoop(
+
+            null
+
+        );
+
+
+    }
+
+    else{
+
+
+        renderer.setAnimationLoop(
+
+            animate
+
+        );
+
+
+    }
+
+
+});
+
+
+//====================================================
+// GLB LOW POWER MODE
+//====================================================
+
+
+function adaptiveQuality(){
+
+
+    const connection =
+
+    navigator.connection;
+
+
+
+    if(connection){
+
+
+        if(
+
+        connection.saveData
+
+        ){
+
+
+            renderer.setPixelRatio(
+
+                1
+
+            );
+
+
+        }
+
+
+    }
+
+
+}
+
+
+adaptiveQuality();
+
+
+//====================================================
+// FINAL MESSAGE
+//====================================================
+
+
+console.log(
+
+`
+=================================
+
+ GralWebs Portfolio 3D
+
+ Three.js : READY
+ GSAP     : READY
+ Avatar   : READY
+ Scroll   : READY
+
+ Premium Experience Activated
+
+=================================
+`
+
+);
+
+</script>
+
+<script src="portfolio.js"></script>
+
+</body>
+</html>

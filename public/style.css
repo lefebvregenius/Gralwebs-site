@@ -3628,3 +3628,387 @@ body.voschoix-active::before {
     display: flex;
   }
 }
+
+
+
+
+
+
+
+
+
+/* =========================================
+   PORTFOLIO BUTTON - PREMIUM OLED STYLE
+========================================= */
+
+
+.portfolio-access{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:100px 20px;
+
+}
+
+
+
+/* bouton principal */
+
+.portfolio-btn{
+
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    width:300px;
+
+    height:85px;
+
+
+    border-radius:25px;
+
+
+    text-decoration:none;
+
+
+    color:#fff;
+
+
+    font-size:24px;
+
+
+    font-weight:900;
+
+
+    letter-spacing:6px;
+
+
+    overflow:hidden;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.15),
+        rgba(255,0,60,.15)
+    );
+
+
+    backdrop-filter:blur(20px);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    box-shadow:
+
+
+    inset 0 0 20px rgba(255,255,255,.08),
+
+    0 15px 40px rgba(0,0,0,.5),
+
+    0 0 35px rgba(255,0,60,.6);
+
+
+
+    transition:
+
+    .5s cubic-bezier(.17,.67,.3,1.33);
+
+
+
+    animation:
+
+    premiumGlow 3s infinite;
+
+
+}
+
+
+
+
+
+/* texte */
+
+.portfolio-btn span{
+
+
+    position:relative;
+
+    z-index:3;
+
+
+    text-shadow:
+
+    0 0 10px rgba(255,255,255,.8);
+
+
+}
+
+
+
+/* bordure lumineuse */
+
+.portfolio-btn::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:-2px;
+
+
+    border-radius:27px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        #ff003c,
+        transparent
+    );
+
+
+    opacity:.8;
+
+
+    z-index:0;
+
+
+    animation:
+
+    borderMove 3s linear infinite;
+
+
+
+}
+
+
+
+/* couche intérieure */
+
+.portfolio-btn::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:3px;
+
+
+    border-radius:22px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ff003c,
+        #550014
+    );
+
+
+    z-index:1;
+
+
+}
+
+
+
+
+/* lumière qui traverse */
+
+
+.portfolio-btn span::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:-120%;
+
+
+    width:80%;
+
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.8),
+        transparent
+    );
+
+
+    transform:skewX(-25deg);
+
+
+    animation:
+
+    shine 4s infinite;
+
+
+
+}
+
+
+
+
+
+/* hover premium */
+
+.portfolio-btn:hover{
+
+
+    transform:
+
+    translateY(-12px)
+    scale(1.08)
+    rotateX(8deg);
+
+
+
+    box-shadow:
+
+
+    0 25px 60px rgba(0,0,0,.6),
+
+    0 0 80px rgba(255,0,60,.9);
+
+
+
+}
+
+
+
+
+
+/* animation halo */
+
+@keyframes premiumGlow{
+
+
+    0%,100%{
+
+
+        filter:
+        drop-shadow(
+        0 0 15px rgba(255,0,60,.5)
+        );
+
+
+    }
+
+
+
+    50%{
+
+
+        filter:
+        drop-shadow(
+        0 0 40px rgba(255,0,60,1)
+        );
+
+
+    }
+
+
+}
+
+
+
+/* mouvement bordure */
+
+@keyframes borderMove{
+
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
+
+
+}
+
+
+
+/* reflet */
+
+@keyframes shine{
+
+
+    0%{
+
+        left:-120%;
+
+    }
+
+
+    40%,100%{
+
+        left:140%;
+
+    }
+
+
+}
+
+
+
+/* mobile */
+
+@media(max-width:600px){
+
+
+.portfolio-btn{
+
+
+    width:230px;
+
+    height:70px;
+
+
+    font-size:18px;
+
+
+}
+
+}
