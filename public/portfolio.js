@@ -27,650 +27,440 @@ import { GLTFLoader } from
 
 
 
-/* ================================
+/* ==========================================================
    VARIABLES GLOBALES
-================================ */
+========================================================== */
 
+let scene = null;
+let camera = null;
+let renderer = null;
 
-let scene;
+let avatar = null;
+let mixer = null;
 
-let camera;
+const clock = new THREE.Clock();
 
-let renderer;
+const canvas = document.getElementById("webgl");
 
-let avatar;
-
-let mixer;
-
-
-let clock =
-new THREE.Clock();
-
-
-
-let canvas =
-document.querySelector("#webgl");
-
-
-
-/* ================================
+/* ==========================================================
    CONFIGURATION
-================================ */
-
+========================================================== */
 
 const CONFIG = {
 
+    modelPath: "models/Avatar.glb",
 
-    modelPath:
-    "/models/Avatar.glb",
+    camera: {
 
+        fov: 35,
 
-    camera:
+        near: 0.1,
 
+        far: 100,
 
-    {
-
-
-       position:{
-    x:0.9,
-    y:1.7,
-    z:3.4
-},
-
-
-        fov:45
+        position: {
+            x: 1.15,
+            y: 1.65,
+            z: 3.25
+        }
 
     },
 
+    avatar: {
 
-    avatar:
+        scale: 1.55,
 
+        position: {
+            x: 0.65,
+            y: -1.35,
+            z: 0
+        },
 
-    {
-
-
-        scale:1,
-
-        rotationSpeed:0.003
+        rotationSpeed: 0.002
 
     }
-
 
 };
 
-
-
-
-/* ================================
-   INITIALISATION THREE
-================================ */
-
-
-function initThree(){
-
-
-
-    scene =
-    new THREE.Scene();
-
-
-
-    /*
-       Fond transparent
-       pour laisser le CSS OLED
-       gérer l'ambiance
-    */
-
-
-    scene.background =
-    null;
-
-
-
-
-    camera =
-    new THREE.PerspectiveCamera(
-
-        CONFIG.camera.fov,
-
-        window.innerWidth /
-        window.innerHeight,
-
-        0.1,
-
-        100
-
-    );
-
-
-
-    camera.position.set(
-
-        CONFIG.camera.position.x,
-
-        CONFIG.camera.position.y,
-
-        CONFIG.camera.position.z
-
-    );
-
-
-
-
-
-    renderer =
-    new THREE.WebGLRenderer({
-
-        canvas,
-
-        alpha:true,
-
-        antialias:true,
-
-        powerPreference:
-        "high-performance"
-
-    });
-
-
-
-
-
-    renderer.setPixelRatio(
-
-        Math.min(
-            window.devicePixelRatio,
-            2
-        )
-
-    );
-
-
-
-    renderer.setSize(
-
-        window.innerWidth,
-
-        window.innerHeight
-
-    );
-
-
-
-
-
-    renderer.outputColorSpace =
-    THREE.SRGBColorSpace;
-
-
-
-    renderer.shadowMap.enabled =
-    true;
-
-
-
-    renderer.shadowMap.type =
-    THREE.PCFSoftShadowMap;
-
-
-
-
-    createLights();
-
-
-
-    loadAvatar();
-
-
-
-    window.addEventListener(
-
-        "resize",
-
-        resizeRenderer
-
-    );
-
-
-
-}
-
-
-
-
-
-/* ================================
-   LUMIERES REALISTES
-================================ */
-
-
-function createLights(){
-
-
-
-    /*
-       Lumière principale
-       type studio
-    */
-
-
-    const keyLight =
-    new THREE.DirectionalLight(
-
-        0xffffff,
-
-        2
-
-    );
-
-
-
-    keyLight.position.set(
-
-        3,
-
-        5,
-
-        4
-
-    );
-
-
-
-    keyLight.castShadow =
-    true;
-
-
-
-    scene.add(keyLight);
-
-
-
-
-
-    /*
-       Lumière rouge ambiance
-       GralWebs identité
-    */
-
-
-    const redLight =
-    new THREE.PointLight(
-
-        0xff3030,
-
-        3,
-
-        8
-
-    );
-
-
-
-    redLight.position.set(
-
-        -3,
-
-        2,
-
-        2
-
-    );
-
-
-
-    scene.add(redLight);
-
-
-
-
-
-
-    /*
-       Lumière de remplissage
-    */
-
-
-    const fillLight =
-    new THREE.HemisphereLight(
-
-        0xffffff,
-
-        0x222222,
-
-        1.5
-
-    );
-
-
-
-    scene.add(fillLight);
-
-
-
-}
-
-
-
-
-
-/* ================================
-   CHARGEMENT GLB PROGRESSIF
-================================ */
-
-
-function loadAvatar(){
-
-
-
-    const loader =
-    new GLTFLoader();
-
-
-
-    loader.load(
-
-
-        CONFIG.modelPath,
-
-
-
-        function(gltf){
-
-
-
-            avatar =
-            gltf.scene;
-
-
-
-            avatar.scale.set(
-
-                CONFIG.avatar.scale,
-
-                CONFIG.avatar.scale,
-
-                CONFIG.avatar.scale
-
-            );
-
-
-
-
-           avatar.position.set(
-0.6,
--1.35,
-0
-);
-
-
-
-
-
-            avatar.traverse(
-
-                child => {
-
-
-
-                    if(child.isMesh){
-
-
-
-                        child.castShadow =
-                        true;
-
-
-
-                        child.receiveShadow =
-                        true;
-
-
-
-                    }
-
-
-
-                }
-
-            );
-
-
-
-
-            scene.add(avatar);
-
-
-
-
-            console.log(
-
-            "Avatar GLB chargé avec succès"
-
-            );
-
-
-
-        },
-
-
-
-        function(progress){
-
-
-
-            const percent =
-
-            (
-                progress.loaded /
-                progress.total
-            ) * 100;
-
-
-
-            console.log(
-
-            `Chargement avatar : ${percent.toFixed(0)}%`
-
-            );
-
-
-
-        },
-
-
-
-        function(error){
-
-
-
-            console.error(
-
-            "Erreur chargement GLB",
-
-            error
-
-            );
-
-
-
-        }
-
-
-
-    );
-
-
-
-}
-
-
-
-
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-
-function resizeRenderer(){
-
-
-
-    camera.aspect =
-
-    window.innerWidth /
-    window.innerHeight;
-
-
-
-    camera.updateProjectionMatrix();
-
-
-
-    renderer.setSize(
-
-        window.innerWidth,
-
-        window.innerHeight
-
-    );
-
-
-
-}
-
-
-
-
-/* ================================
-   DEMARRAGE
-================================ */
-
-
-initThree();
-
-
-
-/* FIN PARTIE 1/6 */
-
 /* ==========================================================
-   GRALWEBS PORTFOLIO 3D
-   portfolio.js
-   PARTIE 2/6
-
-   Three.js Scene + GLB Loader + Lighting
+   INITIALISATION THREE.JS
 ========================================================== */
 
-
-
-
-
-/* ==========================================================
-   CONFIGURATION
-========================================================== */
-
-const canvas = document.querySelector("#webgl");
-
-const MODEL_PATH = "/models/Avatar.glb";
-
-
-/* ==========================================================
-   CREATION DE LA SCENE
-========================================================== */
-
-function createScene(){
+function initThree() {
 
     scene = new THREE.Scene();
 
-
-    // Fond transparent pour intégrer au design OLED
-    scene.background = new THREE.Color(0x050505);
-
-
-    /*
-        Brouillard léger pour profondeur
-    */
-
-    scene.fog = new THREE.Fog(
-        0x050505,
-        8,
-        30
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   CAMERA
-========================================================== */
-
-
-function createCamera(){
-
+    scene.background = null;
 
     camera = new THREE.PerspectiveCamera(
-
-        45,
-
-        window.innerWidth /
-        window.innerHeight,
-
-        0.1,
-
-        100
-
+        CONFIG.camera.fov,
+        window.innerWidth / window.innerHeight,
+        CONFIG.camera.near,
+        CONFIG.camera.far
     );
-
 
     camera.position.set(
-        0,
-        1.7,
-        5
+        CONFIG.camera.position.x,
+        CONFIG.camera.position.y,
+        CONFIG.camera.position.z
     );
 
+    camera.lookAt(0, 1.3, 0);
 
-    camera.lookAt(
-        0,
-        1.5,
-        0
-    );
+    renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance"
+    });
 
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+    renderer.setSize(window.innerWidth,window.innerHeight);
+
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    createLights();
+
+    loadAvatar();
+
+    window.addEventListener("resize",resizeRenderer);
 
 }
 
-
-
 /* ==========================================================
-   RENDERER
+   LUMIERES
 ========================================================== */
 
+function createLights(){
 
-function createRenderer(){
+    const ambient = new THREE.AmbientLight(
+        0xffffff,
+        1.8
+    );
 
+    scene.add(ambient);
 
-    renderer = new THREE.WebGLRenderer({
+    const key = new THREE.DirectionalLight(
+        0xffffff,
+        3
+    );
 
-        canvas:canvas,
+    key.position.set(4,6,5);
 
-        antialias:true,
+    key.castShadow = true;
 
-        alpha:true,
+    scene.add(key);
 
-        powerPreference:"high-performance"
+    const fill = new THREE.DirectionalLight(
+        0xff2a55,
+        1.5
+    );
+
+    fill.position.set(-4,3,2);
+
+    scene.add(fill);
+
+    const rim = new THREE.DirectionalLight(
+        0x55ccff,
+        1
+    );
+
+    rim.position.set(0,4,-5);
+
+    scene.add(rim);
+
+}
+/* ==========================================================
+   GRALWEBS PORTFOLIO 3D
+   AVATAR + LOADER + GSAP
+========================================================== */
+
+gsap.registerPlugin(ScrollTrigger);
+
+let avatarModel = null;
+let mixer = null;
+const clock = new THREE.Clock();
+
+/* ==========================================================
+   CONFIG
+========================================================== */
+
+const avatarAnimation = {
+
+    startRotation: Math.PI,
+    endRotation: 0,
+
+    cameraStartZ: 7,
+    cameraEndZ: 4.5,
+
+    cameraStartY: 2,
+    cameraEndY: 1.7
+
+};
+
+/* ==========================================================
+   CHARGEMENT AVATAR
+========================================================== */
+
+function loadAvatar() {
+
+    const loader = new GLTFLoader();
+
+    loader.load(
+
+        CONFIG.modelPath,
+
+        (gltf) => {
+
+            avatarModel = gltf.scene;
+
+            avatarModel.scale.setScalar(CONFIG.avatar.scale);
+
+            avatarModel.position.set(
+
+                CONFIG.avatar.position.x,
+                CONFIG.avatar.position.y,
+                CONFIG.avatar.position.z
+
+            );
+
+            avatarModel.rotation.y =
+                avatarAnimation.startRotation;
+
+            avatarModel.traverse((child) => {
+
+                if (child.isMesh) {
+
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+
+                }
+
+            });
+
+            scene.add(avatarModel);
+
+            if (gltf.animations.length > 0) {
+
+                mixer = new THREE.AnimationMixer(
+                    avatarModel
+                );
+
+                gltf.animations.forEach((clip) => {
+
+                    mixer
+                        .clipAction(clip)
+                        .play();
+
+                });
+
+            }
+
+            hideLoader();
+
+            createPortfolioTimeline();
+
+            initScrollAnimations();
+
+            console.log("Avatar chargé");
+
+        },
+
+        (progress) => {
+
+            if (progress.total) {
+
+                const percent =
+                    (progress.loaded / progress.total) * 100;
+
+                updateLoader(percent);
+
+            }
+
+        },
+
+        (error) => {
+
+            console.error("Erreur GLB :", error);
+
+        }
+
+    );
+
+}
+
+/* ==========================================================
+   BARRE DE CHARGEMENT
+========================================================== */
+
+function updateLoader(value) {
+
+    const progress = document.querySelector(
+        ".loading-progress"
+    );
+
+    if (progress) {
+
+        progress.style.width =
+            value + "%";
+
+    }
+
+}
+
+/* ==========================================================
+   MASQUER LE LOADER
+========================================================== */
+
+function hideLoader() {
+
+    const loader = document.querySelector(
+        ".portfolio-loader"
+    );
+
+    if (!loader) return;
+
+    gsap.to(loader, {
+
+        opacity: 0,
+        duration: 1,
+
+        onComplete() {
+
+            loader.remove();
+
+        }
 
     });
 
+}
 
-    renderer.setPixelRatio(
-        Math.min(
-            window.devicePixelRatio,
-            2
-        )
+/* ==========================================================
+   TIMELINE PRINCIPALE
+========================================================== */
+
+function createPortfolioTimeline() {
+
+    if (!avatarModel) return;
+
+    gsap.timeline({
+
+        scrollTrigger: {
+
+            trigger: ".portfolio-container",
+
+            start: "top top",
+
+            end: "+=5000",
+
+            scrub: 1.5,
+
+            pin: true,
+
+            anticipatePin: 1
+
+        }
+
+    })
+
+    /* Rotation vers le visage */
+
+    .to(
+
+        avatarModel.rotation,
+
+        {
+
+            y: avatarAnimation.endRotation,
+
+            duration: 3,
+
+            ease: "power2.inOut"
+
+        }
+
+    )
+
+    /* Zoom caméra */
+
+    .to(
+
+        camera.position,
+
+        {
+
+            z: avatarAnimation.cameraEndZ,
+
+            y: avatarAnimation.cameraEndY,
+
+            duration: 3,
+
+            ease: "power2.out"
+
+        },
+
+        "<"
+
+    )
+
+    /* Léger déplacement */
+
+    .to(
+
+        avatarModel.position,
+
+        {
+
+            y: CONFIG.avatar.position.y + 0.15,
+
+            duration: 2,
+
+            ease: "sine.inOut"
+
+        },
+
+        "-=1"
+
+    )
+
+    /* Petit mouvement naturel */
+
+    .to(
+
+        avatarModel.rotation,
+
+        {
+
+            x: 0.05,
+
+            duration: 1,
+
+            repeat: 1,
+
+            yoyo: true,
+
+            ease: "sine.inOut"
+
+        }
+
     );
 
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+function resizePortfolio() {
+
+    camera.aspect =
+        window.innerWidth / window.innerHeight;
+
+    camera.updateProjectionMatrix();
 
     renderer.setSize(
 
@@ -680,361 +470,39 @@ function createRenderer(){
 
     );
 
-
-    renderer.outputColorSpace =
-        THREE.SRGBColorSpace;
-
-
-
-    renderer.shadowMap.enabled = true;
-
-
 }
 
-
-
-
 /* ==========================================================
-   LUMIERES REALISTES
+   BOUCLE RENDER
 ========================================================== */
 
+function animate() {
 
-function createLights(){
+    requestAnimationFrame(animate);
 
+    const delta = clock.getDelta();
 
+    if (mixer) {
 
-    // Lumière principale studio
-
-    const keyLight =
-        new THREE.DirectionalLight(
-            0xffffff,
-            2
-        );
-
-
-    keyLight.position.set(
-
-        3,
-        5,
-        5
-
-    );
-
-
-    keyLight.castShadow=true;
-
-
-    scene.add(
-        keyLight
-    );
-
-
-
-
-    // Lumière rouge ambiance GralWebs
-
-    const redLight =
-        new THREE.PointLight(
-
-            0xff0033,
-
-            1.5,
-
-            10
-
-        );
-
-
-    redLight.position.set(
-
-        -3,
-
-        2,
-
-        2
-
-    );
-
-
-    scene.add(
-        redLight
-    );
-
-
-
-
-
-    // Lumière arrière
-
-    const rimLight =
-        new THREE.DirectionalLight(
-
-            0xffffff,
-
-            1
-
-        );
-
-
-    rimLight.position.set(
-
-        0,
-
-        3,
-
-        -4
-
-    );
-
-
-    scene.add(
-        rimLight
-    );
-
-
-
-}
-
-
-
-/* ==========================================================
-   CHARGEMENT AVATAR GLB
-========================================================== */
-
-
-function loadAvatar(){
-
-
-    const loader =
-    new THREE.GLTFLoader();
-
-
-
-    loader.load(
-
-
-        MODEL_PATH,
-
-
-
-        function(gltf){
-
-
-
-            avatarModel =
-                gltf.scene;
-
-
-
-            avatarModel.scale.set(
-
-                1,
-
-                1,
-
-                1
-
-            );
-
-
-
-            avatarModel.position.set(
-
-                0,
-
-                -1.5,
-
-                0
-
-            );
-
-
-
-            /*
-              Activation ombres
-            */
-
-            avatarModel.traverse(
-                function(child){
-
-                    if(child.isMesh){
-
-                        child.castShadow=true;
-
-                        child.receiveShadow=true;
-
-                    }
-
-                }
-            );
-
-
-
-            scene.add(
-                avatarModel
-            );
-
-
-
-            console.log(
-                "Avatar GLB chargé"
-            );
-
-
-
-            /*
-                Si le modèle contient
-                des animations Mixamo
-            */
-
-            if(gltf.animations.length>0){
-
-
-                mixer =
-                new THREE.AnimationMixer(
-                    avatarModel
-                );
-
-
-                gltf.animations.forEach(
-                    clip=>{
-
-                        const action =
-                        mixer.clipAction(
-                            clip
-                        );
-
-
-                        action.play();
-
-                    }
-                );
-
-
-            }
-
-
-
-            hideLoader();
-
-
-
-        },
-
-
-
-        function(progress){
-
-
-            const percent =
-            (
-                progress.loaded /
-                progress.total
-            ) * 100;
-
-
-
-            updateLoader(
-                percent
-            );
-
-
-
-        },
-
-
-
-        function(error){
-
-
-            console.error(
-                "Erreur GLB:",
-                error
-            );
-
-
-        }
-
-
-
-    );
-
-
-}
-
-
-
-
-/* ==========================================================
-   LOADER VISUEL
-========================================================== */
-
-
-function updateLoader(value){
-
-
-    const loader =
-    document.querySelector(
-        ".loading-progress"
-    );
-
-
-    if(loader){
-
-        loader.style.width =
-        value+"%";
+        mixer.update(delta);
 
     }
 
+    renderer.render(
 
-}
+        scene,
 
+        camera
 
-
-function hideLoader(){
-
-
-    const screen =
-    document.querySelector(
-        ".portfolio-loader"
     );
 
-
-    if(screen){
-
-
-        gsap.to(
-            screen,
-            {
-
-                opacity:0,
-
-                duration:1,
-
-                onComplete(){
-
-                    screen.remove();
-
-                }
-
-            }
-        );
-
-
-    }
-
-
 }
 
-
-
 /* ==========================================================
-   INITIALISATION COMPLETE
+   INITIALISATION
 ========================================================== */
 
-
-function initPortfolio3D(){
-
+function initPortfolio3D() {
 
     createScene();
 
@@ -1046,665 +514,179 @@ function initPortfolio3D(){
 
     loadAvatar();
 
-
-
     window.addEventListener(
-        "resize",
-        resizePortfolio
-    );
 
+        "resize",
+
+        resizePortfolio
+
+    );
 
     animate();
 
-
 }
-
-
-
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
-
-
-function resizePortfolio(){
-
-
-    camera.aspect =
-    window.innerWidth /
-    window.innerHeight;
-
-
-    camera.updateProjectionMatrix();
-
-
-
-    renderer.setSize(
-
-        window.innerWidth,
-
-        window.innerHeight
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   BOUCLE ANIMATION
-========================================================== */
-
-
-function animate(){
-
-
-    requestAnimationFrame(
-        animate
-    );
-
-
-    const delta =
-    clock.getDelta();
-
-
-
-    if(mixer){
-
-        mixer.update(
-            delta
-        );
-
-    }
-
-
-
-    /*
-       Rotation douce avatar
-       (sera remplacée par GSAP scroll)
-    */
-
-
-    if(avatarModel){
-
-
-        avatarModel.rotation.y +=
-        0.002;
-
-
-    }
-
-
-
-    renderer.render(
-
-        scene,
-
-        camera
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   START
-========================================================== */
-
 
 initPortfolio3D();
 
-/* ==========================================================
-   GRALWEBS PORTFOLIO 3D
-   portfolio.js
-   PARTIE 3/6
 
-   GSAP Scroll Animation
-   Avatar Presentation System
+   /* ==========================================================
+   ETAPE 4
+   POSITION PREMIUM
 ========================================================== */
 
+timeline.to(
 
-/* ==========================================================
-   IMPORT GSAP
-========================================================== */
+    avatarModel.position,
 
+    {
 
-gsap.registerPlugin(
-    ScrollTrigger
+        x: 2.2,
+        y: -1.15,
+
+        duration: 2,
+
+        ease: "power3.out"
+
+    },
+
+    "<"
+
 );
 
-
-
 /* ==========================================================
-   CONFIGURATION ANIMATION
+   ETAPE 5
+   LEGER AGRANDISSEMENT
 ========================================================== */
 
+timeline.to(
 
-const avatarAnimation = {
+    avatarModel.scale,
 
-    startRotation: Math.PI,
+    {
 
-    endRotation: 0,
+        x: CONFIG.avatar.scale * 1.18,
+        y: CONFIG.avatar.scale * 1.18,
+        z: CONFIG.avatar.scale * 1.18,
 
+        duration: 2,
 
-    cameraStartZ: 7,
+        ease: "power2.out"
 
-    cameraEndZ: 4.5,
+    },
 
+    "<"
 
-    cameraStartY: 2,
+);
 
-    cameraEndY:1.7
+function createSectionAnimations() {
 
+    document.querySelectorAll(".portfolio-section")
 
-};
-
-
-
-
-/* ==========================================================
-   CREATION TIMELINE PRINCIPALE
-========================================================== */
-
-
-function createPortfolioTimeline(){
-
-
-
-    if(!avatarModel){
-
-        console.warn(
-            "Avatar non chargé"
-        );
-
-        return;
-
-    }
-
-
-
-
-    const timeline = gsap.timeline({
-
-        scrollTrigger:{
-
-
-            trigger:
-            ".portfolio-container",
-
-
-            start:
-            "top top",
-
-
-            end:
-            "+=4000",
-
-
-            scrub:
-            1.5,
-
-
-            pin:
-            true,
-
-
-
-        }
-
-    });
-
-
-
-
-
-    /*
-    ======================================================
-    ETAPE 1
-    Avatar visible de dos
-    0% -> 20%
-    ======================================================
-    */
-
-
-
-    timeline.to(
-
-        avatarModel.rotation,
-
-        {
-
-
-            y:
-            avatarAnimation.startRotation,
-
-
-            duration:1
-
-
-
-        },
-
-
-        0
-
-    );
-
-
-
-
-
-    /*
-    ======================================================
-    ETAPE 2
-    Rotation vers visage
-    20% -> 40%
-    ======================================================
-    */
-
-
-    timeline.to(
-
-        avatarModel.rotation,
-
-        {
-
-            y:
-            avatarAnimation.endRotation,
-
-
-            ease:
-            "power2.inOut",
-
-
-            duration:2
-
-
-        }
-
-    );
-
-
-
-
-
-
-    /*
-    ======================================================
-    ETAPE 3
-    Zoom caméra professionnel
-    ======================================================
-    */
-
-
-    timeline.to(
-
-        camera.position,
-
-        {
-
-
-            z:
-            avatarAnimation.cameraEndZ,
-
-
-            y:
-            avatarAnimation.cameraEndY,
-
-
-            ease:
-            "power2.out",
-
-
-            duration:2
-
-
-        },
-
-        "-=1"
-
-
-
-    );
-
-
-
-
-
-    /*
-    ======================================================
-    ETAPE 4
-    Petit mouvement dynamique
-    ======================================================
-    */
-
-
-    timeline.to(
-
-        avatarModel.position,
-
-        {
-
-
-            x:
-            0.35,
-
-
-            duration:1,
-
-
-            ease:
-            "power3.out"
-
-
-        }
-
-
-    );
-
-
-
-
-
-}
-
-
-
-
-/* ==========================================================
-   ANIMATION PAR SECTION
-========================================================== */
-
-
-function createSectionAnimations(){
-
-
-
-    const sections =
-    document.querySelectorAll(
-        ".portfolio-section"
-    );
-
-
-
-    sections.forEach(
-        (section,index)=>{
-
+        .forEach((section, index) => {
 
             ScrollTrigger.create({
 
+                trigger: section,
 
+                start: "top 60%",
 
-                trigger:
-                section,
+                onEnter: () => {
 
-
-
-                start:
-                "top center",
-
-
-
-                onEnter(){
-
-
-
-                    animateAvatarState(
-                        index
-                    );
-
-
+                    animateAvatarState(index);
 
                 }
-
-
 
             });
 
-
-
-        }
-
-    );
-
+        });
 
 }
 
+function animateAvatarState(index) {
 
+    if (!avatarModel) return;
 
-
-
-/* ==========================================================
-   ETATS AVATAR
-========================================================== */
-
-
-function animateAvatarState(section){
-
-
-
-    if(!avatarModel)
-    return;
-
-
-
-    switch(section){
-
-
-
-        /*
-        =====================================
-        INTRO
-        =====================================
-        */
+    switch (index) {
 
         case 0:
 
+            gsap.to(avatarModel.rotation, {
 
-            gsap.to(
+                y: 0,
 
-                avatarModel.rotation,
+                duration: 1.2,
 
-                {
+                ease: "power2.out"
 
-
-                    y:0,
-
-
-                    duration:1.5,
-
-
-                    ease:
-                    "power3.out"
-
-
-                }
-
-            );
-
+            });
 
         break;
-
-
-
-
-
-        /*
-        =====================================
-        EXPERIENCE
-        =====================================
-        */
-
 
         case 1:
 
+            gsap.to(avatarModel.rotation, {
 
-            gsap.to(
+                y: Math.PI * 0.08,
 
-                avatarModel.rotation,
+                duration: 1.2,
 
-                {
+                ease: "power2.out"
 
-
-                    y:
-                    Math.PI / 8,
-
-
-                    duration:1
-
-
-                }
-
-            );
-
-
+            });
 
         break;
-
-
-
-
-
-
-
-        /*
-        =====================================
-        TECHNOLOGIES
-        =====================================
-        */
-
 
         case 2:
 
+            gsap.to(avatarModel.rotation, {
 
+                y: -Math.PI * 0.12,
 
-            gsap.to(
+                duration: 1.2,
 
-                avatarModel.rotation,
+                ease: "power2.out"
 
-                {
-
-
-                    y:
-                    -Math.PI / 6,
-
-
-                    duration:1
-
-
-                }
-
-            );
-
-
+            });
 
         break;
-
-
-
-
-
-
-        /*
-        =====================================
-        PROJETS
-        =====================================
-        */
-
 
         case 3:
 
+            gsap.to(avatarModel.position, {
 
-            gsap.to(
+                x: 2.35,
 
-                avatarModel.position,
+                y: -1.05,
 
-                {
+                duration: 1.4,
 
+                ease: "power2.out"
 
-                    y:
-                    -1.3,
-
-
-                    duration:1
-
-
-                }
-
-
-            );
-
-
+            });
 
         break;
-
-
-
-
-
-
-
-        /*
-        =====================================
-        CONTACT
-        =====================================
-        */
-
 
         case 4:
 
+            gsap.to(avatarModel.rotation, {
 
+                y: Math.PI * 0.20,
 
-            gsap.to(
+                duration: 1.5,
 
-                avatarModel.rotation,
+                ease: "power2.out"
 
-                {
-
-
-                    y:
-                    Math.PI,
-
-
-                    duration:1.5
-
-
-                }
-
-
-            );
-
-
+            });
 
         break;
 
-
-
     }
-
-
 
 }
 
+function addFloatingEffect() {
 
-
-
-
-/* ==========================================================
-   EFFET FLOATING AVATAR
-========================================================== */
-
-
-function addFloatingEffect(){
-
-
-
-    if(!avatarModel)
-    return;
-
-
+    if (!avatarModel) return;
 
     gsap.to(
 
@@ -1712,173 +694,110 @@ function addFloatingEffect(){
 
         {
 
+            y: "-=0.08",
 
-            y:
-            -1.35,
+            duration: 2.8,
 
+            repeat: -1,
 
-            duration:2.5,
+            yoyo: true,
 
-
-            repeat:-1,
-
-
-            yoyo:true,
-
-
-            ease:
-            "sine.inOut"
-
-
+            ease: "sine.inOut"
 
         }
 
+    );
+
+    gsap.to(
+
+        avatarModel.rotation,
+
+        {
+
+            z: 0.015,
+
+            duration: 3,
+
+            repeat: -1,
+
+            yoyo: true,
+
+            ease: "sine.inOut"
+
+        }
 
     );
 
-
 }
 
+function cameraParallax() {
 
+    window.addEventListener("mousemove", (event) => {
 
+        const mouseX =
+            (event.clientX / window.innerWidth) - 0.5;
 
-/* ==========================================================
-   CAMERA MOUSE PARALLAX
-========================================================== */
+        const mouseY =
+            (event.clientY / window.innerHeight) - 0.5;
 
+        gsap.to(
 
-function cameraParallax(){
+            camera.position,
 
+            {
 
+                x: mouseX * 0.35,
 
-    window.addEventListener(
+                y: 1.7 - mouseY * 0.18,
 
-        "mousemove",
+                duration: 1.4,
 
-        (event)=>{
+                ease: "power2.out"
 
+            }
 
-            const x =
-            (
-                event.clientX /
-                window.innerWidth
-            ) - 0.5;
+        );
 
-
-
-            const y =
-            (
-                event.clientY /
-                window.innerHeight
-            ) - 0.5;
-
-
-
-
+        if (avatarModel) {
 
             gsap.to(
 
-                camera.position,
+                avatarModel.rotation,
 
                 {
 
+                    y:
+                        avatarAnimation.endRotation +
+                        mouseX * 0.10,
 
                     x:
-                    x * 0.4,
+                        mouseY * 0.04,
 
+                    duration: 1.2,
 
-                    y:
-                    1.7 -
-                    y * 0.3,
-
-
-                    duration:1
-
+                    ease: "power2.out"
 
                 }
 
             );
 
-
-
         }
 
-    );
-
-
+    });
 
 }
 
-
-
-
-
-/* ==========================================================
-   INITIALISATION ANIMATIONS
-========================================================== */
-
-
-function initScrollAnimations(){
-
-
-
-    createPortfolioTimeline();
-
+function initScrollAnimations() {
 
     createSectionAnimations();
 
-
     addFloatingEffect();
 
-
     cameraParallax();
-
-
 
 }
 
 
-
-/*
-Cette fonction sera appelée après
-le chargement du GLB
-*/
-
-
-setTimeout(()=>{
-
-
-    initScrollAnimations();
-
-
-},1500);
-
-/* ==========================================================
-   GRALWEBS PORTFOLIO 3D
-   portfolio.js
-   PARTIE 4/6
-
-   External Visual Effects
-   (NO GLB MODIFICATION)
-========================================================== */
-
-
-/*
-    IMPORTANT :
-
-    Tous les effets sont ajoutés dans la scène
-    autour du modèle.
-
-    Le GLB reste intact :
-    - matériaux originaux conservés
-    - textures intactes
-    - animations intactes
-    - rig intact
-*/
-
-
-
-let avatarEffects = {};
 
 
 

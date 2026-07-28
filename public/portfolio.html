@@ -2197,31 +2197,121 @@ import { OrbitControls }
 from "https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js";
 
 gsap.registerPlugin(ScrollTrigger);
+//==========================================================
+// GRALWEBS PORTFOLIO 3D
+// VARIABLES GLOBALES
+// VERSION PREMIUM
+//==========================================================
 
-//====================================================
-// VARIABLES
-//====================================================
+//==============================
+// THREE.JS
+//==============================
 
-let scene;
-let camera;
-let renderer;
+let scene = null;
+let camera = null;
+let renderer = null;
 
-let avatar;
+//==============================
+// AVATAR
+//==============================
 
-let mixer;
+let avatar = null;
+let mixer = null;
+let animations = [];
 
-let clock = new THREE.Clock();
+//==============================
+// HORLOGE
+//==============================
 
-let controls;
+const clock = new THREE.Clock();
 
-const canvas =
-document.querySelector("#webgl");
+//==============================
+// CONTROLS
+//==============================
+
+let controls = null;
+
+//==============================
+// HTML ELEMENTS
+//==============================
+
+const canvas = document.getElementById("webgl");
+
+const avatarContainer =
+document.getElementById("avatar-container");
+
+const loader =
+document.getElementById("loader");
 
 const loadingBar =
-document.querySelector(".loading-bar");
+document.querySelector(".loader-progress");
 
 const loadingText =
-document.querySelector(".loading-text");
+document.querySelector("#loader p");
+
+//==============================
+// CONFIGURATION
+//==============================
+
+const CONFIG = {
+
+    model:{
+
+        path:"models/Avatar.glb",
+
+        scale:1.55,
+
+        position:{
+            x:0.65,
+            y:-1.35,
+            z:0
+        },
+
+        rotation:{
+            x:0,
+            y:Math.PI,
+            z:0
+        }
+
+    },
+
+    camera:{
+
+        fov:38,
+
+        near:0.1,
+
+        far:100,
+
+        position:{
+            x:0.9,
+            y:1.75,
+            z:3.5
+        }
+
+    },
+
+    renderer:{
+
+        antialias:true,
+
+        alpha:true,
+
+        powerPreference:"high-performance"
+
+    }
+
+};
+
+//==============================
+// ETAT DE CHARGEMENT
+//==============================
+
+let avatarLoaded = false;
+
+let isAnimating = true;
+
+let scrollEnabled = false;
 
 //====================================================
 // INITIALISATION
