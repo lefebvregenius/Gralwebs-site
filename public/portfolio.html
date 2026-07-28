@@ -2215,7 +2215,7 @@ let clock = new THREE.Clock();
 let controls;
 
 const canvas =
-document.querySelector("#three-canvas");
+document.querySelector("#webgl");
 
 const loadingBar =
 document.querySelector(".loading-bar");
@@ -2558,20 +2558,18 @@ function loadAvatar(){
             //--------------------------------------------------
 
             avatar.position.set(
-                0,
-                -1.05,
-                0
-            );
-
+0.6,
+-1.35,
+0
+);
             //--------------------------------------------------
             // ECHELLE
             //--------------------------------------------------
-
-            avatar.scale.set(
-                1.18,
-                1.18,
-                1.18
-            );
+avatar.scale.set(
+1.55,
+1.55,
+1.55
+);
 
             //--------------------------------------------------
             // ROTATION

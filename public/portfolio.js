@@ -49,7 +49,7 @@ new THREE.Clock();
 
 
 let canvas =
-document.querySelector("#portfolio-canvas");
+document.querySelector("#webgl");
 
 
 
@@ -71,17 +71,11 @@ const CONFIG = {
     {
 
 
-        position:
-
-        {
-
-            x:0,
-
-            y:1.6,
-
-            z:5
-
-        },
+       position:{
+    x:0.9,
+    y:1.7,
+    z:3.4
+},
 
 
         fov:45
@@ -403,15 +397,11 @@ function loadAvatar(){
 
 
 
-            avatar.position.set(
-
-                0,
-
-                -1.5,
-
-                0
-
-            );
+           avatar.position.set(
+0.6,
+-1.35,
+0
+);
 
 
 
@@ -573,26 +563,14 @@ initThree();
 ========================================================== */
 
 
-/* ==========================================================
-   VARIABLES THREE.JS
-========================================================== */
 
-let scene;
-let camera;
-let renderer;
-
-let avatarModel = null;
-
-let mixer = null;
-
-let clock = new THREE.Clock();
 
 
 /* ==========================================================
    CONFIGURATION
 ========================================================== */
 
-const canvas = document.querySelector("#portfolio-canvas");
+const canvas = document.querySelector("#webgl");
 
 const MODEL_PATH = "/models/Avatar.glb";
 
@@ -3810,3 +3788,28 @@ nav.classList.remove("hide-nav");
 lastScroll=current;
 
 });
+
+
+
+
+
+
+const burger=document.querySelector(".menu-toggle");
+const menu=document.querySelector(".mobile-menu");
+const close=document.querySelector(".close-menu");
+const overlay=document.querySelector(".menu-overlay");
+
+burger.onclick=()=>{
+    menu.classList.add("active");
+    overlay.classList.add("active");
+}
+
+close.onclick=()=>{
+    menu.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+overlay.onclick=()=>{
+    menu.classList.remove("active");
+    overlay.classList.remove("active");
+}
