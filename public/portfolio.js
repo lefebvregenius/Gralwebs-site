@@ -62,7 +62,7 @@ const CONFIG = {
 
 
     modelPath:
-    "/models/portrait.glb",
+    "/models/Avatar.glb",
 
 
     camera:
@@ -594,7 +594,7 @@ let clock = new THREE.Clock();
 
 const canvas = document.querySelector("#portfolio-canvas");
 
-const MODEL_PATH = "/models/portrait.glb";
+const MODEL_PATH = "/models/Avatar.glb";
 
 
 /* ==========================================================
