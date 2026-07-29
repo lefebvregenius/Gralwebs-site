@@ -34,7 +34,7 @@ CONFIGURATION
 const CONFIG={
 
 
-    model:"models/Avatar.glb",
+    model:"./models/Avatar.glb",
 
 
 
