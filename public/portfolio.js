@@ -1312,20 +1312,6 @@ FINITIONS
 Optimisations
 =========================================================*/
 
-/*=========================================================
-LANCEMENT DES ANIMATIONS
-(après chargement du modèle)
-=========================================================*/
-
-function startPortfolio() {
-
-    createScrollAnimation();
-
-    introAnimation();
-
-    floatingAnimation();
-
-}
 
 /*=========================================================
 ANIMATION D'INTRODUCTION
