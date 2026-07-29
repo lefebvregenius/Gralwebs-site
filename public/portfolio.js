@@ -2,69 +2,101 @@
     GRALWEBS PORTFOLIO
     portfolio.js (1/3)
 
-    - Une seule scène Three.js
-    - Un seul Renderer
-    - Une seule Camera
-    - Chargement unique de Avatar.glb
+    THREE.JS + AVATAR GLB + GSAP SCROLL
 =========================================================*/
+
 
 import * as THREE from
 "https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js";
 
+
 import { GLTFLoader } from
 "https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/loaders/GLTFLoader.js";
+
 
 import { OrbitControls } from
 "https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/controls/OrbitControls.js";
 
+
+
 gsap.registerPlugin(ScrollTrigger);
+
+
 
 /*=========================================================
 CONFIGURATION
 =========================================================*/
 
+
 const CONFIG = {
 
-    model: "models/Avatar.glb",
+
+    model:"./models/Avatar.glb",
+
+
 
     camera:{
 
+
         fov:35,
+
 
         near:0.1,
 
+
         far:100,
 
+
         position:new THREE.Vector3(
-            0.9,
-            1.55,
-            3.8
+
+            1.2,
+
+            1.5,
+
+            4
+
         )
 
     },
 
+
+
     avatar:{
 
-        scale:1.35,
+
+        scale:2.2,
+
 
         position:new THREE.Vector3(
-            0.7,
-            -1.45,
+
+            1.25,
+
+            -1.55,
+
             0
+
         ),
+
 
         rotation:Math.PI
 
     }
 
+
 };
+
+
+
+
 
 /*=========================================================
 VARIABLES
 =========================================================*/
 
+
 const canvas =
 document.querySelector("#webgl");
+
 
 let scene;
 
@@ -74,70 +106,114 @@ let renderer;
 
 let controls;
 
-let avatar;
+let avatar=null;
 
-let mixer;
+let mixer=null;
+
 
 const clock =
 new THREE.Clock();
+
+
+
+
+
 
 /*=========================================================
 INITIALISATION
 =========================================================*/
 
+
 init();
+
+
 
 function init(){
 
+
     createScene();
+
 
     createCamera();
 
+
     createRenderer();
+
 
     createControls();
 
+
     createLights();
+
 
     loadAvatar();
 
+
+
     window.addEventListener(
+
         "resize",
+
         onResize
+
     );
 
+
 }
+
+
+
+
+
 
 /*=========================================================
 SCENE
 =========================================================*/
 
+
 function createScene(){
+
 
     scene =
     new THREE.Scene();
 
+
 }
+
+
+
+
+
+
 
 /*=========================================================
 CAMERA
 =========================================================*/
 
+
 function createCamera(){
+
 
     camera =
     new THREE.PerspectiveCamera(
 
+
         CONFIG.camera.fov,
 
-        window.innerWidth/
+
+        window.innerWidth /
         window.innerHeight,
+
 
         CONFIG.camera.near,
 
+
         CONFIG.camera.far
 
+
     );
+
+
 
     camera.position.copy(
 
@@ -145,27 +221,44 @@ function createCamera(){
 
     );
 
+
 }
+
+
+
+
+
+
 
 /*=========================================================
 RENDERER
 =========================================================*/
 
+
 function createRenderer(){
+
+
 
     renderer =
     new THREE.WebGLRenderer({
 
+
         canvas,
+
 
         alpha:true,
 
+
         antialias:true,
+
 
         powerPreference:
         "high-performance"
 
+
     });
+
+
 
     renderer.setSize(
 
@@ -174,6 +267,8 @@ function createRenderer(){
         window.innerHeight
 
     );
+
+
 
     renderer.setPixelRatio(
 
@@ -187,22 +282,32 @@ function createRenderer(){
 
     );
 
+
+
     renderer.outputColorSpace =
     THREE.SRGBColorSpace;
 
-    renderer.shadowMap.enabled =
-    true;
+
+
+    renderer.shadowMap.enabled=true;
+
 
 }
 
+
+
+
+
+
+
+
 /*=========================================================
 CONTROLS
-(désactivés,
-uniquement utiles
-pour le développement)
 =========================================================*/
 
+
 function createControls(){
+
 
     controls =
     new OrbitControls(
@@ -213,28 +318,42 @@ function createControls(){
 
     );
 
+
     controls.enabled=false;
+
 
 }
 
+
+
+
+
+
+
+
 /*=========================================================
-LUMIERES
+LUMIERES PREMIUM
 =========================================================*/
 
+
 function createLights(){
+
+
 
     const ambient =
     new THREE.AmbientLight(
 
         0xffffff,
 
-        1.8
+        2
 
     );
 
-    scene.add(
-        ambient
-    );
+
+    scene.add(ambient);
+
+
+
 
 
     const key =
@@ -242,70 +361,101 @@ function createLights(){
 
         0xffffff,
 
-        2.6
+        3
 
     );
 
+
     key.position.set(
 
-        4,
-
         5,
+
+        6,
 
         5
 
     );
 
-    key.castShadow=true;
 
-    scene.add(
-        key
-    );
+    scene.add(key);
+
+
+
 
 
     const rim =
-    new THREE.DirectionalLight(
+    new THREE.PointLight(
 
-        0xff3355,
+        0xff3344,
 
-        1.1
+        2,
+
+        10
 
     );
+
 
     rim.position.set(
 
-        -4,
+        -3,
 
-        3,
+        2,
 
-        -2
+        -3
 
     );
 
-    scene.add(
-        rim
-    );
+
+    scene.add(rim);
+
+
 
 }
 
+
+
+
+
+
+
+
+
 /*=========================================================
-CHARGEMENT DU GLB
-(UNE SEULE FOIS)
+CHARGEMENT AVATAR GLB
 =========================================================*/
 
+
 function loadAvatar(){
+
+
 
     const loader =
     new GLTFLoader();
 
+
+
+
+
     loader.load(
+
 
         CONFIG.model,
 
+
+
         (gltf)=>{
+
+
 
             avatar =
             gltf.scene;
+
+
+
+
+
+            // GRANDE TAILLE
+
 
             avatar.scale.setScalar(
 
@@ -313,127 +463,305 @@ function loadAvatar(){
 
             );
 
+
+
+
+
+            // POSITION DROITE
+
+
             avatar.position.copy(
 
                 CONFIG.avatar.position
 
             );
 
+
+
+
+
             avatar.rotation.y =
+
             CONFIG.avatar.rotation;
+
+
+
+
+
+
 
             avatar.traverse(
 
-                mesh=>{
+                child=>{
 
-                    if(mesh.isMesh){
 
-                        mesh.castShadow=true;
+                    if(child.isMesh){
 
-                        mesh.receiveShadow=true;
+
+                        child.castShadow=true;
+
+
+                        child.receiveShadow=true;
+
 
                     }
 
+
                 }
 
+
             );
 
-            scene.add(
-                avatar
-            );
 
-            if(
-                gltf.animations.length
-            ){
+
+
+
+
+            scene.add(avatar);
+
+
+
+
+
+
+
+
+            // Animation interne GLB si présente
+
+
+            if(gltf.animations.length){
+
+
 
                 mixer =
                 new THREE.AnimationMixer(
+
                     avatar
+
                 );
+
+
 
                 gltf.animations.forEach(
 
                     clip=>{
 
+
                         mixer
+
                         .clipAction(clip)
+
                         .play();
+
 
                     }
 
                 );
 
+
             }
 
-            document
-            .getElementById("loader")
-            .style.display="none";
+
+
+
+
+
+
+            /*
+            IMPORTANT
+            Activation GSAP seulement
+            après chargement
+            */
+
+
+            createScrollAnimation();
+
+
+            idleAvatarMotion();
+
+
+            introAnimation();
+
+
+
+
+
+            ScrollTrigger.refresh();
+
+
+
+
+
+
+            const loaderScreen =
+            document.getElementById("loader");
+
+
+
+            if(loaderScreen){
+
+
+                gsap.to(
+
+                    loaderScreen,
+
+                    {
+
+                        opacity:0,
+
+                        duration:0.8,
+
+
+                        onComplete(){
+
+                            loaderScreen.remove();
+
+                        }
+
+                    }
+
+                );
+
+
+            }
+
+
+
+
+
+
 
             animate();
 
+
+
+            console.log(
+
+            "Avatar.glb chargé avec succès"
+
+            );
+
+
+
         },
+
+
+
 
         (xhr)=>{
 
+
             if(xhr.total){
 
-                const value=
+
+                const progress =
+
                 (xhr.loaded/xhr.total)*100;
 
-                document
-                .getElementById("progress")
-                .style.width=
-                value+"%";
+
+
+                const bar =
+
+                document.getElementById(
+                    "progress"
+                );
+
+
+
+                if(bar){
+
+                    bar.style.width =
+                    progress+"%";
+
+                }
+
 
             }
 
+
+
         },
 
-        (error)=>{
 
-            console.error(error);
+
+
+        error=>{
+
+
+            console.error(
+
+                "Erreur Avatar.glb :",
+
+                error
+
+            );
+
 
         }
 
+
     );
+
 
 }
 
 /*=========================================================
-portfolio.js (2/3)
+    GRALWEBS PORTFOLIO
+    portfolio.js (2/3)
 
-Animation
-GSAP
-ScrollTrigger
-Render
+    Animation
+    GSAP
+    ScrollTrigger
+    Render
 =========================================================*/
+
+
 
 /*=========================================================
-BOUCLE DE RENDU
-(UNE SEULE)
+BOUCLE DE RENDU UNIQUE
 =========================================================*/
 
-function animate() {
 
-    requestAnimationFrame(animate);
+function animate(){
+
 
     const delta = clock.getDelta();
 
-    if (mixer) {
+
+
+    if(mixer){
+
 
         mixer.update(delta);
 
+
     }
 
-    renderer.render(scene, camera);
+
+
+    renderer.render(
+
+        scene,
+
+        camera
+
+    );
+
 
 }
+
+
+
+
 
 /*=========================================================
 RESIZE
 =========================================================*/
 
-function onResize() {
+
+function onResize(){
+
+
 
     camera.aspect =
 
@@ -441,7 +769,11 @@ function onResize() {
 
         window.innerHeight;
 
+
+
     camera.updateProjectionMatrix();
+
+
 
     renderer.setSize(
 
@@ -451,307 +783,695 @@ function onResize() {
 
     );
 
+
+
 }
 
+
+
+window.addEventListener(
+
+    "resize",
+
+    onResize
+
+);
+
+
+
+
+
+
+
 /*=========================================================
-TIMELINE PRINCIPALE
+SCROLLTELLING AVATAR GLB
+UNE SEULE TIMELINE
 =========================================================*/
 
-createScrollAnimation();
 
-function createScrollAnimation() {
+function createScrollAnimation(){
 
-    if (!avatar) return;
 
-    gsap.timeline({
 
-        scrollTrigger: {
+    if(!avatar) return;
 
-            trigger: "#about",
 
-            start: "top 80%",
 
-            end: "bottom 20%",
 
-            scrub: 1
+    const tl = gsap.timeline({
+
+
+
+        scrollTrigger:{
+
+
+            trigger:"body",
+
+
+            start:"top top",
+
+
+            end:"bottom bottom",
+
+
+            scrub:1.5,
+
+
+            invalidateOnRefresh:true
+
 
         }
 
-    })
 
-    /*=========================================
+
+    });
+
+
+
+
+
+
+
+    /*
+    =========================================
     HERO → ABOUT
-    =========================================*/
 
-    .to(
+    Avatar regarde le visiteur
+    =========================================
+    */
+
+
+    tl.to(
+
 
         avatar.rotation,
 
+
         {
 
-            y: Math.PI - 0.35,
 
-            duration: 1
+            y:Math.PI - 0.45,
+
+
+            duration:1
+
 
         }
 
+
+
     )
 
+
+
     .to(
+
 
         avatar.position,
 
+
         {
 
-            x: 0.45,
 
-            y: -1.38,
+            x:1.05,
 
-            duration: 1
+
+            y:-1.45,
+
+
+            duration:1
+
 
         },
 
-        0
+
+        "<"
+
+
 
     )
 
+
+
     .to(
+
 
         camera.position,
 
+
         {
 
-            x: 0.55,
 
-            z: 3.25,
+            x:1.0,
 
-            duration: 1
+
+            z:3.5,
+
+
+            duration:1
+
 
         },
 
-        0
+
+        "<"
+
+
 
     );
 
 
 
-    /*=========================================
+
+
+
+
+
+
+    /*
+    =========================================
     ABOUT → SKILLS
-    =========================================*/
 
-    gsap.timeline({
+    Rapprochement
+    =========================================
+    */
 
-        scrollTrigger: {
 
-            trigger: "#skills",
 
-            start: "top center",
+    tl.to(
 
-            end: "bottom center",
-
-            scrub: 1
-
-        }
-
-    })
-
-    .to(
 
         avatar.rotation,
 
+
         {
 
-            y: Math.PI + 0.20
+
+            y:Math.PI+0.15,
+
+
+            duration:1
+
 
         }
 
+
+
     )
 
+
+
     .to(
+
 
         avatar.position,
 
+
         {
 
-            x: 0.70,
 
-            y: -1.45
+            x:1.15,
+
+
+            y:-1.55
+
 
         },
 
-        0
+
+        "<"
+
+
 
     )
 
+
+
     .to(
+
 
         camera.position,
 
+
         {
 
-            z: 2.90
+
+            z:3
+
 
         },
 
-        0
+
+        "<"
+
+
 
     );
 
 
 
-    /*=========================================
+
+
+
+
+
+
+
+
+    /*
+    =========================================
     SKILLS → EXPERIENCE
-    =========================================*/
 
-    gsap.timeline({
+    Nouvelle vue
+    =========================================
+    */
 
-        scrollTrigger: {
 
-            trigger: "#experience",
 
-            start: "top center",
+    tl.to(
 
-            end: "bottom center",
-
-            scrub: 1
-
-        }
-
-    })
-
-    .to(
 
         avatar.rotation,
 
+
         {
 
-            y: Math.PI - 0.10
+
+            y:Math.PI-0.15
+
 
         }
 
+
+
     )
 
+
+
     .to(
+
 
         avatar.position,
 
+
         {
 
-            x: 0.55,
 
-            y: -1.35
+            x:0.95,
+
+
+            y:-1.40
+
 
         },
 
-        0
+
+        "<"
+
+
 
     )
 
+
+
     .to(
+
 
         camera.position,
 
+
         {
 
-            x: 0.35,
 
-            z: 2.65
+            x:0.75,
+
+
+            z:2.8
+
 
         },
 
-        0
+
+        "<"
+
+
 
     );
 
 
 
-    /*=========================================
+
+
+
+
+
+
+
+
+    /*
+    =========================================
     EXPERIENCE → CONTACT
-    =========================================*/
 
-    gsap.timeline({
+    Position finale
+    =========================================
+    */
 
-        scrollTrigger: {
 
-            trigger: "#contact",
 
-            start: "top center",
+    tl.to(
 
-            end: "bottom center",
-
-            scrub: 1
-
-        }
-
-    })
-
-    .to(
 
         avatar.rotation,
 
+
         {
 
-            y: Math.PI
+
+            y:Math.PI
+
 
         }
 
+
+
     )
 
+
+
     .to(
+
 
         avatar.position,
 
+
         {
 
-            x: 0.65,
 
-            y: -1.42
+            x:1.25,
+
+
+            y:-1.50
+
 
         },
 
-        0
+
+        "<"
+
+
 
     )
 
+
+
     .to(
+
 
         camera.position,
 
+
         {
 
-            x: 0.80,
 
-            z: 3.50
+            x:1.1,
+
+
+            z:3.8
+
 
         },
 
-        0
+
+        "<"
+
+
 
     );
+
+
+
 
 }
 
+
+
+
+
+
+
+
+
 /*=========================================================
-LÉGER MOUVEMENT CONTINU
+INTRO PREMIUM
 =========================================================*/
 
-gsap.to(
 
-    CONFIG.camera.position,
+function introAnimation(){
 
-    {
 
-        y: 1.62,
 
-        duration: 3,
+    if(!avatar)return;
 
-        repeat: -1,
 
-        yoyo: true,
 
-        ease: "sine.inOut"
 
-    }
+    gsap.from(
+
+
+        avatar.scale,
+
+
+        {
+
+
+            x:0.2,
+
+
+            y:0.2,
+
+
+            z:0.2,
+
+
+            duration:1.5,
+
+
+            ease:"back.out(1.7)"
+
+
+        }
+
+
+
+    );
+
+
+
+
+    gsap.from(
+
+
+        camera.position,
+
+
+        {
+
+
+            z:6,
+
+
+            duration:2,
+
+
+            ease:"power3.out"
+
+
+        }
+
+
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*=========================================================
+MOUVEMENT RESPIRATION
+=========================================================*/
+
+
+function idleAvatarMotion(){
+
+
+
+    if(!avatar)return;
+
+
+
+
+    gsap.to(
+
+
+        avatar.position,
+
+
+        {
+
+
+            y:CONFIG.avatar.position.y+0.06,
+
+
+            duration:2.8,
+
+
+            repeat:-1,
+
+
+            yoyo:true,
+
+
+            ease:"sine.inOut"
+
+
+        }
+
+
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*=========================================================
+PARALLAX SOURIS
+=========================================================*/
+
+
+window.addEventListener(
+
+
+"mousemove",
+
+
+(event)=>{
+
+
+    if(!avatar)return;
+
+
+
+
+    const mouseX =
+
+
+    (event.clientX /
+
+    window.innerWidth -0.5)*0.12;
+
+
+
+
+    gsap.to(
+
+
+        avatar.rotation,
+
+
+        {
+
+
+            y:avatar.rotation.y+mouseX,
+
+
+            duration:0.4,
+
+
+            overwrite:"auto"
+
+
+        }
+
+
+
+    );
+
+
+
+}
+
+
+
+);
+
+
+
+
+
+
+
+
+
+/*=========================================================
+LANCEMENT PORTFOLIO
+=========================================================*/
+
+
+function startPortfolio(){
+
+
+
+    createScrollAnimation();
+
+
+
+    introAnimation();
+
+
+
+    idleAvatarMotion();
+
+
+
+    ScrollTrigger.refresh();
+
+
+
+}
+
+
+
+
+
+
+
+/*=========================================================
+BOUCLE THREE.JS
+=========================================================*/
+
+
+renderer.setAnimationLoop(
+
+    animate
 
 );
 
@@ -835,69 +1555,6 @@ function introAnimation() {
 
 }
 
-/*=========================================================
-EFFET RESPIRATION
-=========================================================*/
-
-function floatingAnimation() {
-
-    if (!avatar) return;
-
-    gsap.to(
-
-        avatar.position,
-
-        {
-
-            y: avatar.position.y + 0.05,
-
-            duration: 2.5,
-
-            repeat: -1,
-
-            yoyo: true,
-
-            ease: "sine.inOut"
-
-        }
-
-    );
-
-}
-
-/*=========================================================
-LÉGÈRE ROTATION CONTINUE
-=========================================================*/
-
-gsap.to(
-
-    CONFIG.avatar,
-
-    {
-
-        rotation: Math.PI + 0.03,
-
-        duration: 4,
-
-        repeat: -1,
-
-        yoyo: true,
-
-        ease: "sine.inOut",
-
-        onUpdate() {
-
-            if (avatar) {
-
-                avatar.rotation.y = CONFIG.avatar.rotation;
-
-            }
-
-        }
-
-    }
-
-);
 
 /*=========================================================
 PARALLAX SOURIS

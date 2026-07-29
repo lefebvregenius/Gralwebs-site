@@ -650,11 +650,30 @@ src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js">
 src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js">
 </script>
 
+<!--======================================================
+THREE.JS IMPORT MAP
+=======================================================-->
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.167.1/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.167.1/examples/jsm/"
+  }
+}
+</script>
+
+<!--======================================================
+SCRIPT PRINCIPAL
+=======================================================-->
+
+<script type="module" src="portfolio.js"></script>
 
 
 <!--======================================================
 UN SEUL SCRIPT
 =======================================================-->
+
 
 <script type="module"
         src="portfolio.js">
