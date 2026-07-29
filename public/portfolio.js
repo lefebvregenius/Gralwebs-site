@@ -1,3 +1,4 @@
+
 /*=========================================================
     GRALWEBS PORTFOLIO
     portfolio.js (1/3)
@@ -23,15 +24,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 
+
+
 /*=========================================================
 CONFIGURATION
 =========================================================*/
 
 
-const CONFIG = {
+const CONFIG={
 
 
-    model:"./models/Avatar.glb",
+    model:"/models/Avatar.glb",
 
 
 
@@ -49,13 +52,14 @@ const CONFIG = {
 
         position:new THREE.Vector3(
 
-            1.2,
+            1.1,
 
             1.5,
 
             4
 
         )
+
 
     },
 
@@ -69,7 +73,7 @@ const CONFIG = {
 
         position:new THREE.Vector3(
 
-            1.25,
+            1.35,
 
             -1.55,
 
@@ -80,10 +84,12 @@ const CONFIG = {
 
         rotation:Math.PI
 
+
     }
 
 
 };
+
 
 
 
@@ -119,6 +125,7 @@ new THREE.Clock();
 
 
 
+
 /*=========================================================
 INITIALISATION
 =========================================================*/
@@ -131,88 +138,20 @@ init();
 function init(){
 
 
-    createScene();
+    scene=new THREE.Scene();
 
 
-    createCamera();
-
-
-    createRenderer();
-
-
-    createControls();
-
-
-    createLights();
-
-
-    loadAvatar();
-
-
-
-    window.addEventListener(
-
-        "resize",
-
-        onResize
-
-    );
-
-
-}
-
-
-
-
-
-
-/*=========================================================
-SCENE
-=========================================================*/
-
-
-function createScene(){
-
-
-    scene =
-    new THREE.Scene();
-
-
-}
-
-
-
-
-
-
-
-/*=========================================================
-CAMERA
-=========================================================*/
-
-
-function createCamera(){
-
-
-    camera =
-    new THREE.PerspectiveCamera(
-
+    camera=new THREE.PerspectiveCamera(
 
         CONFIG.camera.fov,
 
-
-        window.innerWidth /
-        window.innerHeight,
-
+        window.innerWidth/window.innerHeight,
 
         CONFIG.camera.near,
 
-
         CONFIG.camera.far
 
-
     );
-
 
 
     camera.position.copy(
@@ -222,39 +161,16 @@ function createCamera(){
     );
 
 
-}
 
-
-
-
-
-
-
-/*=========================================================
-RENDERER
-=========================================================*/
-
-
-function createRenderer(){
-
-
-
-    renderer =
-    new THREE.WebGLRenderer({
-
+    renderer=new THREE.WebGLRenderer({
 
         canvas,
 
-
         alpha:true,
-
 
         antialias:true,
 
-
-        powerPreference:
-        "high-performance"
-
+        powerPreference:"high-performance"
 
     });
 
@@ -284,33 +200,14 @@ function createRenderer(){
 
 
 
-    renderer.outputColorSpace =
+    renderer.outputColorSpace=
+
     THREE.SRGBColorSpace;
 
 
 
-    renderer.shadowMap.enabled=true;
 
-
-}
-
-
-
-
-
-
-
-
-/*=========================================================
-CONTROLS
-=========================================================*/
-
-
-function createControls(){
-
-
-    controls =
-    new OrbitControls(
+    controls=new OrbitControls(
 
         camera,
 
@@ -322,6 +219,23 @@ function createControls(){
     controls.enabled=false;
 
 
+
+    createLights();
+
+
+    loadAvatar();
+
+
+
+    window.addEventListener(
+
+        "resize",
+
+        onResize
+
+    );
+
+
 }
 
 
@@ -331,8 +245,9 @@ function createControls(){
 
 
 
+
 /*=========================================================
-LUMIERES PREMIUM
+LUMIERES
 =========================================================*/
 
 
@@ -340,24 +255,21 @@ function createLights(){
 
 
 
-    const ambient =
-    new THREE.AmbientLight(
+    scene.add(
 
-        0xffffff,
+        new THREE.AmbientLight(
 
-        2
+            0xffffff,
+
+            2
+
+        )
 
     );
 
 
-    scene.add(ambient);
 
-
-
-
-
-    const key =
-    new THREE.DirectionalLight(
+    const light=new THREE.DirectionalLight(
 
         0xffffff,
 
@@ -366,7 +278,7 @@ function createLights(){
     );
 
 
-    key.position.set(
+    light.position.set(
 
         5,
 
@@ -377,16 +289,15 @@ function createLights(){
     );
 
 
-    scene.add(key);
+    scene.add(light);
 
 
 
 
 
-    const rim =
-    new THREE.PointLight(
+    const rim=new THREE.PointLight(
 
-        0xff3344,
+        0xff3355,
 
         2,
 
@@ -399,7 +310,7 @@ function createLights(){
 
         -3,
 
-        2,
+        3,
 
         -3
 
@@ -407,7 +318,6 @@ function createLights(){
 
 
     scene.add(rim);
-
 
 
 }
@@ -419,9 +329,8 @@ function createLights(){
 
 
 
-
 /*=========================================================
-CHARGEMENT AVATAR GLB
+LOAD AVATAR GLB
 =========================================================*/
 
 
@@ -429,10 +338,7 @@ function loadAvatar(){
 
 
 
-    const loader =
-    new GLTFLoader();
-
-
+    const loader=new GLTFLoader();
 
 
 
@@ -447,14 +353,10 @@ function loadAvatar(){
 
 
 
-            avatar =
-            gltf.scene;
+            avatar=gltf.scene;
 
 
 
-
-
-            // GRANDE TAILLE
 
 
             avatar.scale.setScalar(
@@ -465,11 +367,6 @@ function loadAvatar(){
 
 
 
-
-
-            // POSITION DROITE
-
-
             avatar.position.copy(
 
                 CONFIG.avatar.position
@@ -478,13 +375,9 @@ function loadAvatar(){
 
 
 
-
-
-            avatar.rotation.y =
+            avatar.rotation.y=
 
             CONFIG.avatar.rotation;
-
-
 
 
 
@@ -514,9 +407,6 @@ function loadAvatar(){
 
 
 
-
-
-
             scene.add(avatar);
 
 
@@ -525,16 +415,11 @@ function loadAvatar(){
 
 
 
-
-            // Animation interne GLB si présente
-
-
             if(gltf.animations.length){
 
 
 
-                mixer =
-                new THREE.AnimationMixer(
+                mixer=new THREE.AnimationMixer(
 
                     avatar
 
@@ -567,22 +452,7 @@ function loadAvatar(){
 
 
 
-            /*
-            IMPORTANT
-            Activation GSAP seulement
-            après chargement
-            */
-
-
-            createScrollAnimation();
-
-
-            idleAvatarMotion();
-
-
-            introAnimation();
-
-
+            startPortfolio();
 
 
 
@@ -591,86 +461,47 @@ function loadAvatar(){
 
 
 
-
-
-            const loaderScreen =
-            document.getElementById("loader");
-
-
-
-            if(loaderScreen){
-
-
-                gsap.to(
-
-                    loaderScreen,
-
-                    {
-
-                        opacity:0,
-
-                        duration:0.8,
-
-
-                        onComplete(){
-
-                            loaderScreen.remove();
-
-                        }
-
-                    }
-
-                );
-
-
-            }
-
-
-
-
-
-
-
-            animate();
+            hideLoader();
 
 
 
             console.log(
 
-            "Avatar.glb chargé avec succès"
+            "Avatar.glb chargé"
 
             );
-
 
 
         },
 
 
 
-
-        (xhr)=>{
+        xhr=>{
 
 
             if(xhr.total){
 
 
-                const progress =
+                const progress=
 
-                (xhr.loaded/xhr.total)*100;
+                xhr.loaded/xhr.total*100;
 
 
 
-                const bar =
+                const bar=
 
                 document.getElementById(
+
                     "progress"
+
                 );
 
 
 
                 if(bar){
 
-                    bar.style.width =
+                    bar.style.width=
+
                     progress+"%";
 
                 }
@@ -679,9 +510,7 @@ function loadAvatar(){
             }
 
 
-
         },
-
 
 
 
@@ -690,7 +519,7 @@ function loadAvatar(){
 
             console.error(
 
-                "Erreur Avatar.glb :",
+                "Erreur GLB",
 
                 error
 
@@ -704,6 +533,7 @@ function loadAvatar(){
 
 
 }
+
 
 /*=========================================================
     GRALWEBS PORTFOLIO
@@ -1698,4 +1528,123 @@ ARCHITECTURE FINALE
 ✓ 1 Avatar.glb
 ✓ GSAP + ScrollTrigger
 ✓ Aucun rechargement du modèle
+=========================================================*/
+
+
+/*=========================================================
+    GRALWEBS PORTFOLIO
+    portfolio.js (3/3)
+
+    FINITIONS
+=========================================================*/
+
+
+
+/*=========================================================
+LOADER
+=========================================================*/
+
+
+function hideLoader(){
+
+
+    const loader =
+
+    document.getElementById("loader");
+
+
+
+    if(!loader)return;
+
+
+
+    gsap.to(
+
+        loader,
+
+        {
+
+
+            opacity:0,
+
+
+            duration:0.8,
+
+
+            onComplete(){
+
+
+                loader.remove();
+
+
+            }
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+
+
+/*=========================================================
+CONSOLE
+=========================================================*/
+
+
+console.log(
+
+"%cGRALWEBS PORTFOLIO",
+
+"color:#ff2b2b;font-size:18px;font-weight:bold"
+
+);
+
+
+
+console.log(
+
+"Three.js initialisé"
+
+);
+
+
+
+console.log(
+
+"Avatar.glb chargé"
+
+);
+
+
+
+console.log(
+
+"GSAP Scroll actif"
+
+);
+
+
+
+
+
+
+/*=========================================================
+FIN
+
+✓ 1 Scene
+✓ 1 Camera
+✓ 1 Renderer
+✓ 1 Animation Loop
+✓ 1 Avatar.glb
+✓ GSAP ScrollTrigger
+✓ Avatar visible droite
+✓ Scroll storytelling actif
+
 =========================================================*/
