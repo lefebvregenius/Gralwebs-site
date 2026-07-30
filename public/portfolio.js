@@ -1169,5 +1169,93 @@ function startPortfolio(){
 
 
 
+/*=========================================================
+AUTO HIDE NAVBAR
+=========================================================*/
 
+const navbar = document.querySelector(".navbar");
+
+if(navbar){
+
+    const hoverZone = document.createElement("div");
+
+    hoverZone.className = "nav-hover-zone";
+
+    document.body.appendChild(hoverZone);
+
+    let lastScroll = 0;
+
+    let isHidden = false;
+
+
+
+    function hideNavbar(){
+
+        if(isHidden) return;
+
+        navbar.classList.add("navbar-hidden");
+
+        isHidden = true;
+
+    }
+
+
+
+    function showNavbar(){
+
+        if(!isHidden) return;
+
+        navbar.classList.remove("navbar-hidden");
+
+        isHidden = false;
+
+    }
+
+
+
+    window.addEventListener("scroll",()=>{
+
+        const current = window.scrollY;
+
+        if(current < 80){
+
+            showNavbar();
+
+            lastScroll = current;
+
+            return;
+
+        }
+
+        if(current > lastScroll){
+
+            hideNavbar();
+
+        }else{
+
+            showNavbar();
+
+        }
+
+        lastScroll = current;
+
+    });
+
+
+
+    hoverZone.addEventListener("mouseenter",showNavbar);
+
+    navbar.addEventListener("mouseenter",showNavbar);
+
+    navbar.addEventListener("mouseleave",()=>{
+
+        if(window.scrollY > 80){
+
+            hideNavbar();
+
+        }
+
+    });
+
+}
 

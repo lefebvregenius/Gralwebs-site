@@ -769,3 +769,59 @@ box-shadow:
 #navbar.scrolled .brand-name{
     font-size:1rem;
 }
+
+/*=========================================================
+AUTO HIDE NAVBAR
+=========================================================*/
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    z-index:9999;
+
+    transform:translateY(0);
+
+    transition:
+    transform .45s ease,
+    opacity .45s ease;
+
+}
+
+
+/* Navbar cachée */
+
+.navbar-hidden{
+
+    transform:translateY(-110%);
+
+    opacity:0;
+
+}
+
+
+/* Zone invisible en haut pour faire réapparaître la navbar */
+
+.nav-hover-zone{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:18px;
+
+    z-index:10000;
+
+    pointer-events:auto;
+
+}
