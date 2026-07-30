@@ -514,7 +514,6 @@ console.log(
 
 
 
-
 /*=========================================================
 RESPONSIVE AVATAR
 =========================================================*/
@@ -523,19 +522,48 @@ function updateAvatarResponsive(){
 
     if(!avatar) return;
 
-    if(window.innerWidth <= 768){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const portrait = h > w;
+
+    /*=========================================
+    Très grands écrans (4K)
+    =========================================*/
+    if(w >= 1800){
 
         avatar.scale.set(
-            CONFIG.avatar.scale * 0.34,
-            CONFIG.avatar.scale * 0.34,
-            CONFIG.avatar.scale * 0.34
+            CONFIG.avatar.scale * 0.48,
+            CONFIG.avatar.scale * 0.48,
+            CONFIG.avatar.scale * 0.48
         );
 
-        camera.position.z = 4.6;
+        avatar.position.x = 1.25;
+        avatar.position.y = -1.25;
 
+        camera.position.z = 4.4;
     }
 
-    else if(window.innerWidth <= 1024){
+    /*=========================================
+    Desktop
+    =========================================*/
+    else if(w >= 1200){
+
+        avatar.scale.set(
+            CONFIG.avatar.scale * 0.44,
+            CONFIG.avatar.scale * 0.44,
+            CONFIG.avatar.scale * 0.44
+        );
+
+        avatar.position.x = 1.10;
+        avatar.position.y = -1.25;
+
+        camera.position.z = 4.25;
+    }
+
+    /*=========================================
+    Laptop
+    =========================================*/
+    else if(w >= 1024){
 
         avatar.scale.set(
             CONFIG.avatar.scale * 0.40,
@@ -543,14 +571,79 @@ function updateAvatarResponsive(){
             CONFIG.avatar.scale * 0.40
         );
 
-        camera.position.z = 4.2;
+        avatar.position.x = 0.95;
+        avatar.position.y = -1.15;
 
+        camera.position.z = 4.2;
+    }
+
+    /*=========================================
+    Tablette
+    =========================================*/
+    else if(w >= 768){
+
+        avatar.scale.set(
+            CONFIG.avatar.scale * 0.37,
+            CONFIG.avatar.scale * 0.37,
+            CONFIG.avatar.scale * 0.37
+        );
+
+        avatar.position.x = 0.65;
+        avatar.position.y = -1.05;
+
+        camera.position.z = 4.15;
+    }
+
+    /*=========================================
+    Mobile
+    =========================================*/
+    else if(w >= 480){
+
+        avatar.scale.set(
+            CONFIG.avatar.scale * 0.33,
+            CONFIG.avatar.scale * 0.33,
+            CONFIG.avatar.scale * 0.33
+        );
+
+        if(portrait){
+
+            /* Avatar centré */
+            avatar.position.x = 0;
+            avatar.position.y = -0.95;
+
+            camera.position.z = 4.05;
+
+        }else{
+
+            avatar.position.x = 0.45;
+            avatar.position.y = -1.00;
+
+            camera.position.z = 4.1;
+        }
+
+    }
+
+    /*=========================================
+    Très petit mobile
+    =========================================*/
+    else{
+
+        avatar.scale.set(
+            CONFIG.avatar.scale * 0.29,
+            CONFIG.avatar.scale * 0.29,
+            CONFIG.avatar.scale * 0.29
+        );
+
+        avatar.position.x = 0;
+        avatar.position.y = -0.80;
+
+        camera.position.z = 3.9;
     }
 
 }
 
 window.addEventListener("resize", updateAvatarResponsive);
-
+updateAvatarResponsive();
 
 /*=========================================================
     GRALWEBS PORTFOLIO
