@@ -609,148 +609,115 @@ window.addEventListener(
 
 
 
-
-
 /*=========================================================
 SCROLLTELLING AVATAR GLB
 UNE SEULE TIMELINE
 =========================================================*/
 
-
 function createScrollAnimation(){
-
-
 
     if(!avatar) return;
 
-
-
-
     const tl = gsap.timeline({
-
-
 
         scrollTrigger:{
 
-
             trigger:"body",
-
 
             start:"top top",
 
-
             end:"bottom bottom",
-
 
             scrub:1.5,
 
-
             invalidateOnRefresh:true
-
 
         }
 
-
-
     });
-
-
-
-
 
 
 
     /*
     =========================================
     HERO → ABOUT
-
-    Avatar regarde le visiteur
+    Avatar bien centré à droite
+    Visage orienté vers le visiteur
+    Taille visuellement réduite
     =========================================
     */
 
-
     tl.to(
-
 
         avatar.rotation,
 
-
         {
 
-
-            y:Math.PI - 0.45,
-
+            y:0.0,
 
             duration:1
-
 
         }
 
-
-
     )
 
-
-
     .to(
-
 
         avatar.position,
 
-
         {
 
-
-            x:1.05,
-
+            x:0.95,
 
             y:-1.45,
 
+            z:0,
 
             duration:1
 
-
         },
 
-
         "<"
-
-
 
     )
 
-
-
     .to(
 
-
-        camera.position,
-
+        avatar.scale,
 
         {
 
+            x:CONFIG.avatar.scale*0.80,
 
-            x:1.0,
+            y:CONFIG.avatar.scale*0.80,
 
-
-            z:3.5,
-
+            z:CONFIG.avatar.scale*0.80,
 
             duration:1
 
-
         },
-
 
         "<"
 
+    )
 
+    .to(
+
+        camera.position,
+
+        {
+
+            x:0.85,
+
+            z:3.6,
+
+            duration:1
+
+        },
+
+        "<"
 
     );
-
-
-
-
 
 
 
@@ -759,88 +726,53 @@ function createScrollAnimation(){
     /*
     =========================================
     ABOUT → SKILLS
-
-    Rapprochement
+    Légère rotation uniquement
     =========================================
     */
 
-
-
     tl.to(
-
 
         avatar.rotation,
 
-
         {
 
-
-            y:Math.PI+0.15,
-
+            y:0.10,
 
             duration:1
 
-
         }
-
-
 
     )
 
-
-
     .to(
-
 
         avatar.position,
 
-
         {
 
+            x:1.00,
 
-            x:1.15,
-
-
-            y:-1.55
-
+            y:-1.50
 
         },
 
-
         "<"
-
-
 
     )
 
-
-
     .to(
-
 
         camera.position,
 
-
         {
 
-
-            z:3
-
+            z:3.15
 
         },
 
-
         "<"
 
-
-
     );
-
-
-
-
-
-
 
 
 
@@ -849,88 +781,53 @@ function createScrollAnimation(){
     /*
     =========================================
     SKILLS → EXPERIENCE
-
-    Nouvelle vue
+    Toujours de face
     =========================================
     */
 
-
-
     tl.to(
-
 
         avatar.rotation,
 
-
         {
 
-
-            y:Math.PI-0.15
-
+            y:-0.10
 
         }
 
-
-
     )
 
-
-
     .to(
-
 
         avatar.position,
 
-
         {
 
+            x:0.90,
 
-            x:0.95,
-
-
-            y:-1.40
-
+            y:-1.42
 
         },
 
-
         "<"
-
-
 
     )
 
-
-
     .to(
-
 
         camera.position,
 
-
         {
 
+            x:0.70,
 
-            x:0.75,
-
-
-            z:2.8
-
+            z:2.95
 
         },
 
-
         "<"
 
-
-
     );
-
-
-
-
-
-
 
 
 
@@ -939,89 +836,55 @@ function createScrollAnimation(){
     /*
     =========================================
     EXPERIENCE → CONTACT
-
     Position finale
     =========================================
     */
 
-
-
     tl.to(
-
 
         avatar.rotation,
 
-
         {
 
-
-            y:Math.PI
-
+            y:0.0
 
         }
 
-
-
     )
 
-
-
     .to(
-
 
         avatar.position,
 
-
         {
 
+            x:1.05,
 
-            x:1.25,
-
-
-            y:-1.50
-
+            y:-1.48
 
         },
 
-
         "<"
-
-
 
     )
 
-
-
     .to(
-
 
         camera.position,
 
-
         {
 
+            x:0.95,
 
-            x:1.1,
-
-
-            z:3.8
-
+            z:3.75
 
         },
 
-
         "<"
-
-
 
     );
 
-
-
-
 }
-
-
 
 
 
