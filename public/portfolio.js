@@ -440,7 +440,7 @@ function loadAvatar(){
 
 ScrollTrigger.refresh();
 
-hideLoader();
+
 
 /* Démarrage du rendu UNE SEULE FOIS */
 renderer.setAnimationLoop(animate);
