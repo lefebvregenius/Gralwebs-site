@@ -7,16 +7,11 @@
 =========================================================*/
 
 
-import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js";
+import * as THREE from "three";
 
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-import { GLTFLoader } from
-"https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/loaders/GLTFLoader.js";
-
-
-import { OrbitControls } from
-"https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 
 
@@ -38,54 +33,43 @@ const CONFIG={
 
 
 
-    camera:{
+  camera:{
 
+    fov:32,
 
-        fov:35,
+    near:0.1,
 
+    far:100,
 
-        near:0.1,
+    position:new THREE.Vector3(
 
+        2.0,
 
-        far:100,
+        1.75,
 
+        5.2
 
-        position:new THREE.Vector3(
+    )
 
-            1.1,
+},
 
-            1.5,
+avatar:{
 
-            4
+    scale:3.1,
 
-        )
+    position:new THREE.Vector3(
 
+        2.25,
 
-    },
+        -2.15,
 
+        -0.25
 
+    ),
 
-    avatar:{
+    rotation:Math.PI
 
-
-        scale:2.2,
-
-
-        position:new THREE.Vector3(
-
-            1.35,
-
-            -1.55,
-
-            0
-
-        ),
-
-
-        rotation:Math.PI
-
-
-    }
+}
 
 
 };
@@ -452,24 +436,18 @@ function loadAvatar(){
 
 
 
-            startPortfolio();
+           startPortfolio();
 
+ScrollTrigger.refresh();
 
+hideLoader();
 
-            ScrollTrigger.refresh();
+/* Démarrage du rendu UNE SEULE FOIS */
+renderer.setAnimationLoop(animate);
 
-
-
-
-            hideLoader();
-
-
-
-            console.log(
-
-            "Avatar.glb chargé"
-
-            );
+console.log(
+    "Avatar.glb chargé"
+);
 
 
         },
@@ -1292,345 +1270,3 @@ function startPortfolio(){
 
 
 
-
-
-/*=========================================================
-BOUCLE THREE.JS
-=========================================================*/
-
-
-renderer.setAnimationLoop(
-
-    animate
-
-);
-
-/*=========================================================
-portfolio.js (3/3)
-
-FINITIONS
-Optimisations
-=========================================================*/
-
-
-/*=========================================================
-ANIMATION D'INTRODUCTION
-=========================================================*/
-
-function introAnimation() {
-
-    if (!avatar) return;
-
-    gsap.from(
-
-        avatar.position,
-
-        {
-
-            y: avatar.position.y - 0.35,
-
-            duration: 1.8,
-
-            ease: "power3.out"
-
-        }
-
-    );
-
-    gsap.from(
-
-        avatar.rotation,
-
-        {
-
-            y: avatar.rotation.y + 0.35,
-
-            duration: 2,
-
-            ease: "power2.out"
-
-        }
-
-    );
-
-    gsap.from(
-
-        camera.position,
-
-        {
-
-            z: 5.2,
-
-            duration: 2,
-
-            ease: "power2.out"
-
-        }
-
-    );
-
-}
-
-
-/*=========================================================
-PARALLAX SOURIS
-=========================================================*/
-
-window.addEventListener(
-
-    "mousemove",
-
-    (event) => {
-
-        if (!avatar) return;
-
-        const x =
-
-            (event.clientX / window.innerWidth - 0.5) * 0.08;
-
-        const y =
-
-            (event.clientY / window.innerHeight - 0.5) * 0.04;
-
-        gsap.to(
-
-            avatar.rotation,
-
-            {
-
-                y: Math.PI + x,
-
-                x: -y,
-
-                duration: 0.6,
-
-                overwrite: true
-
-            }
-
-        );
-
-    }
-
-);
-
-/*=========================================================
-AMÉLIORATION DU RENDU
-=========================================================*/
-
-renderer.setAnimationLoop(animate);
-
-/*=========================================================
-SUPPRESSION DU LOADER
-=========================================================*/
-
-function hideLoader() {
-
-    const loader = document.getElementById("loader");
-
-    if (!loader) return;
-
-    gsap.to(
-
-        loader,
-
-        {
-
-            opacity: 0,
-
-            duration: 0.8,
-
-            onComplete() {
-
-                loader.remove();
-
-            }
-
-        }
-
-    );
-
-}
-
-/*=========================================================
-MODIFIER LA FIN DE loadAvatar()
-
-Remplace simplement :
-
-document
-.getElementById("loader")
-.style.display="none";
-
-animate();
-
-par :
-
-=========================================================*/
-
-hideLoader();
-
-startPortfolio();
-
-animate();
-
-/*=========================================================
-CONSOLE
-=========================================================*/
-
-console.log(
-
-    "%cGRALWEBS PORTFOLIO",
-
-    "color:#ff2b2b;font-size:18px;font-weight:bold"
-
-);
-
-console.log(
-
-    "Three.js initialisé"
-
-);
-
-console.log(
-
-    "Avatar.glb chargé"
-
-);
-
-console.log(
-
-    "GSAP prêt"
-
-);
-
-/*=========================================================
-ARCHITECTURE FINALE
-
-✓ 1 Scene
-✓ 1 Camera
-✓ 1 Renderer
-✓ 1 AnimationLoop
-✓ 1 GLTFLoader
-✓ 1 Avatar.glb
-✓ GSAP + ScrollTrigger
-✓ Aucun rechargement du modèle
-=========================================================*/
-
-
-/*=========================================================
-    GRALWEBS PORTFOLIO
-    portfolio.js (3/3)
-
-    FINITIONS
-=========================================================*/
-
-
-
-/*=========================================================
-LOADER
-=========================================================*/
-
-
-function hideLoader(){
-
-
-    const loader =
-
-    document.getElementById("loader");
-
-
-
-    if(!loader)return;
-
-
-
-    gsap.to(
-
-        loader,
-
-        {
-
-
-            opacity:0,
-
-
-            duration:0.8,
-
-
-            onComplete(){
-
-
-                loader.remove();
-
-
-            }
-
-
-        }
-
-    );
-
-
-}
-
-
-
-
-
-
-
-/*=========================================================
-CONSOLE
-=========================================================*/
-
-
-console.log(
-
-"%cGRALWEBS PORTFOLIO",
-
-"color:#ff2b2b;font-size:18px;font-weight:bold"
-
-);
-
-
-
-console.log(
-
-"Three.js initialisé"
-
-);
-
-
-
-console.log(
-
-"Avatar.glb chargé"
-
-);
-
-
-
-console.log(
-
-"GSAP Scroll actif"
-
-);
-
-
-
-
-
-
-/*=========================================================
-FIN
-
-✓ 1 Scene
-✓ 1 Camera
-✓ 1 Renderer
-✓ 1 Animation Loop
-✓ 1 Avatar.glb
-✓ GSAP ScrollTrigger
-✓ Avatar visible droite
-✓ Scroll storytelling actif
-
-=========================================================*/
