@@ -513,6 +513,45 @@ console.log(
 }
 
 
+
+
+/*=========================================================
+RESPONSIVE AVATAR
+=========================================================*/
+
+function updateAvatarResponsive(){
+
+    if(!avatar) return;
+
+    if(window.innerWidth <= 768){
+
+        avatar.scale.set(
+            CONFIG.avatar.scale * 0.34,
+            CONFIG.avatar.scale * 0.34,
+            CONFIG.avatar.scale * 0.34
+        );
+
+        camera.position.z = 4.6;
+
+    }
+
+    else if(window.innerWidth <= 1024){
+
+        avatar.scale.set(
+            CONFIG.avatar.scale * 0.40,
+            CONFIG.avatar.scale * 0.40,
+            CONFIG.avatar.scale * 0.40
+        );
+
+        camera.position.z = 4.2;
+
+    }
+
+}
+
+window.addEventListener("resize", updateAvatarResponsive);
+
+
 /*=========================================================
     GRALWEBS PORTFOLIO
     portfolio.js (2/3)
@@ -680,26 +719,25 @@ function createScrollAnimation(){
         "<"
 
     )
+.to(
 
-    .to(
+    avatar.scale,
 
-        avatar.scale,
+    {
 
-        {
+        x:CONFIG.avatar.scale*0.48,
 
-            x:CONFIG.avatar.scale*0.80,
+        y:CONFIG.avatar.scale*0.48,
 
-            y:CONFIG.avatar.scale*0.80,
+        z:CONFIG.avatar.scale*0.48,
 
-            z:CONFIG.avatar.scale*0.80,
+        duration:1
 
-            duration:1
+    },
 
-        },
+    "<"
 
-        "<"
-
-    )
+)
 
     .to(
 
