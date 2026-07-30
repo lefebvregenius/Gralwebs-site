@@ -1535,3 +1535,55 @@ allLinks.forEach(a => {
     a.style.boxShadow = "none";
   });
 });
+
+
+
+/*=========================================================
+BURGER TOOLTIP
+=========================================================*/
+
+const burger = document.querySelector(".menu-toggle");
+
+if(burger){
+
+    const tip = document.createElement("div");
+
+    tip.className = "burger-tooltip";
+
+    tip.innerHTML = "👆 Cliquez pour découvrir toutes les pages de GralWebs";
+
+    burger.appendChild(tip);
+
+
+
+    setTimeout(()=>{
+
+        tip.classList.add("show");
+
+    },1500);
+
+
+
+    setTimeout(()=>{
+
+        tip.classList.remove("show");
+
+    },7000);
+
+
+
+    burger.addEventListener("mouseenter",()=>{
+
+        tip.classList.add("show");
+
+    });
+
+
+
+    burger.addEventListener("mouseleave",()=>{
+
+        tip.classList.remove("show");
+
+    });
+
+}
