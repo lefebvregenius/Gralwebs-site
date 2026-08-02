@@ -4015,3 +4015,76 @@ body.voschoix-active::before {
 
 
 
+.download-contract{
+
+padding:90px 20px;
+
+text-align:center;
+
+background:#070707;
+
+}
+
+.download-contract h2{
+
+font-size:42px;
+
+color:#FFD700;
+
+margin-bottom:20px;
+
+}
+
+.download-contract p{
+
+max-width:850px;
+
+margin:auto;
+
+font-size:20px;
+
+color:#ddd;
+
+line-height:1.8;
+
+}
+
+.download-btn{
+
+display:inline-block;
+
+margin-top:45px;
+
+padding:18px 45px;
+
+border-radius:50px;
+
+background:linear-gradient(135deg,#d60000,#ff3030);
+
+color:white;
+
+font-size:20px;
+
+font-weight:bold;
+
+text-decoration:none;
+
+transition:.35s;
+
+box-shadow:0 15px 35px rgba(255,0,0,.35);
+
+}
+
+.download-btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 20px 45px rgba(255,0,0,.6);
+
+}
+
+.download-btn i{
+
+margin-right:10px;
+
+}
