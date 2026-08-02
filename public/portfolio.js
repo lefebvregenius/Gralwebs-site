@@ -725,11 +725,11 @@ function createScrollAnimation(){
 
     {
 
-        x:CONFIG.avatar.scale*0.58,
+        x:CONFIG.avatar.scale*0.54,
 
-        y:CONFIG.avatar.scale*0.58,
+        y:CONFIG.avatar.scale*0.54,
 
-        z:CONFIG.avatar.scale*0.58,
+        z:CONFIG.avatar.scale*0.54,
 
         duration:1
 
