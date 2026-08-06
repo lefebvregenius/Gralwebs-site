@@ -4217,3 +4217,27 @@ margin-right:10px;
     }
 
 }
+
+.burger-notice{
+
+    animation:
+    burgerNotice 2s infinite,
+    hideNotice 1s forwards;
+
+    animation-delay:
+    0s,
+    7s;
+
+}
+
+@keyframes hideNotice{
+
+    to{
+
+        opacity:0;
+        visibility:hidden;
+        transform:translateY(-50%) scale(.7);
+
+    }
+
+}

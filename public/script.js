@@ -1538,3 +1538,21 @@ allLinks.forEach(a => {
 
 
 
+const notice = document.querySelector(".burger-notice");
+
+if (notice) {
+
+    setTimeout(() => {
+
+        notice.style.transition = "opacity .5s ease";
+        notice.style.opacity = "0";
+
+        setTimeout(() => {
+
+            notice.remove();
+
+        }, 500);
+
+    }, 7000);
+
+}
